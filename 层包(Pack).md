@@ -6,6 +6,13 @@
 
 该模块利用[层级布局](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的数据进行包布局[坐标计算](#核心代码)。为层级布局数据添加[布局信息](#布局信息)用于绘制图形。以及一些内置[API](#API)来设置或获取一些参数来辅助图形的坐标计算。
 
+### API
+```javascript
+pack.radius([radius]): 如果指定了 radius 则将半径访问器设置为指定的函数并返回 pack 布局。如果没有指定 radius 则返回当前半径访问器，默认为 null,
+pack.size([size]): 如果指定了 size 则将当前 pack 布局的尺寸设置为指定的二元数值类型数组: [width, height] 并返回当前 pack 布局。如果没有指定 size 则返回当前的尺寸，默认为 [1, 1]
+pack.padding([padding]): 如果指定了 padding 则设置布局的间隔访问器为指定的数值或函数并返回 pack 布局。如果没有指定 padding 则返回当前的间隔访问器，默认为常量 0。
+```
+
 ### 布局信息
 
 ```javascript
@@ -14,12 +21,7 @@ node.y: 节点中心的 y- 坐标
 node.r: 圆的半径
 ```
 
-### API
-```javascript
-pack.radius([radius]): 如果指定了 radius 则将半径访问器设置为指定的函数并返回 pack 布局。如果没有指定 radius 则返回当前半径访问器，默认为 null,
-pack.size([size]): 如果指定了 size 则将当前 pack 布局的尺寸设置为指定的二元数值类型数组: [width, height] 并返回当前 pack 布局。如果没有指定 size 则返回当前的尺寸，默认为 [1, 1]
-pack.padding([padding]): 如果指定了 padding 则设置布局的间隔访问器为指定的数值或函数并返回 pack 布局。如果没有指定 padding 则返回当前的间隔访问器，默认为常量 0。
-```
+
 
 ### 执行逻辑
 TODO
