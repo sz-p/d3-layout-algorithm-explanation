@@ -1,4 +1,7 @@
 ## 分区(Partition)
+
+![](https:/img.sz-p.cn/d3Layout-partition.png)
+
 分区图，是[层级布局(Hierarchy)](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的一种
 
 该模块依赖一个`层级布局(Hierarchy)`结果,和一个`画布区大小(size)`。输出一个`分区数据(Partition)`,`分区数据(Partition)`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[基本数据](#基本数据)。
