@@ -21,6 +21,9 @@ pack.size([size]): 如果指定了 size 则将当前 pack 布局的尺寸设置�
 pack.padding([padding]): 如果指定了 padding 则设置布局的间隔访问器为指定的数值或函数并返回 pack 布局。如果没有指定 padding 则返回当前的间隔访问器，默认为常量 0。
 ```
 
+### 执行逻辑
+TODO
+
 ### 核心代码
 
 ```javascript
@@ -113,8 +116,10 @@ function pack(root) {
 2. **确定新圆在布局中，插入哪两个节点之间其最小外接圆半径最小**
    例如现在有ABC三个圆，新圆是以AB为基准插入、还是以AC，BC为基准插入。
    这部分没看懂 留着补
+   TODO
 3. **求多个圆的最小外接圆**
    这个问题可以转化成   
+   TODO
 
 ### 算法理论
 每个圆必须包含 circle.r 属性表示半径，以及 circle.x 以及 circle.y 属性表示圆的中心，最小包裹圆的实现见 论文 [Matoušek-Sharir-Welzl algorithm](https://inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf)。
