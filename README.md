@@ -1,13 +1,13 @@
-## d3 布局算法(d3 Layout Layout algorithm)
+## [d3 布局算法(d3 Layout Layout algorithm)](https://sz-p.cn/blog/index.php/2019/07/08/205.html)
 
 D3提供的布局有12种，具体见官网：[https://d3js.org/](https://d3js.org/)
-`布局不是要直接绘图而是获取绘图所需数据` 最新版的API有所跟新, 这里以算法说明为主
+`布局不是要直接绘图而是获取绘图所需数据` 最新版的API有所更新, 这里以算法说明为主
 
 这里为一个目录，罗列一些D3布局算法的API，title为相对详细一些的d3算法解析。
 
 ### [捆图(Bundle)](./捆图(Bundle).md)
 
-```code
+```javascript
 d3.layout.bundle - 构造一个新的捆图布局
 bundle - 应用霍顿的边缘捆绑算法
 ```
