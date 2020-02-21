@@ -8,22 +8,44 @@
 
 ### API
 ```javascript
-pack.radius([radius]): 如果指定了 radius 则将半径访问器设置为指定的函数并返回 pack 布局。如果没有指定 radius 则返回当前半径访问器，默认为 null,
-pack.size([size]): 如果指定了 size 则将当前 pack 布局的尺寸设置为指定的二元数值类型数组: [width, height] 并返回当前 pack 布局。如果没有指定 size 则返回当前的尺寸，默认为 [1, 1]
-pack.padding([padding]): 如果指定了 padding 则设置布局的间隔访问器为指定的数值或函数并返回 pack 布局。如果没有指定 padding 则返回当前的间隔访问器，默认为常量 0。
+//  如果指定了 radius 则将半径访问器设置为指定的函数并返回 pack 布局。如果没有指定 radius 则返回当前半径访问器，默认为 null,
+pack.radius([radius])
+
+// 如果指定了 size 则将当前 pack 布局的尺寸设置为指定的二元数值类型数组: [width, height] 并返回当前 pack 布局。如果没有指定 size 则返回当前的尺寸，默认为 [1, 1]
+pack.size([size])
+
+// 如果指定了 padding 则设置布局的间隔访问器为指定的数值或函数并返回 pack 布局。如果没有指定 padding 则返回当前的间隔访问器，默认为常量 0。
+pack.padding([padding])
 ```
 
 ### 布局信息
+`x`:节点中心的 x- 坐标
+`y`:节点中心的 y- 坐标
+`r`:圆的半径
+`parent`,`children`分别代表当前节点的父节点和子节点
 
 ```javascript
-node.x: 节点中心的 x- 坐标
-node.y: 节点中心的 y- 坐标
-node.r: 圆的半径
+const nodes = [
+  {
+    height: 2,
+    depth: 0,
+    parent: null,
+    value: 950,
+    x: 200,
+    y: 300,
+    r: 199.99999999999997,
+    children:[Node,Node]
+  }
+]
+
 ```
 
 
 
 ### 执行逻辑
+TODO
+
+### 基本数据
 TODO
 
 ### 核心代码
@@ -128,6 +150,15 @@ function pack(root) {
 
 ## 参考 & 引用
 https://github.com/xswei/d3-hierarchy/blob/master/README.md#node_sum
+
 https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L15
+
 https://github.com/d3/d3-hierarchy/blob/master/src/pack/enclose.js
+
 https://github.com/d3/d3-hierarchy/blob/master/src/pack/siblings.js
+
+https://d3js.org.cn/document/d3-hierarchy/#pack
+
+https://dl.acm.org/doi/10.1145/1124772.1124851
+
+http://www.inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf
