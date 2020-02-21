@@ -23,8 +23,7 @@ function Pie() {
   let radius = Math.min(width, height) * 0.8 / 2
 
   let arc = d3.arc()
-    .innerRadius(70)
-    .cornerRadius(10)
+    .innerRadius(0)
 
   let color = d3.scaleOrdinal(d3.schemeCategory10)
 
@@ -45,8 +44,7 @@ function Pie() {
       .sort(null)
       .sortValues(null)
       .startAngle(0)
-      .endAngle(Math.PI * 2)
-      .padAngle(0.05)(oriData)
+      .endAngle(Math.PI * 2)(oriData)
     console.log(drawData);
 
     g.append('g')
