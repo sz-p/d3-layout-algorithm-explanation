@@ -4,6 +4,7 @@ import './App.css';
 import IndexPage from './pages/index/index';
 import TreeMap from './pages/treemap/treemap';
 import Pie from './pages/pie/pie';
+import Pack from './pages/pack/pack';
 
 import { hot } from 'react-hot-loader';
 
@@ -27,9 +28,10 @@ let store = createLocalStore();
 function App() {
 	return (
 		<Provider store={store}>
-			<BrowserRouter >
+			<BrowserRouter>
 				<div id="container">
-          <Route path={'/treemap'} component={TreeMap} />
+					<Route path={'/treemap'} component={TreeMap} />
+					<Route path={'/pack'} component={Pack} />
 					<Route path={'/pie'} component={Pie} />
 					<Route exact path={'/'} component={IndexPage} />
 				</div>

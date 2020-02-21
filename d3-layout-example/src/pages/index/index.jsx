@@ -7,6 +7,8 @@ function IndexPage() {
     <div className={styles.page}>
       <Link to={'/treemap'}>treemap</Link>
       <br></br>
+      <Link to={'/pack'}>pack</Link>
+      <br></br>
       <Link to={'/pie'}>pie</Link>
     </div>
   );
