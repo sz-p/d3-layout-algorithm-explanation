@@ -5,6 +5,7 @@ import IndexPage from './pages/index/index';
 import TreeMap from './pages/treemap/treemap';
 import Pie from './pages/pie/pie';
 import Pack from './pages/pack/pack';
+import Cluster from './pages/cluster/cluster';
 
 import { hot } from 'react-hot-loader';
 
@@ -33,6 +34,7 @@ function App() {
 					<Route path={'/treemap'} component={TreeMap} />
 					<Route path={'/pack'} component={Pack} />
 					<Route path={'/pie'} component={Pie} />
+          <Route path={'/cluster'} component={Cluster} />
 					<Route exact path={'/'} component={IndexPage} />
 				</div>
 			</BrowserRouter>

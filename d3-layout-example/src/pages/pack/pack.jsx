@@ -3,7 +3,6 @@ import styles from "./pack.scss";
 import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 import hierarchyData from '../../components/hierarchy';
-import { transform } from '@babel/core';
 
 function Pack() {
   const chartArea = useRef();

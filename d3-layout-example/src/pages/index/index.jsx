@@ -10,6 +10,8 @@ function IndexPage() {
       <Link to={'/pack'}>pack</Link>
       <br></br>
       <Link to={'/pie'}>pie</Link>
+      <br></br>
+      <Link to={'/cluster'}>cluster</Link>
     </div>
   );
 }
