@@ -2,7 +2,7 @@
 
 ![](https://img.sz-p.cn/d3Layout-pie.png)
 
-该模块依赖。`开始角度`,`结束角度`。将原始数据中给出的值按比例映射到`开始角度`到`结束角度`这个区间内。详情见[基本数据](#基本数据)。
+该模块依赖`开始角度`,`结束角度`。将原始数据中给出的值按比例映射到`开始角度`到`结束角度`这个区间内。详情见[基本数据](#基本数据)。
 
 ### API
 [#](https://d3js.org.cn/document/d3-shape/#pie) d3.**pie**() [<源码>](https://github.com/xswei/d3-shape/blob/master/src/pie.js)
@@ -207,6 +207,7 @@ function padAngle() {
     }
 ]
 ```
+
 ### 基本数据
 
 **原始数据**
