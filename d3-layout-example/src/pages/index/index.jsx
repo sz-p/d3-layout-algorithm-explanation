@@ -12,6 +12,8 @@ function IndexPage() {
       <Link to={'/pie'}>pie</Link>
       <br></br>
       <Link to={'/cluster'}>cluster</Link>
+      <br></br>
+      <Link to={'/tree'}>tree</Link>
     </div>
   );
 }
