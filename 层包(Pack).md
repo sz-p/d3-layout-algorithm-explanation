@@ -7,16 +7,31 @@
 该模块利用[层级布局](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的数据进行包布局[坐标计算](#核心代码)。为层级布局数据添加[布局信息](#布局信息)用于绘制图形。以及一些内置[API](#API)来设置或获取一些参数来辅助图形的坐标计算。
 
 ### API
-```javascript
-//  如果指定了 radius 则将半径访问器设置为指定的函数并返回 pack 布局。如果没有指定 radius 则返回当前半径访问器，默认为 null,
-pack.radius([radius])
+[#](https://d3js.org.cn/document/d3-hierarchy/#pack) d3.**pack**()
 
-// 如果指定了 size 则将当前 pack 布局的尺寸设置为指定的二元数值类型数组: [width, height] 并返回当前 pack 布局。如果没有指定 size 则返回当前的尺寸，默认为 [1, 1]
-pack.size([size])
+使用默认的设置创建一个打包布局。
 
-// 如果指定了 padding 则设置布局的间隔访问器为指定的数值或函数并返回 pack 布局。如果没有指定 padding 则返回当前的间隔访问器，默认为常量 0。
-pack.padding([padding])
-```
+[#](https://d3js.org.cn/document/d3-hierarchy/#_pack) *pack*(*root*) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L15)
+
+对 *root* [hierarchy](https://d3js.org.cn/document/d3-hierarchy/#hierarchy) 进行布局，*root* 节点以及每个后代节点会被附加以下属性:
+
+- *node*.x - 节点中心的 *x*- 坐标
+- *node*.y - 节点中心的 *y*- 坐标
+- *node*.r - 圆的半径
+
+在传入布局之前必须调用 [*root*.sum](https://d3js.org.cn/document/d3-hierarchy/#node_sum)。可能还需要调用 [*root*.sort](https://d3js.org.cn/document/d3-hierarchy/#node_sort) 对节点进行排序。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#pack_radius) *pack*.**radius**([*radius*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L30)
+
+如果指定了 *radius* 则将半径访问器设置为指定的函数并返回 `pack` 布局。如果没有指定 *radius* 则返回当前半径访问器，默认为 `null`, 表示叶节点的圆的半径由叶节点的 *node*.value(通过 [*node*.sum](https://d3js.org.cn/document/d3-hierarchy/#node_sum) 计算) 得到；然后按照比例缩放以适应 [layout size](https://d3js.org.cn/document/d3-hierarchy/#pack_size)。如果半径访问器不为 `null` 则叶节点的半径由函数精确指定。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#pack_size) *pack*.**size**([*size*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L34)
+
+如果指定了 *size* 则将当前 `pack` 布局的尺寸设置为指定的二元数值类型数组: [*width*, *height*] 并返回当前 `pack` 布局。如果没有指定 *size* 则返回当前的尺寸，默认为 [1, 1]。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#pack_padding) *pack*.**padding**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L38)
+
+如果指定了 *padding* 则设置布局的间隔访问器为指定的数值或函数并返回 `pack` 布局。如果没有指定 *padding* 则返回当前的间隔访问器，默认为常量 `0`。当兄弟节点被打包时，节点之间的间隔会被设置为指定的间隔；外层包裹圆与字节点之间的间隔也会被设置为指定的间隔。如果没有指定 [explicit radius(明确的半径)](https://d3js.org.cn/document/d3-hierarchy/#pack_radius)，则间隔是近似的，因为需要一个双通道算法来适应 [layout size](https://d3js.org.cn/document/d3-hierarchy/#pack_size)：这些圆首先没有间隙；一个用于计算间隔的比例因子会被计算；最后，这些圆被填充了。
 
 ### 布局信息
 `x`:节点中心的 x- 坐标
@@ -162,3 +177,4 @@ https://d3js.org.cn/document/d3-hierarchy/#pack
 https://dl.acm.org/doi/10.1145/1124772.1124851
 
 http://www.inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf
+

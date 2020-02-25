@@ -7,6 +7,62 @@
 该模块依赖一个`层级布局(Hierarchy)`结果,和一个`画布区大小(size)`。输出一个`矩阵树数据(Treemap)`,`矩阵树数据(Treemap)`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[基本数据](#基本数据)。
 
 ### API
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap) d3.**treemap**()
+
+使用默认的配置创建一个新的 `treemap` 布局。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#_treemap) *treemap*(*root*) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L18)
+
+对指定的 *root* [hierarchy](https://d3js.org.cn/document/d3-hierarchy/#hierarchy) 进行布局，为 *root* 以及每个后代节点附加以下属性:
+
+- *node*.x0 - 矩形的左边缘
+- *node*.y0 - 矩形的上边缘
+- *node*.x1 - 矩形的右边缘
+- *node*.y1 - 矩形的下边缘
+
+在将层次数据传递给 `treemap` 布局之前，必须调用 [*root*.sum](https://d3js.org.cn/document/d3-hierarchy/#node_sum)。在计算布局之前还可能需要调用 [*root*.sort](https://d3js.org.cn/document/d3-hierarchy/#node_sort) 对节点进行排序。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_tile) *treemap*.**tile**([*tile*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L61)
+
+如果指定了 *tile* 则设置 [tiling method](https://d3js.org.cn/document/d3-hierarchy/#treemap-tiling) 为指定的函数并返回当前 `treemap` 布局。如果没有指定 *tile* 则返回当前铺设方法，默认为 [d3.treemapSquarify](https://d3js.org.cn/document/d3-hierarchy/#treemapSquarify)，也就是切分的矩形的长宽比遵循黄金比例。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_size) *treemap*.**size**([*size*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L57)
+
+如果指定了 *size* 则将当前的布局尺寸设置为指定的二元数值数组：[*width*, *height*]，并返回当前 `treemap` 布局。如果没有指定 *size* 则返回当前尺寸，默认为 [1, 1]。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_round) *treemap*.**round**([*round*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L53)
+
+如果指定了 *round* 则根据指定的布尔类型值启用或禁用四舍五入，并返回当前 `treemap` 布局。如果 *round* 没有指定则返回当前 `rounding` 状态，默认为 `false`。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_padding) *treemap*.**padding**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L65)
+
+如果指定了 *padding* 则同时设置 [inner](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingInner) 和 [outer](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingOuter) 间隔为指定的数值或函数，并返回当前 `treemap` 布局。如果没有指定 *padding* 则返回当前的 `inner` 间隔函数。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingInner) *treemap*.**paddingInner**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L69)
+
+如果指定了 *padding* 则将当前 `inner` 间隔设置为指定的数值或函数并返回当前的 `treemap` 布局。如果 *padding* 没有指定则返回当前 `inner` 间隔函数，默认为常数 `0`。如果 `padding` 为函数则会为每个包含子节点的节点调用并传递当前节点。`inner` 间隔用来设置节点相邻两个子节点之间的间隔。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingOuter) *treemap*.**paddingOuter**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L73)
+
+如果指定了 *padding* 则将 [top](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingTop), [right](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingRight), [bottom](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingBottom) 和 [left](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingLeft) 间隔设置为指定的数值或函数，并返回当前 `treemap` 布局，如果没有指定 *padding* 则返回当前 `top` 间隔函数。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingTop) *treemap*.**paddingTop**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L77)
+
+如果指定了 *padding* 则将 `top` 间隔设置为指定的数值或函数并返回当前 `treemap` 布局。如果没有指定 `padding` 则返回当前 `top` 间隔函数，默认为常量 `0`。如果 `padding` 为会为每个包含子节点的节点调用并传递当前节点。`top` 间隔用来将节点的顶部边缘与其子节点分开。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingRight) *treemap*.**paddingRight**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L81)
+
+如果指定了 *padding* 则将 `right` 间隔设置为指定的数值或函数并返回当前 `treemap` 布局。如果没有指定 `padding` 则返回当前 `right` 间隔函数，默认为常量 `0`。如果 `padding` 为会为每个包含子节点的节点调用并传递当前节点。`right` 间隔用来将节点的右侧边缘与其子节点分开。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingBottom) *treemap*.**paddingBottom**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L85)
+
+如果指定了 *padding* 则将 `bottom` 间隔设置为指定的数值或函数并返回当前 `treemap` 布局。如果没有指定 `padding` 则返回当前 `bottom` 间隔函数，默认为常量 `0`。如果 `padding` 为会为每个包含子节点的节点调用并传递当前节点。`bottom` 间隔用来将节点的下侧边缘与其子节点分开。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#treemap_paddingLeft) *treemap*.**paddingLeft**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/treemap/index.js#L89)
+
+如果指定了 *padding* 则将 `left` 间隔设置为指定的数值或函数并返回当前 `treemap` 布局。如果没有指定 `padding` 则返回当前 `left` 间隔函数，默认为常量 `0`。如果 `padding` 为会为每个包含子节点的节点调用并传递当前节点。`left` 间隔用来将节点的左侧边缘与其子节点分开。
+
 ### 基本数据
 
 **画布区大小(size)**
@@ -258,7 +314,7 @@ D3使用的是最基础的没有对数据集进行倒序处理的`Squarified`算
 
 
 ```
- 
+
 ## 参考 & 引用
 https://blog.csdn.net/dkr380205984/article/details/81704687
 https://zhuanlan.zhihu.com/p/57873460

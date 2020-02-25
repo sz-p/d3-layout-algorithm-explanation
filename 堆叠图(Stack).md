@@ -6,6 +6,109 @@
 
 ### API
 
+[#](https://d3js.org.cn/document/d3-shape/#stack) d3.**stack**() [<源码>](https://github.com/xswei/d3-shape/blob/master/src/stack.js)
+
+使用默认的设置构造一个新的堆叠布局生成器。
+
+[#](https://d3js.org.cn/document/d3-shape/#_stack) *stack*(*data*[, *arguments…*]) [<源码>](https://github.com/xswei/d3-shape/blob/master/src/stack.js#L16)
+
+根据指定的数据数组 *data* 生成一个堆叠布局，返回形式为序列数组。可以传递任意 *arguments*，它们会被直接传递给访问器。
+
+返回的序列由 [keys accessor](https://d3js.org.cn/document/d3-shape/#stack_keys) 决定。每个序列 *i* 对应第 *i* 个 `key`。每个序列都是一组点数组，每个点 *j* 表示输入数据中的第 *j* 个元素。最后每个点都会被表示为一个数组 `[y0, y1]`, 其中 *y0* 表示这个点的下限值(基线)，*y1* 表示这个点的上限值(顶线); *y0* 和 *y1* 之间的差值对应当前点的计算 [value](https://d3js.org.cn/document/d3-shape/#stack_value)。每个系列的 `key` 与 *series*.key 对应, 并且 [index](https://d3js.org.cn/document/d3-shape/#stack_order) 等于 *series*.index. 每个点的输入数据元素对应 *point*.data.
+
+例如，考虑如下的表示几种水果的月销售数据的表格:
+
+| Month  | Apples | Bananas | Cherries | Dates |
+| ------ | ------ | ------- | -------- | ----- |
+| 1/2015 | 3840   | 1920    | 960      | 400   |
+| 2/2015 | 1600   | 1440    | 960      | 400   |
+| 3/2015 | 640    | 960     | 640      | 400   |
+| 4/2015 | 320    | 480     | 640      | 400   |
+
+在 `JavaScript` 中可以表示为对象：
+
+```js
+var data = [
+  {month: new Date(2015, 0, 1), apples: 3840, bananas: 1920, cherries: 960, dates: 400},
+  {month: new Date(2015, 1, 1), apples: 1600, bananas: 1440, cherries: 960, dates: 400},
+  {month: new Date(2015, 2, 1), apples:  640, bananas:  960, cherries: 640, dates: 400},
+  {month: new Date(2015, 3, 1), apples:  320, bananas:  480, cherries: 640, dates: 400}
+];
+```
+
+使用这个数据创建一个堆叠布局:
+
+```js
+var stack = d3.stack()
+    .keys(["apples", "bananas", "cherries", "dates"])
+    .order(d3.stackOrderNone)
+    .offset(d3.stackOffsetNone);
+
+var series = stack(data);
+```
+
+返回的结果是一个包含每个 *series* 的数组。每个系列在每个月都对应一个数据点，每个点都有下限值和上限值用来表示基线和顶线:
+
+```js
+[
+  [[   0, 3840], [   0, 1600], [   0,  640], [   0,  320]], // apples
+  [[3840, 5760], [1600, 3040], [ 640, 1600], [ 320,  800]], // bananas
+  [[5760, 6720], [3040, 4000], [1600, 2240], [ 800, 1440]], // cherries
+  [[6720, 7120], [4000, 4400], [2240, 2640], [1440, 1840]], // dates
+]
+```
+
+每个序列通常会被传递给 [area generator](https://d3js.org.cn/document/d3-shape/#areas) 来渲染出区域图，或者直接用来绘制条形图。
+
+[#](https://d3js.org.cn/document/d3-shape/#stack_keys) *stack*.**keys**([*keys*]) [<源码>](https://github.com/xswei/d3-shape/blob/master/src/stack.js#L40)
+
+如果指定了 *keys* 则将 `keys` 访问器设置为指定的函数或数组，并返回当前堆叠布局生成器。如果没有指定 *keys* 则返回当前的 `keys` 访问器，默认为空数组。一个序列(一层) 对应一个 `key`。`keys` 通常是字符串，但是也可以是任意值。系列的 `key` 会被直接传递给 [value accessor](https://d3js.org.cn/document/d3-shape/#stack_value) 以计算每个数据点的值。
+
+[#](https://d3js.org.cn/document/d3-shape/#stack_value) *stack*.**value**([*value*]) [<源码>](https://github.com/xswei/d3-shape/blob/master/src/stack.js#L44)
+
+如果指定了 *value* 则将值访问器设置为指定的函数或数值并返回当前堆叠布局生成器。如果没有指定则返回当前的值访问器，默认为:
+
+```js
+function value(d, key) {
+  return d[key];
+}
+```
+
+因此，默认情况下堆叠布局生成器假设输入数据是一个对象数组，每个对象都包含了一个值为数值类型的属性。参考 [*stack*](https://d3js.org.cn/document/d3-shape/#_stack)。
+
+[#](https://d3js.org.cn/document/d3-shape/#stack_order) *stack*.**order**([*order*]) [<源码>](https://github.com/xswei/d3-shape/blob/master/src/stack.js#L48)
+
+如果指定了 *order* 则将顺序访问器设置为指定的函数或数组并返回当前堆叠布局生成器。如果没有指定 *order* 则返回当前顺序访问器默认为 [stackOrderNone](https://d3js.org.cn/document/d3-shape/#stackOrderNone)；也就是使用 [key accessor](https://d3js.org.cn/document/d3-shape/#stack_key) 指定的次序。参考 [stack orders](https://d3js.org.cn/document/d3-shape/#stack-orders) 获取内置顺序。
+
+如果 *order* 为函数则会传递生成的系列数组，并且必须返回数组。例如默认的顺序访问器被定义为:
+
+```js
+function orderNone(series) {
+  var n = series.length, o = new Array(n);
+  while (--n >= 0) o[n] = n;
+  return o;
+}
+```
+
+堆叠次序是在计算 [offset](https://d3js.org.cn/document/d3-shape/#stack_offset) 之前进行的，因此在计算次序时每个点的下限都为 `0`。每个序列的索引属性在计算完次序之后才会被设置。
+
+[#](https://d3js.org.cn/document/d3-shape/#stack_offset) *stack*.**offset**([*offset*]) [<源码>](https://github.com/xswei/d3-shape/blob/master/src/stack.js#L52)
+
+如果指定了 *offset* 则将偏移访问器设置为指定的函数或数组并返回当前堆叠布局。如果 *offset* 没有指定则返回当前的偏移访问器，默认为 [stackOffsetNone](https://d3js.org.cn/document/d3-shape/#stackOffsetNone); 默认会生成以 `0` 为基线的堆叠图，参考 [stack offsets](https://d3js.org.cn/document/d3-shape/#stack-offsets) 了解内置的偏移。
+
+如果 *offset* 为函数，则会传递系列数组以及顺序索引。偏移函数负责计算更新每个数据点的上下限值。例如默认的偏移被定义为:
+
+```js
+function offsetNone(series, order) {
+  if (!((n = series.length) > 1)) return;
+  for (var i = 1, s0, s1 = series[order[0]], n, m = s1.length; i < n; ++i) {
+    s0 = s1, s1 = series[order[i]];
+    for (var j = 0; j < m; ++j) {
+      s1[j][1] += s1[j][0] = s0[j][1];
+    }
+  }
+```
+
 ### 基本数据
 
 **数据项(keys)**

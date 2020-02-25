@@ -151,8 +151,6 @@ function padAngle() {
 
 这里的间隔角度也就是两个相邻的扇形之间的间隔。间隔角度的总和等于指定的角度乘以输入数据数组中的元素数量，最大为 |endAngle - startAngle|；然后，剩余的间隔按比例按比例分配，这样每个弧的相对面积就会被保留下来。参考 [pie padding animation](http://bl.ocks.org/mbostock/3e961b4c97a1b543fff2) 获取更详细的说明。间隔访问器只会被调用一次，并传递当前数据集，其中 `this` 上下文指向 [pie generator](https://d3js.org.cn/document/d3-shape/#_pie)。角度的单位是任意的，但是如果要将饼图生成器与弧生成器结合使用则应该以弧度指定。
 
-## [#](https://d3js.org.cn/document/d3-shape/#lines)Lines
-
 ### 布局信息
 布局信息整体为一个数组,数组中的每一项代表一个扇区，其中`startAngle`,`endAngle`代表起止角度。单位为弧度制。`padAngle`为各个扇区中间的间距。`outerRadius`为外半径
 ```javascript

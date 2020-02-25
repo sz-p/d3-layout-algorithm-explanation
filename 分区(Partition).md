@@ -8,6 +8,33 @@
 
 ### API
 
+[#](https://d3js.org.cn/document/d3-hierarchy/#partition) d3.**partition**()
+
+使用默认的设置创建一个分区图布局。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#_partition) *partition*(*root*) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/partition.js#L10)
+
+对指定的 *root* [hierarchy](https://d3js.org.cn/document/d3-hierarchy/#hierarchy) 进行布局，*root* 节点以及每个后代节点会被附加以下属性:
+
+- *node*.x0 - 矩形的左边缘
+- *node*.y0 - 矩形的上边缘
+- *node*.x1 - 矩形的右边缘
+- *node*.y1 - 矩形的下边缘
+
+在将层次数据传递给 `treemap` 布局之前，必须调用 [*root*.sum](https://d3js.org.cn/document/d3-hierarchy/#node_sum)。在计算布局之前还可能需要调用 [*root*.sort](https://d3js.org.cn/document/d3-hierarchy/#node_sort) 对节点进行排序。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#partition_size) *partition*.**size**([*size*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/partition.js#L43)
+
+如果指定了 *size* 则将当前的布局尺寸设置为指定的二元数值数组：[*width*, *height*]，并返回当前 `treemap` 布局。如果没有指定 *size* 则返回当前尺寸，默认为 [1, 1]。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#partition_round) *partition*.**round**([*round*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/partition.js#L39)
+
+如果指定了 *round* 则根据指定的布尔类型值启用或禁用四舍五入，并返回当前 `treemap` 布局。如果 *round* 没有指定则返回当前 `rounding` 状态，默认为 `false`。
+
+[#](https://d3js.org.cn/document/d3-hierarchy/#partition_padding) *partition*.**padding**([*padding*]) [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/partition.js#L47)
+
+如果指定了 *padding* 则设将当前分区布局的间隔设置为指定的数值或函数，并返回当前 `partition` 布局。如果没有指定 *padding* 则返回当前的间隔，默认为 `0`。间隔用于分离节点的相邻子节点。
+
 ### 基本数据
 
 **画布区大小(size)**
