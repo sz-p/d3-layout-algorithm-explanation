@@ -1,6 +1,6 @@
 ## 地图(Map)
 
-![](https:/img.sz-p.cn/d3Layout-map.png)
+![](https://img.sz-p.cn/d3Layout-map.png)
 
 ### API
 

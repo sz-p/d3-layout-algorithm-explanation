@@ -1,6 +1,6 @@
 ## 力学图(Force)
 
-![](https:/img.sz-p.cn/d3Layoutforce.png)
+![](https://img.sz-p.cn/d3Layoutforce.png)
 
 ### API
 ### 布局信息

@@ -1,6 +1,6 @@
 ## 分区(Partition)
 
-![](https:/img.sz-p.cn/d3Layout-partition.png)
+![](https://img.sz-p.cn/d3Layout-partition.png)
 
 分区图，是[层级布局(Hierarchy)](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的一种
 

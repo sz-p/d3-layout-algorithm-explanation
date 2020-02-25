@@ -1,6 +1,6 @@
 ## 弦图(Chord)
 
-![](https:/img.sz-p.cn/d3Layout-chord.png)
+![](https://img.sz-p.cn/d3Layout-chord.png)
 
 ### API
 ### 布局信息

@@ -1,6 +1,6 @@
 ## 捆图(Bundle)
 
-![](https:/img.sz-p.cn/d3Layout-bundle.png)
+![](https://img.sz-p.cn/d3Layout-bundle.png)
 
 ### API
 ### 布局信息

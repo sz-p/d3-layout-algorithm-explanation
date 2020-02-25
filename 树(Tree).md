@@ -1,6 +1,6 @@
 ## 树(Tree)
 
-![](https:/img.sz-p.cn/d3Layout-cluster.png)
+![](https://img.sz-p.cn/d3Layout-cluster.png)
 
 ### API
 ### 布局信息

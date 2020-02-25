@@ -1,6 +1,6 @@
 ## 矩阵树(Treemap)
 
-![](https:/img.sz-p.cn/d3Layout-treemap.png)
+![](https://img.sz-p.cn/d3Layout-treemap.png)
 
 矩阵树,是[层级布局(Hierarchy)](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的一种
 
