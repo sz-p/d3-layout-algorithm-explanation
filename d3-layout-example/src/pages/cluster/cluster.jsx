@@ -23,7 +23,9 @@ function Cluster() {
   }
 
   let color = d3.scaleOrdinal(d3.schemeCategory10)
-
+  let nodeR = function (d) {
+    return 40 - d.depth * 12;
+  }
   useEffect(() => {
     const svg = d3.select(chartArea.current)
       .append('svg')
@@ -48,11 +50,11 @@ function Cluster() {
 
     nodes.append("circle")
       .attr('fill', (d, i) => color(i))
-      .attr("r", (d) => { return 40 - d.depth * 15 });
+      .attr("r", (d) => { return nodeR(d) });
 
     nodes.append('text')
       .text((d) => d.data.name)
-      .attr('font-size', (d) => { return (40 - d.depth * 15) / 2 + 'px' })
+      .attr('font-size', (d) => { return nodeR(d) / 2 + 'px' })
       .attr('text-anchor', "middle")
       .attr('dominant-baseline', "middle")
       .attr('fill', '#ffffff')

@@ -6,7 +6,11 @@ export default {
 			name: '浙江',
 			value: '450',
 			children: [
-				{ name: '杭州', value: '150' },
+				{
+					name: '杭州',
+					value: '150',
+					children: [ { name: '临安区', value: '150' } ]
+				},
 				{ name: '宁波', value: '120' },
 				{ name: '温州', value: '130' },
 				{ name: '绍兴', value: '50' }
