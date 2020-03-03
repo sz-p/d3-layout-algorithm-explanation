@@ -2,6 +2,10 @@
 
 ![](https://img.sz-p.cn/d3Layout-cluster.png)
 
+集群,是[层级布局(Hierarchy)](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的一种
+
+该模块依赖一个[层级布局(Hierarchy)](./层级布局(Hierarchy).md)结果,和一个`画布区大小(size)`。将层级布局数据中的节点赋予`x`和`y`坐标。集群图从叶子节点开始，自底向上，每一层节点对齐。
+
 ### API
 
 [#](https://d3js.org.cn/document/d3-hierarchy/#cluster) d3.**cluster**() [<源码>](https://github.com/d3/d3-hierarchy/blob/master/src/cluster.js)
@@ -38,8 +42,121 @@ function separation(a, b) {
 间隔访问器用来设置相邻的两个叶节点之间的间隔。指定的间隔访问器会传递两个叶节点 *a* 和 *b*，并且必须返回一个期望的间隔值。这些节点通常是兄弟节点，如果布局将两个节点放置到相邻的位置，则可以通过配置间隔访问器设置相邻节点之间的间隔控制其期望的距离。
 
 ### 布局信息
+
+`x`:节点中心的 x- 坐标
+`y`:节点中心的 y- 坐标
+`parent`,`children`分别代表当前节点的父节点和子节点
+
+```javascript
+const nodes = [
+  {
+    data: {name: "中国", value: "950", children: Array(4)},
+    height: 3,
+    depth: 0,
+    parent: null,
+    value: 950,
+    children: (4) [Node, Node, Node, Node],
+    x: 208.33333333333334,
+    y: 0,
+  }
+]
+```
+
 ### 基本数据
+
+**画布区大小(size)**
+
+```javascript
+[400,600]
+```
+
 ### 执行逻辑
+
+1. 对节点树进行**后续遍历**，并维护上一个叶子节点信息
+2. 初始化第一个叶子节点数据横纵坐标均为0
+3. 对叶子节点进行计数，同一个父节点的叶子节点间隔为1，不同父节点的叶子节点间隔为2，对叶子节点和横坐标进行累加，纵坐标均为0
+4. **对子节点的横坐标求平均值得到本节点的横坐标，对子节点的纵坐标的最大值+1得到本节点的纵坐标**
+5. 重复步骤4 直至计算完毕整个树的相对坐标
+6. 获取节点树的轮廓信息，即x_min, x_max, y_min, y_max
+7. 对节点树进行**第二次后序遍历**
+8. 将表示本节点相对位置的的x,y坐标映射到画布区
+
 ### 核心代码
 
+```javascript
+export default function() {
+  var separation = defaultSeparation,
+      dx = 1,
+      dy = 1,
+      nodeSize = false;
+
+  function cluster(root) {
+    var previousNode,
+        x = 0;
+
+    // 第一步 计算初始的 x 和 y 坐标 
+    // 这时的 xy仅 表示相对位置
+    // 这里对树进行后续遍历 即 先访问所有的子节点再访问该节点。
+    root.eachAfter(function(node) {
+      var children = node.children;
+      if (children) {
+        node.x = meanX(children);
+        node.y = maxY(children);
+      } else {
+        // 叶子节点 x 坐标 根据当前叶子节点的排序 递增确定 相同父节点+1 不同父节点+2
+        node.x = previousNode ? x += separation(node, previousNode) : 0;
+        // 叶子节点 y 坐标统一为 0
+        node.y = 0;
+        // 这里维护了变量表示上一个 子节点
+        previousNode = node;
+      }
+    });
+      
+    // 这里拿到了 最左侧，最右侧的节点的x坐标
+    var left = leafLeft(root),
+        right = leafRight(root),
+        x0 = left.x - separation(left, right) / 2,
+        x1 = right.x + separation(right, left) / 2;
+    
+    // 第二次遍历 将表示相对位置的x,y坐标映射到画布区
+    return root.eachAfter(nodeSize ? function(node) {
+      node.x = (node.x - root.x) * dx;
+      node.y = (root.y - node.y) * dy;
+    } : function(node) {
+      // 这里对横坐标做了一个简单的线性映射
+      node.x = (node.x - x0) / (x1 - x0) * dx;
+      // 同样这里对纵坐标做了一个线性映射
+      node.y = (1 - (root.y ? node.y / root.y : 1)) * dy;
+    });
+  }
+// 返回 a b 两个节点的间距，如果是同一个父节点，两节点间距为1 否则为2
+function separation(a, b) {
+  return a.parent === b.parent ? 1 : 2;
+}
+
+// 父节点的 x值 取 子节点的 x值的 平均值
+function meanX(children) {
+  return children.reduce(meanXReduce, 0) / children.length;
+}
+
+function meanXReduce(x, c) {
+  return x + c.x;
+}
+    
+// 父节点的 y值 取 子节点的 最大的y值的 +1
+function maxY(children) {
+  return 1 + children.reduce(maxYReduce, 0);
+}
+
+function maxYReduce(y, c) {
+  return Math.max(y, c.y);
+}
+```
+
+
+
 ## 参考 & 引用
+
+https://blog.csdn.net/selina_chan/article/details/51260516
+
+https://d3js.org.cn/document/d3-hierarchy/#cluster
