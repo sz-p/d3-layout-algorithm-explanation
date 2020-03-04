@@ -2,9 +2,9 @@
 
 ![](https://img.sz-p.cn/d3Layout-partition.png)
 
-分区图，是[层级布局(Hierarchy)](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的一种
+分区图，是[层级布局(Hierarchy)](./层级布局(Hierarchy).md)的一种
 
-该模块依赖一个`层级布局(Hierarchy)`结果,和一个`画布区大小(size)`。输出一个`分区数据(Partition)`,`分区数据(Partition)`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[基本数据](#基本数据)。
+该模块依赖一个`层级布局(Hierarchy)`结果,和一个`画布区大小(size)`。输出一个`布局信息`,`布局信息`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[基本数据](#基本数据)，及[布局信息](#布局信息)。
 
 ### API
 
@@ -35,57 +35,7 @@
 
 如果指定了 *padding* 则设将当前分区布局的间隔设置为指定的数值或函数，并返回当前 `partition` 布局。如果没有指定 *padding* 则返回当前的间隔，默认为 `0`。间隔用于分离节点的相邻子节点。
 
-### 基本数据
-
-**画布区大小(size)**
-```javascript
-[400,600]
-```
-
-**节点数据(NodeData)**
-
-```javascript
-{
-    'name': '中国',
-    'value': '950',
-    'children': [
-      {
-        'name': '浙江',
-        'value': '450'
-      },
-      {
-        'name': '广西',
-        'value': '200'
-      }
-    ]
-}
-```
-
-**层级布局(Hierarchy)**结果
-
-```javascript
-{
-    data:{name:'中国',...NodeData}
-    height: 2,
-    depth: 0,
-    parent: null,
-    value: 400,
-    children: [
-        {
-            data:{name:'浙江',...NodeData.children[0]}
-            parent: Hierarchy,
-            value: 100
-        },
-        {
-            data:{name:'广西',...NodeData.children[1]}
-            parent: Hierarchy,
-            value: 300
-        }
-    ]
-}
-```
-
-**分区数据(Partition)**
+### 布局信息
 其中`x0,y0`,`x1,y1`两个坐标点构成了一个区域。这个区域即为`分区数据(Partition)`的可视化信息。
 
 ```javascript
@@ -118,6 +68,32 @@
             y0:300,
             y1:600,
         }
+    ]
+}
+```
+
+### 基本数据
+
+**画布区大小(size)**
+```javascript
+[400,600]
+```
+
+**节点数据(NodeData)**
+
+```javascript
+{
+    'name': '中国',
+    'value': '950',
+    'children': [
+      {
+        'name': '浙江',
+        'value': '450'
+      },
+      {
+        'name': '广西',
+        'value': '200'
+      }
     ]
 }
 ```
