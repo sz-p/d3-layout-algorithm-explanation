@@ -2,9 +2,9 @@
 
 ![](https://img.sz-p.cn/d3Layout-treemap.png)
 
-矩阵树,是[层级布局(Hierarchy)](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的一种
+矩阵树,是[层级布局(Hierarchy)](./层级布局(Hierarchy).md)的一种
 
-该模块依赖一个[层级布局(Hierarchy)](./层级布局(Hierarchy).md)结果,和一个`画布区大小(size)`。输出一个`矩阵树数据(Treemap)`,`矩阵树数据(Treemap)`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[基本数据](#基本数据)。
+该模块依赖一个[层级布局(Hierarchy)](./层级布局(Hierarchy).md)结果,和一个`画布区大小(size)`。输出一个`矩阵树数据(Treemap)`,`矩阵树数据(Treemap)`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[基本数据](#基本数据),及[布局信息](#布局信息)。
 
 ### API
 
@@ -63,62 +63,7 @@
 
 如果指定了 *padding* 则将 `left` 间隔设置为指定的数值或函数并返回当前 `treemap` 布局。如果没有指定 `padding` 则返回当前 `left` 间隔函数，默认为常量 `0`。如果 `padding` 为会为每个包含子节点的节点调用并传递当前节点。`left` 间隔用来将节点的左侧边缘与其子节点分开。
 
-### 基本数据
-
-**画布区大小(size)**
-```javascript
-[400,600]
-```
-
-**节点数据(NodeData)**
-
-```javascript
-{
-    'name': '中国',
-    'value': '950',
-    'children': [
-      {
-        'name': '浙江',
-        'value': '450'
-      },
-      {
-        'name': '广西',
-        'value': '200'
-      }
-    ]
-}
-```
-
-**层级布局(Hierarchy)**结果
-
-```javascript
-{
-    data:{name:'中国',...NodeData}
-    height: 2,
-    depth: 0,
-    parent: null,
-    value: 400,
-    children: [
-        {
-            data:{name:'浙江',...NodeData.children[0]}
-            parent: Hierarchy,
-            value: 100
-        },
-        {
-            data:{name:'广西',...NodeData.children[1]}
-            parent: Hierarchy,
-            value: 300
-        }
-    ]
-}
-```
-
-**长宽比**
-```javascript
-ratio = (1 + Math.sqrt(5)) / 2
-```
-
-**矩阵树(Treemap)**
+### 布局信息
 其中`x0,y0`,`x1,y1`两个坐标点构成了一个区域。这个区域即为`矩阵树(Treemap)`的可视化信息。
 
 ```javascript
@@ -153,6 +98,37 @@ ratio = (1 + Math.sqrt(5)) / 2
         }
     ]
 }
+```
+
+### 基本数据
+
+**画布区大小(size)**
+```javascript
+[400,600]
+```
+
+**节点数据(NodeData)**
+
+```javascript
+{
+    'name': '中国',
+    'value': '950',
+    'children': [
+      {
+        'name': '浙江',
+        'value': '450'
+      },
+      {
+        'name': '广西',
+        'value': '200'
+      }
+    ]
+}
+```
+
+**长宽比**
+```javascript
+ratio = (1 + Math.sqrt(5)) / 2
 ```
 
 ### 算法简介
@@ -317,4 +293,5 @@ D3使用的是最基础的没有对数据集进行倒序处理的`Squarified`算
 
 ## 参考 & 引用
 https://blog.csdn.net/dkr380205984/article/details/81704687
+
 https://zhuanlan.zhihu.com/p/57873460
