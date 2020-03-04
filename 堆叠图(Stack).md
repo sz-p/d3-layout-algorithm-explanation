@@ -2,7 +2,7 @@
 
 ![](https://img.sz-p.cn/d3Layout-stack.png)
 
-该模块依赖`数据项(keys)`其提供了`原始数据数据(data)`中所需要堆积的数据项的条目。最终返回`堆积数据(stackData)`。堆积数据包含`原始数据数据(data)`中每一项的所占的起始值和结束值。详情见[基本数据](#基本数据)。
+该模块依赖`数据项(keys)`其提供了`原始数据数据(data)`中所需要堆积的数据项的条目。最终返回`布局信息`。堆积数据包含`原始数据数据(data)`中每一项的所占的起始值和结束值。详情见[基本数据](#基本数据),及`布局信息`。
 
 ### API
 
@@ -109,24 +109,7 @@ function offsetNone(series, order) {
   }
 ```
 
-### 基本数据
-
-**数据项(keys)**
-```javascript
-["apple", "samsung", "huawei", "oppo", "xiaomi", "others"]
-```
-
-**原始数据数据(data)**
-```javascript
-const data = [
-    { year: 2017, quarter: 2, samsung: 0.229, apple: 0.118, huawei: 0.110, oppo: 0.08, xiaomi: 0.062, others: 0.401},
-    { year: 2017, quarter: 3, samsung: 0.221, apple: 0.124, huawei: 0.104, oppo: 0.081, xiaomi: 0.075, others: 0.396},
-    { year: 2017, quarter: 4, samsung: 0.189, apple: 0.196, huawei: 0.107, oppo: 0.069, xiaomi: 0.071, others: 0.368},
-    { year: 2018, quarter: 1, samsung: 0.235, apple: 0.157, huawei: 0.118, oppo: 0.074, xiaomi: 0.084, others: 0.332}
-]
-```
-
-**堆积数据(stackData)**
+### 布局信息
 这里计算完毕之后 给每个数据项赋了一个当前的原始数据，数据较长这里就不再贴出。详情数据见原始数据。
 简单说明一下堆积数据
 
@@ -153,6 +136,23 @@ const data = [
     [[0.45699999999999996,0.5369999999999999],[0.44899999999999995,0.5299999999999999],[0.492,0.5609999999999999],[0.51,0.584],key: "oppo", index: 3],
     [[0.5369999999999999,0.599],[0.5299999999999999,0.6049999999999999],[0.5609999999999999,0.6319999999999999],[0.584,0.6679999999999999],key: "xiaomi", index: 4],
     [[0.599,1],[0.6049999999999999,1.001],[0.6319999999999999,0.9999999999999999],[0.6679999999999999,1],key: "others", index: 5]
+]
+```
+
+### 基本数据
+
+**数据项(keys)**
+```javascript
+["apple", "samsung", "huawei", "oppo", "xiaomi", "others"]
+```
+
+**原始数据数据(data)**
+```javascript
+const data = [
+    { year: 2017, quarter: 2, samsung: 0.229, apple: 0.118, huawei: 0.110, oppo: 0.08, xiaomi: 0.062, others: 0.401},
+    { year: 2017, quarter: 3, samsung: 0.221, apple: 0.124, huawei: 0.104, oppo: 0.081, xiaomi: 0.075, others: 0.396},
+    { year: 2017, quarter: 4, samsung: 0.189, apple: 0.196, huawei: 0.107, oppo: 0.069, xiaomi: 0.071, others: 0.368},
+    { year: 2018, quarter: 1, samsung: 0.235, apple: 0.157, huawei: 0.118, oppo: 0.074, xiaomi: 0.084, others: 0.332}
 ]
 ```
 
@@ -216,4 +216,5 @@ function offset(series, order) {
 
 ## 参考 & 引用
 https://www.jianshu.com/p/dac8d1d698d8
+
 https://github.com/Yixian15/d3-tutorial/blob/master/marletShareStack.html
