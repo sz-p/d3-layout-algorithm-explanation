@@ -1,6 +1,6 @@
 ## 集群(Cluster)
 
-![](https://img.sz-p.cn/d3Layout-cluster.png)
+![](https://img.sz-p.cn/d3Layout-Cluster.png)
 
 集群,是[层级布局(Hierarchy)](https://sz-p.cn/blog/index.php/2019/07/08/207.html)的一种
 
