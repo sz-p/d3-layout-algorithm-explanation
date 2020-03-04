@@ -64,7 +64,6 @@ TODO
 TODO
 
 ### 核心代码
-
 ```javascript
 function pack(root) {
   root.x = dx / 2, root.y = dy / 2;
