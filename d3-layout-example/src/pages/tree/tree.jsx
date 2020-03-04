@@ -13,7 +13,8 @@ function Tree() {
   const padding = 30;
 
   console.log(hierarchyData);
-
+  // hierarchyData.eachAfter((d)=>console.log(d));
+  // hierarchyData.eachBefore((d)=>console.log(d.data.name));
   const treeData = d3.tree()
     .size([width, height])(hierarchyData);
   console.log(treeData);
