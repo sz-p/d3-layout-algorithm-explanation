@@ -60,6 +60,19 @@ var bins = histogram(numbers);
 
 如果指定了 *count* 则表示使用 *count* 代替 *thresholds* 数组, [domain](https://d3js.org.cn/document/d3-array/#histogram_domain) 将会被设置成近似的计数区间, 参考 [ticks](https://d3js.org.cn/document/d3-array/#ticks).
 
+### 布局信息
+
+其中，第二层数据每个数组即代表一个**分箱**，x0,x1分别代表起止值域，其中x0，x1不计入数组长度。数组长度即代表该分箱的元素个数。直方图普遍将每个分箱的元素个数作为主体的高度映射。
+
+```javascript
+[
+    [x0: 0, x1: 0.1],
+    [x0: 0.1, x1: 0.2],
+    [x0: 0.2, x1: 0.3, 0.23, 0.25, 0.232, ...]
+    ...
+]
+```
+
 ### 基本数据
 
 区间(domain)
@@ -131,5 +144,7 @@ for (i = 0; i < n; ++i) {
 
 ## 参考 & 引用
 https://baike.baidu.com/item/%E7%9B%B4%E6%96%B9%E5%9B%BE/1103834?fr=aladdin
+
 https://blog.mn886.net/chenjianhua/show/773c07b3abce/index.html
+
 https://github.com/xswei/d3-array/blob/master/README.md#histogram
