@@ -245,6 +245,11 @@ Node.prototype = hierarchy.prototype = {
 };
 ```
 
+### 执行逻辑
+
+1. 层次遍历N叉树，写入父节点、当前节点深度、当前值。
+3. 先序遍历N叉树写入树高度。
+
 ### 核心代码
 
 ```javascript
