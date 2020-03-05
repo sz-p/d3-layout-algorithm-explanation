@@ -35,7 +35,7 @@ function Tree() {
       .attr('height', height)
       .attr('viewBox', () => `-${padding},-${padding},${width + padding},${height + padding}`)
 
-    const links = svg.selectAll('.link')
+    svg.selectAll('.link')
       .data(treeData.links())
       .enter().append("path")
       .attr("fill", "none")

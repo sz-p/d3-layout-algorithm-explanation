@@ -7,6 +7,8 @@ import Pie from './pages/pie/pie';
 import Pack from './pages/pack/pack';
 import Cluster from './pages/cluster/cluster';
 import Tree from './pages/tree/tree';
+import Histogram from './pages/histogram/histogram';
+import Force from './pages/force/force';
 
 import { hot } from 'react-hot-loader';
 
@@ -37,6 +39,8 @@ function App() {
 					<Route path={'/pie'} component={Pie} />
           <Route path={'/cluster'} component={Cluster} />
           <Route path={'/tree'} component={Tree} />
+          <Route path={'/histogram'} component={Histogram} />
+          <Route path={'/force'} component={Force} />
 					<Route exact path={'/'} component={IndexPage} />
 				</div>
 			</BrowserRouter>

@@ -33,7 +33,7 @@ function Cluster() {
       .attr('height', height)
       .attr('viewBox', () => `-${padding},-${padding},${width + padding},${height + padding}`)
 
-    const links = svg.selectAll('.link')
+    svg.selectAll('.link')
       .data(clusterData.links())
       .enter().append("path")
       .attr("fill", "none")
