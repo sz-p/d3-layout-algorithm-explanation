@@ -18,6 +18,8 @@ function IndexPage() {
       <Link to={'/histogram'}>histogram</Link>
       <br></br>
       <Link to={'/force'}>force</Link>
+      <br></br>
+      <Link to={'/map'}>map</Link>
     </div>
   );
 }

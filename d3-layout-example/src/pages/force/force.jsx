@@ -13,7 +13,7 @@ function Force() {
   let currNodes = data.nodes;
   let currLinks = data.links;
 
-  var simulation = d3.forceSimulation()
+  var simulation = d3.forceSimulation(currNodes)
     .force("link", d3.forceLink().id(function (d) { return d.id; }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
@@ -70,11 +70,10 @@ function Force() {
       .text(d => d.id);
 
     simulation
-      //.nodes(graph.nodes)
-      .nodes(currNodes)
       .on("tick", ticked);
 
-    simulation.force("link")
+    simulation
+      .force("link")
       .links(data.links);
 
     function ticked() {
