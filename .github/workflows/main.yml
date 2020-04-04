@@ -26,4 +26,4 @@ jobs:
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         TARGET: ${{ secrets.TARGET }}
-        SOURCE: "*.md"
+        # SOURCE: "*.md"
