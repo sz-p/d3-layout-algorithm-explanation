@@ -36,7 +36,7 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script:
+        script: |
           cd ${{ secrets.TARGET }}
           git add .
           git commit -m "更新d3布局算法相关文件"
