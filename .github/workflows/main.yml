@@ -19,7 +19,6 @@ jobs:
       uses: actions/checkout@v2
 
     # 部署文件
-    steps:
     - name: Deploy
       uses: easingthemes/ssh-deploy@v2.0.9
       env:
