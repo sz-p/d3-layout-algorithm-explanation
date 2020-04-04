@@ -1,0 +1,648 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>堆叠图Stack · D3 布局算法</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="sz-p">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="分区Partition.html" />
+    
+    
+    <link rel="prev" href="地图Map.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://github.com/sz-p/d3-layout-algorithm-explanation" target="_blank" class="custom-link">GitHub</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="饼图Pie.html">
+            
+                <a href="饼图Pie.html">
+            
+                    
+                    饼图Pie
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="层级布局Hierarchy.html">
+            
+                <a href="层级布局Hierarchy.html">
+            
+                    
+                    层级布局Hierarchy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="树Tree.html">
+            
+                <a href="树Tree.html">
+            
+                    
+                    树Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="集群Cluster.html">
+            
+                <a href="集群Cluster.html">
+            
+                    
+                    集群Cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="层包Pack.html">
+            
+                <a href="层包Pack.html">
+            
+                    
+                    层包Pack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="矩阵树Treemap.html">
+            
+                <a href="矩阵树Treemap.html">
+            
+                    
+                    矩阵树Treemap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="地图Map.html">
+            
+                <a href="地图Map.html">
+            
+                    
+                    地图Map
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="堆叠图Stack.html">
+            
+                <a href="堆叠图Stack.html">
+            
+                    
+                    堆叠图Stack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="分区Partition.html">
+            
+                <a href="分区Partition.html">
+            
+                    
+                    分区Partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="捆图Bundle.html">
+            
+                <a href="捆图Bundle.html">
+            
+                    
+                    捆图Bundle
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="力学图Force.html">
+            
+                <a href="力学图Force.html">
+            
+                    
+                    力学图Force
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="弦图Chord.html">
+            
+                <a href="弦图Chord.html">
+            
+                    
+                    弦图Chord
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="直方图Histogram.html">
+            
+                <a href="直方图Histogram.html">
+            
+                    
+                    直方图Histogram
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >堆叠图Stack</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x5806;&#x53E0;&#x56FE;stack">&#x5806;&#x53E0;&#x56FE;Stack</h2>
+<p><img src="https://img.sz-p.cn/d3Layout-stack.png" alt=""></p>
+<p>&#x8BE5;&#x6A21;&#x5757;&#x4F9D;&#x8D56;<code>&#x6570;&#x636E;&#x9879;(keys)</code>&#x5176;&#x63D0;&#x4F9B;&#x4E86;<code>&#x539F;&#x59CB;&#x6570;&#x636E;&#x6570;&#x636E;(data)</code>&#x4E2D;&#x6240;&#x9700;&#x8981;&#x5806;&#x79EF;&#x7684;&#x6570;&#x636E;&#x9879;&#x7684;&#x6761;&#x76EE;&#x3002;&#x6700;&#x7EC8;&#x8FD4;&#x56DE;<code>&#x5E03;&#x5C40;&#x4FE1;&#x606F;</code>&#x3002;&#x5806;&#x79EF;&#x6570;&#x636E;&#x5305;&#x542B;<code>&#x539F;&#x59CB;&#x6570;&#x636E;&#x6570;&#x636E;(data)</code>&#x4E2D;&#x6BCF;&#x4E00;&#x9879;&#x7684;&#x6240;&#x5360;&#x7684;&#x8D77;&#x59CB;&#x503C;&#x548C;&#x7ED3;&#x675F;&#x503C;&#x3002;&#x8BE6;&#x60C5;&#x89C1;<a href="#&#x57FA;&#x672C;&#x6570;&#x636E;">&#x57FA;&#x672C;&#x6570;&#x636E;</a>,&#x53CA;<code>&#x5E03;&#x5C40;&#x4FE1;&#x606F;</code>&#x3002;</p>
+<h3 id="api">API</h3>
+<p><a href="https://d3js.org.cn/document/d3-shape/#stack" target="_blank">#</a> d3.<strong>stack</strong>() <a href="https://github.com/xswei/d3-shape/blob/master/src/stack.js" target="_blank">&lt;&#x6E90;&#x7801;&gt;</a></p>
+<p>&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7684;&#x8BBE;&#x7F6E;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5806;&#x53E0;&#x5E03;&#x5C40;&#x751F;&#x6210;&#x5668;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-shape/#_stack" target="_blank">#</a> <em>stack</em>(<em>data</em>[, <em>arguments&#x2026;</em>]) <a href="https://github.com/xswei/d3-shape/blob/master/src/stack.js#L16" target="_blank">&lt;&#x6E90;&#x7801;&gt;</a></p>
+<p>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x6570;&#x7EC4; <em>data</em> &#x751F;&#x6210;&#x4E00;&#x4E2A;&#x5806;&#x53E0;&#x5E03;&#x5C40;&#xFF0C;&#x8FD4;&#x56DE;&#x5F62;&#x5F0F;&#x4E3A;&#x5E8F;&#x5217;&#x6570;&#x7EC4;&#x3002;&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x4EFB;&#x610F; <em>arguments</em>&#xFF0C;&#x5B83;&#x4EEC;&#x4F1A;&#x88AB;&#x76F4;&#x63A5;&#x4F20;&#x9012;&#x7ED9;&#x8BBF;&#x95EE;&#x5668;&#x3002;</p>
+<p>&#x8FD4;&#x56DE;&#x7684;&#x5E8F;&#x5217;&#x7531; <a href="https://d3js.org.cn/document/d3-shape/#stack_keys" target="_blank">keys accessor</a> &#x51B3;&#x5B9A;&#x3002;&#x6BCF;&#x4E2A;&#x5E8F;&#x5217; <em>i</em> &#x5BF9;&#x5E94;&#x7B2C; <em>i</em> &#x4E2A; <code>key</code>&#x3002;&#x6BCF;&#x4E2A;&#x5E8F;&#x5217;&#x90FD;&#x662F;&#x4E00;&#x7EC4;&#x70B9;&#x6570;&#x7EC4;&#xFF0C;&#x6BCF;&#x4E2A;&#x70B9; <em>j</em> &#x8868;&#x793A;&#x8F93;&#x5165;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x7B2C; <em>j</em> &#x4E2A;&#x5143;&#x7D20;&#x3002;&#x6700;&#x540E;&#x6BCF;&#x4E2A;&#x70B9;&#x90FD;&#x4F1A;&#x88AB;&#x8868;&#x793A;&#x4E3A;&#x4E00;&#x4E2A;&#x6570;&#x7EC4; <code>[y0, y1]</code>, &#x5176;&#x4E2D; <em>y0</em> &#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x70B9;&#x7684;&#x4E0B;&#x9650;&#x503C;(&#x57FA;&#x7EBF;)&#xFF0C;<em>y1</em> &#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x70B9;&#x7684;&#x4E0A;&#x9650;&#x503C;(&#x9876;&#x7EBF;); <em>y0</em> &#x548C; <em>y1</em> &#x4E4B;&#x95F4;&#x7684;&#x5DEE;&#x503C;&#x5BF9;&#x5E94;&#x5F53;&#x524D;&#x70B9;&#x7684;&#x8BA1;&#x7B97; <a href="https://d3js.org.cn/document/d3-shape/#stack_value" target="_blank">value</a>&#x3002;&#x6BCF;&#x4E2A;&#x7CFB;&#x5217;&#x7684; <code>key</code> &#x4E0E; <em>series</em>.key &#x5BF9;&#x5E94;, &#x5E76;&#x4E14; <a href="https://d3js.org.cn/document/d3-shape/#stack_order" target="_blank">index</a> &#x7B49;&#x4E8E; <em>series</em>.index. &#x6BCF;&#x4E2A;&#x70B9;&#x7684;&#x8F93;&#x5165;&#x6570;&#x636E;&#x5143;&#x7D20;&#x5BF9;&#x5E94; <em>point</em>.data.</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x8003;&#x8651;&#x5982;&#x4E0B;&#x7684;&#x8868;&#x793A;&#x51E0;&#x79CD;&#x6C34;&#x679C;&#x7684;&#x6708;&#x9500;&#x552E;&#x6570;&#x636E;&#x7684;&#x8868;&#x683C;:</p>
+<table>
+<thead>
+<tr>
+<th>Month</th>
+<th>Apples</th>
+<th>Bananas</th>
+<th>Cherries</th>
+<th>Dates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1/2015</td>
+<td>3840</td>
+<td>1920</td>
+<td>960</td>
+<td>400</td>
+</tr>
+<tr>
+<td>2/2015</td>
+<td>1600</td>
+<td>1440</td>
+<td>960</td>
+<td>400</td>
+</tr>
+<tr>
+<td>3/2015</td>
+<td>640</td>
+<td>960</td>
+<td>640</td>
+<td>400</td>
+</tr>
+<tr>
+<td>4/2015</td>
+<td>320</td>
+<td>480</td>
+<td>640</td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5728; <code>JavaScript</code> &#x4E2D;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;&#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> data = [
+  {month: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2015</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), apples: <span class="hljs-number">3840</span>, bananas: <span class="hljs-number">1920</span>, cherries: <span class="hljs-number">960</span>, dates: <span class="hljs-number">400</span>},
+  {month: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2015</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>), apples: <span class="hljs-number">1600</span>, bananas: <span class="hljs-number">1440</span>, cherries: <span class="hljs-number">960</span>, dates: <span class="hljs-number">400</span>},
+  {month: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2015</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>), apples:  <span class="hljs-number">640</span>, bananas:  <span class="hljs-number">960</span>, cherries: <span class="hljs-number">640</span>, dates: <span class="hljs-number">400</span>},
+  {month: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2015</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>), apples:  <span class="hljs-number">320</span>, bananas:  <span class="hljs-number">480</span>, cherries: <span class="hljs-number">640</span>, dates: <span class="hljs-number">400</span>}
+];
+</code></pre>
+<p>&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5806;&#x53E0;&#x5E03;&#x5C40;:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> stack = d3.stack()
+    .keys([<span class="hljs-string">&quot;apples&quot;</span>, <span class="hljs-string">&quot;bananas&quot;</span>, <span class="hljs-string">&quot;cherries&quot;</span>, <span class="hljs-string">&quot;dates&quot;</span>])
+    .order(d3.stackOrderNone)
+    .offset(d3.stackOffsetNone);
+
+<span class="hljs-keyword">var</span> series = stack(data);
+</code></pre>
+<p>&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6BCF;&#x4E2A; <em>series</em> &#x7684;&#x6570;&#x7EC4;&#x3002;&#x6BCF;&#x4E2A;&#x7CFB;&#x5217;&#x5728;&#x6BCF;&#x4E2A;&#x6708;&#x90FD;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x70B9;&#xFF0C;&#x6BCF;&#x4E2A;&#x70B9;&#x90FD;&#x6709;&#x4E0B;&#x9650;&#x503C;&#x548C;&#x4E0A;&#x9650;&#x503C;&#x7528;&#x6765;&#x8868;&#x793A;&#x57FA;&#x7EBF;&#x548C;&#x9876;&#x7EBF;:</p>
+<pre><code class="lang-js">[
+  [[   <span class="hljs-number">0</span>, <span class="hljs-number">3840</span>], [   <span class="hljs-number">0</span>, <span class="hljs-number">1600</span>], [   <span class="hljs-number">0</span>,  <span class="hljs-number">640</span>], [   <span class="hljs-number">0</span>,  <span class="hljs-number">320</span>]], <span class="hljs-comment">// apples</span>
+  [[<span class="hljs-number">3840</span>, <span class="hljs-number">5760</span>], [<span class="hljs-number">1600</span>, <span class="hljs-number">3040</span>], [ <span class="hljs-number">640</span>, <span class="hljs-number">1600</span>], [ <span class="hljs-number">320</span>,  <span class="hljs-number">800</span>]], <span class="hljs-comment">// bananas</span>
+  [[<span class="hljs-number">5760</span>, <span class="hljs-number">6720</span>], [<span class="hljs-number">3040</span>, <span class="hljs-number">4000</span>], [<span class="hljs-number">1600</span>, <span class="hljs-number">2240</span>], [ <span class="hljs-number">800</span>, <span class="hljs-number">1440</span>]], <span class="hljs-comment">// cherries</span>
+  [[<span class="hljs-number">6720</span>, <span class="hljs-number">7120</span>], [<span class="hljs-number">4000</span>, <span class="hljs-number">4400</span>], [<span class="hljs-number">2240</span>, <span class="hljs-number">2640</span>], [<span class="hljs-number">1440</span>, <span class="hljs-number">1840</span>]], <span class="hljs-comment">// dates</span>
+]
+</code></pre>
+<p>&#x6BCF;&#x4E2A;&#x5E8F;&#x5217;&#x901A;&#x5E38;&#x4F1A;&#x88AB;&#x4F20;&#x9012;&#x7ED9; <a href="https://d3js.org.cn/document/d3-shape/#areas" target="_blank">area generator</a> &#x6765;&#x6E32;&#x67D3;&#x51FA;&#x533A;&#x57DF;&#x56FE;&#xFF0C;&#x6216;&#x8005;&#x76F4;&#x63A5;&#x7528;&#x6765;&#x7ED8;&#x5236;&#x6761;&#x5F62;&#x56FE;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-shape/#stack_keys" target="_blank">#</a> <em>stack</em>.<strong>keys</strong>([<em>keys</em>]) <a href="https://github.com/xswei/d3-shape/blob/master/src/stack.js#L40" target="_blank">&lt;&#x6E90;&#x7801;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>keys</em> &#x5219;&#x5C06; <code>keys</code> &#x8BBF;&#x95EE;&#x5668;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#x6216;&#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x5806;&#x53E0;&#x5E03;&#x5C40;&#x751F;&#x6210;&#x5668;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>keys</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684; <code>keys</code> &#x8BBF;&#x95EE;&#x5668;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x7A7A;&#x6570;&#x7EC4;&#x3002;&#x4E00;&#x4E2A;&#x5E8F;&#x5217;(&#x4E00;&#x5C42;) &#x5BF9;&#x5E94;&#x4E00;&#x4E2A; <code>key</code>&#x3002;<code>keys</code> &#x901A;&#x5E38;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x4F46;&#x662F;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x610F;&#x503C;&#x3002;&#x7CFB;&#x5217;&#x7684; <code>key</code> &#x4F1A;&#x88AB;&#x76F4;&#x63A5;&#x4F20;&#x9012;&#x7ED9; <a href="https://d3js.org.cn/document/d3-shape/#stack_value" target="_blank">value accessor</a> &#x4EE5;&#x8BA1;&#x7B97;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x70B9;&#x7684;&#x503C;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-shape/#stack_value" target="_blank">#</a> <em>stack</em>.<strong>value</strong>([<em>value</em>]) <a href="https://github.com/xswei/d3-shape/blob/master/src/stack.js#L44" target="_blank">&lt;&#x6E90;&#x7801;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>value</em> &#x5219;&#x5C06;&#x503C;&#x8BBF;&#x95EE;&#x5668;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#x6216;&#x6570;&#x503C;&#x5E76;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x5806;&#x53E0;&#x5E03;&#x5C40;&#x751F;&#x6210;&#x5668;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684;&#x503C;&#x8BBF;&#x95EE;&#x5668;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;:</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">value</span>(<span class="hljs-params">d, key</span>) </span>{
+  <span class="hljs-keyword">return</span> d[key];
+}
+</code></pre>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x5806;&#x53E0;&#x5E03;&#x5C40;&#x751F;&#x6210;&#x5668;&#x5047;&#x8BBE;&#x8F93;&#x5165;&#x6570;&#x636E;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6570;&#x7EC4;&#xFF0C;&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x90FD;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E2A;&#x503C;&#x4E3A;&#x6570;&#x503C;&#x7C7B;&#x578B;&#x7684;&#x5C5E;&#x6027;&#x3002;&#x53C2;&#x8003; <a href="https://d3js.org.cn/document/d3-shape/#_stack" target="_blank"><em>stack</em></a>&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-shape/#stack_order" target="_blank">#</a> <em>stack</em>.<strong>order</strong>([<em>order</em>]) <a href="https://github.com/xswei/d3-shape/blob/master/src/stack.js#L48" target="_blank">&lt;&#x6E90;&#x7801;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>order</em> &#x5219;&#x5C06;&#x987A;&#x5E8F;&#x8BBF;&#x95EE;&#x5668;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#x6216;&#x6570;&#x7EC4;&#x5E76;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x5806;&#x53E0;&#x5E03;&#x5C40;&#x751F;&#x6210;&#x5668;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>order</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x987A;&#x5E8F;&#x8BBF;&#x95EE;&#x5668;&#x9ED8;&#x8BA4;&#x4E3A; <a href="https://d3js.org.cn/document/d3-shape/#stackOrderNone" target="_blank">stackOrderNone</a>&#xFF1B;&#x4E5F;&#x5C31;&#x662F;&#x4F7F;&#x7528; <a href="https://d3js.org.cn/document/d3-shape/#stack_key" target="_blank">key accessor</a> &#x6307;&#x5B9A;&#x7684;&#x6B21;&#x5E8F;&#x3002;&#x53C2;&#x8003; <a href="https://d3js.org.cn/document/d3-shape/#stack-orders" target="_blank">stack orders</a> &#x83B7;&#x53D6;&#x5185;&#x7F6E;&#x987A;&#x5E8F;&#x3002;</p>
+<p>&#x5982;&#x679C; <em>order</em> &#x4E3A;&#x51FD;&#x6570;&#x5219;&#x4F1A;&#x4F20;&#x9012;&#x751F;&#x6210;&#x7684;&#x7CFB;&#x5217;&#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x4E14;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;&#x6570;&#x7EC4;&#x3002;&#x4F8B;&#x5982;&#x9ED8;&#x8BA4;&#x7684;&#x987A;&#x5E8F;&#x8BBF;&#x95EE;&#x5668;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;:</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">orderNone</span>(<span class="hljs-params">series</span>) </span>{
+  <span class="hljs-keyword">var</span> n = series.length, o = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(n);
+  <span class="hljs-keyword">while</span> (--n &gt;= <span class="hljs-number">0</span>) o[n] = n;
+  <span class="hljs-keyword">return</span> o;
+}
+</code></pre>
+<p>&#x5806;&#x53E0;&#x6B21;&#x5E8F;&#x662F;&#x5728;&#x8BA1;&#x7B97; <a href="https://d3js.org.cn/document/d3-shape/#stack_offset" target="_blank">offset</a> &#x4E4B;&#x524D;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x8BA1;&#x7B97;&#x6B21;&#x5E8F;&#x65F6;&#x6BCF;&#x4E2A;&#x70B9;&#x7684;&#x4E0B;&#x9650;&#x90FD;&#x4E3A; <code>0</code>&#x3002;&#x6BCF;&#x4E2A;&#x5E8F;&#x5217;&#x7684;&#x7D22;&#x5F15;&#x5C5E;&#x6027;&#x5728;&#x8BA1;&#x7B97;&#x5B8C;&#x6B21;&#x5E8F;&#x4E4B;&#x540E;&#x624D;&#x4F1A;&#x88AB;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-shape/#stack_offset" target="_blank">#</a> <em>stack</em>.<strong>offset</strong>([<em>offset</em>]) <a href="https://github.com/xswei/d3-shape/blob/master/src/stack.js#L52" target="_blank">&lt;&#x6E90;&#x7801;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>offset</em> &#x5219;&#x5C06;&#x504F;&#x79FB;&#x8BBF;&#x95EE;&#x5668;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#x6216;&#x6570;&#x7EC4;&#x5E76;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x5806;&#x53E0;&#x5E03;&#x5C40;&#x3002;&#x5982;&#x679C; <em>offset</em> &#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684;&#x504F;&#x79FB;&#x8BBF;&#x95EE;&#x5668;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; <a href="https://d3js.org.cn/document/d3-shape/#stackOffsetNone" target="_blank">stackOffsetNone</a>; &#x9ED8;&#x8BA4;&#x4F1A;&#x751F;&#x6210;&#x4EE5; <code>0</code> &#x4E3A;&#x57FA;&#x7EBF;&#x7684;&#x5806;&#x53E0;&#x56FE;&#xFF0C;&#x53C2;&#x8003; <a href="https://d3js.org.cn/document/d3-shape/#stack-offsets" target="_blank">stack offsets</a> &#x4E86;&#x89E3;&#x5185;&#x7F6E;&#x7684;&#x504F;&#x79FB;&#x3002;</p>
+<p>&#x5982;&#x679C; <em>offset</em> &#x4E3A;&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x4F1A;&#x4F20;&#x9012;&#x7CFB;&#x5217;&#x6570;&#x7EC4;&#x4EE5;&#x53CA;&#x987A;&#x5E8F;&#x7D22;&#x5F15;&#x3002;&#x504F;&#x79FB;&#x51FD;&#x6570;&#x8D1F;&#x8D23;&#x8BA1;&#x7B97;&#x66F4;&#x65B0;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x70B9;&#x7684;&#x4E0A;&#x4E0B;&#x9650;&#x503C;&#x3002;&#x4F8B;&#x5982;&#x9ED8;&#x8BA4;&#x7684;&#x504F;&#x79FB;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;:</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">offsetNone</span>(<span class="hljs-params">series, order</span>) </span>{
+  <span class="hljs-keyword">if</span> (!((n = series.length) &gt; <span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>, s0, s1 = series[order[<span class="hljs-number">0</span>]], n, m = s1.length; i &lt; n; ++i) {
+    s0 = s1, s1 = series[order[i]];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j) {
+      s1[j][<span class="hljs-number">1</span>] += s1[j][<span class="hljs-number">0</span>] = s0[j][<span class="hljs-number">1</span>];
+    }
+  }
+</code></pre>
+<h3 id="&#x5E03;&#x5C40;&#x4FE1;&#x606F;">&#x5E03;&#x5C40;&#x4FE1;&#x606F;</h3>
+<p>&#x8FD9;&#x91CC;&#x8BA1;&#x7B97;&#x5B8C;&#x6BD5;&#x4E4B;&#x540E; &#x7ED9;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x8D4B;&#x4E86;&#x4E00;&#x4E2A;&#x5F53;&#x524D;&#x7684;&#x539F;&#x59CB;&#x6570;&#x636E;&#xFF0C;&#x6570;&#x636E;&#x8F83;&#x957F;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x518D;&#x8D34;&#x51FA;&#x3002;&#x8BE6;&#x60C5;&#x6570;&#x636E;&#x89C1;&#x539F;&#x59CB;&#x6570;&#x636E;&#x3002;
+&#x7B80;&#x5355;&#x8BF4;&#x660E;&#x4E00;&#x4E0B;&#x5806;&#x79EF;&#x6570;&#x636E;</p>
+<p>&#x6570;&#x636E;&#x5206;&#x4E3A;&#x4E24;&#x5C42;&#x6570;&#x7EC4;
+&#x7B2C;&#x4E00;&#x5C42;&#x6570;&#x636E;</p>
+<pre><code class="lang-javascript">[[<span class="hljs-number">0</span>,<span class="hljs-number">0.118</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">0.124</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">0.196</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">0.157</span>],key: <span class="hljs-string">&quot;apple&quot;</span>, index: <span class="hljs-number">0</span>]
+</code></pre>
+<p>&#x4EE3;&#x8868;<code>apple</code>&#x7684;&#x6570;&#x636E;,&#x3002; 
+&#x5176;&#x4E2D;<code>key</code>&#x5B57;&#x6BB5;&#x5373;&#x4E3A;<code>&#x6570;&#x636E;&#x9879;(keys)</code>&#x4E2D;&#x7684;&#x503C;&#x3002;<code>index</code>&#x53CD;&#x5E94;&#x7684;&#x662F;<code>apple</code>&#x6570;&#x636E;&#x5728;&#x5806;&#x79EF;&#x56FE;&#x4E2D;&#x6240;&#x5360;&#x7684;&#x4F4D;&#x7F6E;0,&#x5C31;&#x662F;&#x4EE3;&#x8868;&#x5904;&#x5728;&#x9996;&#x4F4D;&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x5C42;&#x6570;&#x636E;
+<code>apple</code>&#x4E2D;&#x7684;&#x56DB;&#x9879;&#xFF0C;&#x5206;&#x522B;&#x5BF9;&#x5E94;<code>apple</code>&#x7684;&#x6570;&#x636E;&#x5728;<code>data</code>&#x4E2D;&#x56DB;&#x9879;&#x4E2D;&#x6240;&#x5360;&#x7684;<code>&#x6BD4;&#x4F8B;</code>&#x3002;</p>
+<pre><code class="lang-javascript">[<span class="hljs-number">0</span>,<span class="hljs-number">0.118</span>]
+</code></pre>
+<p>&#x7B2C;&#x4E00;&#x9879;&#x4E0E;&#x7B2C;&#x4E8C;&#x9879;&#x5206;&#x522B;&#x4EE3;&#x8868;<code>&#x5F00;&#x59CB;&#x503C;</code>&#x548C;<code>&#x7ED3;&#x675F;&#x503C;</code>&#x3002;&#x603B;&#x503C;</p>
+<pre><code class="lang-javascript">[
+    [[<span class="hljs-number">0</span>,<span class="hljs-number">0.118</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">0.124</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">0.196</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">0.157</span>],key: <span class="hljs-string">&quot;apple&quot;</span>, index: <span class="hljs-number">0</span>],
+    [[<span class="hljs-number">0.118</span>,<span class="hljs-number">0.347</span>],[<span class="hljs-number">0.124</span>,<span class="hljs-number">0.345</span>],[<span class="hljs-number">0.196</span>,<span class="hljs-number">0.385</span>],[<span class="hljs-number">0.157</span>,<span class="hljs-number">0.392</span>],key: <span class="hljs-string">&quot;samsung&quot;</span>, index: <span class="hljs-number">1</span>],
+    [[<span class="hljs-number">0.347</span>,<span class="hljs-number">0.45699999999999996</span>],[<span class="hljs-number">0.345</span>,<span class="hljs-number">0.44899999999999995</span>],[<span class="hljs-number">0.385</span>,<span class="hljs-number">0.492</span>],[<span class="hljs-number">0.392</span>,<span class="hljs-number">0.51</span>],key: <span class="hljs-string">&quot;huawei&quot;</span>, index: <span class="hljs-number">2</span>],
+    [[<span class="hljs-number">0.45699999999999996</span>,<span class="hljs-number">0.5369999999999999</span>],[<span class="hljs-number">0.44899999999999995</span>,<span class="hljs-number">0.5299999999999999</span>],[<span class="hljs-number">0.492</span>,<span class="hljs-number">0.5609999999999999</span>],[<span class="hljs-number">0.51</span>,<span class="hljs-number">0.584</span>],key: <span class="hljs-string">&quot;oppo&quot;</span>, index: <span class="hljs-number">3</span>],
+    [[<span class="hljs-number">0.5369999999999999</span>,<span class="hljs-number">0.599</span>],[<span class="hljs-number">0.5299999999999999</span>,<span class="hljs-number">0.6049999999999999</span>],[<span class="hljs-number">0.5609999999999999</span>,<span class="hljs-number">0.6319999999999999</span>],[<span class="hljs-number">0.584</span>,<span class="hljs-number">0.6679999999999999</span>],key: <span class="hljs-string">&quot;xiaomi&quot;</span>, index: <span class="hljs-number">4</span>],
+    [[<span class="hljs-number">0.599</span>,<span class="hljs-number">1</span>],[<span class="hljs-number">0.6049999999999999</span>,<span class="hljs-number">1.001</span>],[<span class="hljs-number">0.6319999999999999</span>,<span class="hljs-number">0.9999999999999999</span>],[<span class="hljs-number">0.6679999999999999</span>,<span class="hljs-number">1</span>],key: <span class="hljs-string">&quot;others&quot;</span>, index: <span class="hljs-number">5</span>]
+]
+</code></pre>
+<h3 id="&#x57FA;&#x672C;&#x6570;&#x636E;">&#x57FA;&#x672C;&#x6570;&#x636E;</h3>
+<p><strong>&#x6570;&#x636E;&#x9879;(keys)</strong></p>
+<pre><code class="lang-javascript">[<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;samsung&quot;</span>, <span class="hljs-string">&quot;huawei&quot;</span>, <span class="hljs-string">&quot;oppo&quot;</span>, <span class="hljs-string">&quot;xiaomi&quot;</span>, <span class="hljs-string">&quot;others&quot;</span>]
+</code></pre>
+<p><strong>&#x539F;&#x59CB;&#x6570;&#x636E;&#x6570;&#x636E;(data)</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> data = [
+    { year: <span class="hljs-number">2017</span>, quarter: <span class="hljs-number">2</span>, samsung: <span class="hljs-number">0.229</span>, apple: <span class="hljs-number">0.118</span>, huawei: <span class="hljs-number">0.110</span>, oppo: <span class="hljs-number">0.08</span>, xiaomi: <span class="hljs-number">0.062</span>, others: <span class="hljs-number">0.401</span>},
+    { year: <span class="hljs-number">2017</span>, quarter: <span class="hljs-number">3</span>, samsung: <span class="hljs-number">0.221</span>, apple: <span class="hljs-number">0.124</span>, huawei: <span class="hljs-number">0.104</span>, oppo: <span class="hljs-number">0.081</span>, xiaomi: <span class="hljs-number">0.075</span>, others: <span class="hljs-number">0.396</span>},
+    { year: <span class="hljs-number">2017</span>, quarter: <span class="hljs-number">4</span>, samsung: <span class="hljs-number">0.189</span>, apple: <span class="hljs-number">0.196</span>, huawei: <span class="hljs-number">0.107</span>, oppo: <span class="hljs-number">0.069</span>, xiaomi: <span class="hljs-number">0.071</span>, others: <span class="hljs-number">0.368</span>},
+    { year: <span class="hljs-number">2018</span>, quarter: <span class="hljs-number">1</span>, samsung: <span class="hljs-number">0.235</span>, apple: <span class="hljs-number">0.157</span>, huawei: <span class="hljs-number">0.118</span>, oppo: <span class="hljs-number">0.074</span>, xiaomi: <span class="hljs-number">0.084</span>, others: <span class="hljs-number">0.332</span>}
+]
+</code></pre>
+<h3 id="&#x6267;&#x884C;&#x903B;&#x8F91;">&#x6267;&#x884C;&#x903B;&#x8F91;</h3>
+<ol>
+<li>&#x6839;&#x636E;&#x63D0;&#x4F9B;&#x7684;<strong>&#x6570;&#x636E;&#x9879;(keys)</strong>&#x7684;&#x957F;&#x5EA6;&#x521B;&#x5EFA;<strong>&#x5806;&#x79EF;&#x6570;&#x636E;(stackData)</strong>&#x6570;&#x7EC4;</li>
+<li>&#x904D;&#x5386;<strong>&#x539F;&#x59CB;&#x6570;&#x636E;&#x6570;&#x636E;(data)</strong>&#x5C06;&#x539F;&#x59CB;&#x6570;&#x636E;&#x4E2D;&#x5404;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x503C;&#x5199;&#x5165;<strong>&#x5806;&#x79EF;&#x6570;&#x636E;(stackData)</strong>&#x6784;&#x5EFA;&#x6210;<code>[0,value]</code>&#x7684;&#x683C;&#x5F0F;</li>
+<li>&#x5BF9;<strong>&#x5806;&#x79EF;&#x6570;&#x636E;(stackData)</strong>&#x4E2D;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x76EE;&#x8FDB;&#x884C;&#x5217;&#x5FAA;&#x73AF;,&#x6BCF;&#x4E00;&#x884C;&#x7684;&#x503C;&#x7B49;&#x4E8E;&#x4E0A;&#x4E00;&#x884C;&#x7684;&#x503C;&#x52A0;&#x4E0A;&#x672C;&#x884C;&#x503C;&#x7684;&#x548C;</li>
+</ol>
+<h3 id="&#x6838;&#x5FC3;&#x4EE3;&#x7801;">&#x6838;&#x5FC3;&#x4EE3;&#x7801;</h3>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stack</span>(<span class="hljs-params">data</span>) </span>{
+<span class="hljs-keyword">var</span> kz = keys.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>),
+    i,
+    m = data.length,
+    n = kz.length,
+    sz = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(n),
+    oz;
+
+<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+    <span class="hljs-comment">// &#x521B;&#x5EFA; &#x5806;&#x79EF;&#x6570;&#x636E;(stackData) &#x6570;&#x7EC4;</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> ki = kz[i], si = sz[i] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(m), j = <span class="hljs-number">0</span>, sij; j &lt; m; ++j) {
+        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4EC5;&#x4EC5;&#x8FD4;&#x56DE;&#x4E86;&#x6570;&#x636E;&#x503C;</span>
+        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x7684;&#x503C;&#x4ECE;0&#x5F00;&#x59CB;,&#x4EE5;&#x8BE5;&#x6570;&#x636E;&#x9879;&#x503C;&#x7ED3;&#x675F;</span>
+        si[j] = sij = [<span class="hljs-number">0</span>, +value(data[j], ki, j, data)];
+        sij.data = data[j];
+    }
+    si.key = ki;
+}
+
+<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, oz = order(sz); i &lt; n; ++i) {
+    sz[oz[i]].index = i;
+}
+<span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5C06;&#x5806;&#x79EF;&#x6570;&#x636E;(stackData)&#x505A;&#x4E86;&#x91CD;&#x7F6E;</span>
+offset(sz, oz);
+<span class="hljs-keyword">return</span> sz;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">value</span>(<span class="hljs-params">d, key</span>) </span>{
+  <span class="hljs-keyword">return</span> d[key];
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">offset</span>(<span class="hljs-params">series, order</span>) </span>{
+  <span class="hljs-keyword">if</span> (!((n = series.length) &gt; <span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>, j, s0, s1 = series[order[<span class="hljs-number">0</span>]], n, m = s1.length; i &lt; n; ++i) {
+    s0 = s1, s1 = series[order[i]];
+    <span class="hljs-comment">// &#x4E3B;&#x610F; &#x8FD9;&#x91CC; &#x91CC;&#x5C42;&#x662F;&#x5BF9; &#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#x8FDB;&#x884C;&#x7684;&#x5FAA;&#x73AF; &#x8FD9;&#x4E2A;&#x4E8C;&#x91CD;&#x5FAA;&#x73AF;&#x662F;&#x5148;&#x5FAA;&#x73AF;&#x7684;&#x5217;&#x518D;&#x5FAA;&#x73AF;&#x7684;&#x884C;</span>
+    <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; m; ++j) {
+      <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5BF9;&#x6570;&#x7EC4;&#x6BCF;&#x4E00;&#x9879;&#x90FD;&#x52A0;&#x4E86;&#x524D;&#x4E00;&#x9879;</span>
+      <span class="hljs-comment">// &#x5176;&#x5B9E;&#x8FD9;&#x91CC;&#x6709;&#x4E9B;&#x95EE;&#x9898; &#x7531;&#x4E8E;&#x52A0;&#x7684;&#x6B21;&#x6570;&#x6BD4;&#x8F83;&#x591A; </span>
+      <span class="hljs-comment">// 0.1 + 0.2 = 0.30000000000000004 &#x7684;&#x95EE;&#x9898; &#x76F8;&#x5BF9;&#x6765;&#x8BF4;&#x4F1A;&#x6BD4;&#x8F83;&#x660E;&#x663E;</span>
+
+      <span class="hljs-comment">// &#x7531;&#x4E8E;&#x8FD9;&#x91CC;&#x662F;&#x539F;&#x59CB;&#x503C;&#xFF0C;&#x5E76;&#x4E0D;&#x662F;&#x5750;&#x6807;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4E0D;&#x80FD;&#x5BF9;&#x503C;&#x505A;&#x7279;&#x6B8A;&#x5904;&#x7406;&#xFF0C;&#x6240;&#x4EE5;&#x4F1A;&#x9057;&#x7559;&#x8FD9;&#x79CD;&#x73B0;&#x8C61;&#x3002;</span>
+      <span class="hljs-comment">// &#x77E9;&#x9635;&#x6811;&#x4E2D; &#x8BA1;&#x7B97;&#x5B8C;&#x5750;&#x6807;&#x540E; &#x7531;&#x4E8E;&#x5750;&#x6807;&#x662F;&#x50CF;&#x7D20;&#x4FE1;&#x606F; &#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x5BF9;&#x5750;&#x6807;&#x8FDB;&#x884C;&#x56DB;&#x820D;&#x4E94;&#x5165;&#x5904;&#x7406;&#x3002;</span>
+
+      <span class="hljs-comment">// &#x6574;&#x4E2A;&#x5806;&#x79EF;&#x56FE;&#x7684;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x662F;&#x8FD9;&#x4E00;&#x884C;</span>
+      s1[j][<span class="hljs-number">1</span>] += s1[j][<span class="hljs-number">0</span>] = <span class="hljs-built_in">isNaN</span>(s0[j][<span class="hljs-number">1</span>]) ? s0[j][<span class="hljs-number">0</span>] : s0[j][<span class="hljs-number">1</span>];
+    }
+  }
+}
+</code></pre>
+<h2 id="&#x53C2;&#x8003;--&#x5F15;&#x7528;">&#x53C2;&#x8003; &amp; &#x5F15;&#x7528;</h2>
+<p><a href="https://www.jianshu.com/p/dac8d1d698d8" target="_blank">https://www.jianshu.com/p/dac8d1d698d8</a></p>
+<p><a href="https://github.com/Yixian15/d3-tutorial/blob/master/marletShareStack.html" target="_blank">https://github.com/Yixian15/d3-tutorial/blob/master/marletShareStack.html</a> </p>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2020-04-04 22:33:42
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="地图Map.html" class="navigation navigation-prev " aria-label="Previous page: 地图Map">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="分区Partition.html" class="navigation navigation-next " aria-label="Next page: 分区Partition">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"堆叠图Stack","level":"1.9","depth":1,"next":{"title":"分区Partition","level":"1.10","depth":1,"path":"分区Partition.md","ref":"分区Partition.md","articles":[]},"previous":{"title":"地图Map","level":"1.8","depth":1,"path":"地图Map.md","ref":"地图Map.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","splitter","pageview-count","edit-link","tbfed-pagefooter","github","livereload"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/sz-p/d3-layout-algorithm-explanation"},"livereload":{},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"pageview-count":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/sz-p/d3-layout-algorithm-explanation/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"sz-p","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"D3 布局算法","language":"zh-hans","links":{"sidebar":{"GitHub":"https://github.com/sz-p/d3-layout-algorithm-explanation"}},"gitbook":"3.2.3","description":"D3布局算法解析"},"file":{"path":"堆叠图Stack.md","mtime":"2020-04-04T14:33:42.821Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-04T14:37:48.533Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

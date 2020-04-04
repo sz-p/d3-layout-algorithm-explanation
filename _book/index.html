@@ -1,0 +1,666 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>简介 · D3 布局算法</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="sz-p">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="饼图Pie.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://github.com/sz-p/d3-layout-algorithm-explanation" target="_blank" class="custom-link">GitHub</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="饼图Pie.html">
+            
+                <a href="饼图Pie.html">
+            
+                    
+                    饼图Pie
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="层级布局Hierarchy.html">
+            
+                <a href="层级布局Hierarchy.html">
+            
+                    
+                    层级布局Hierarchy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="树Tree.html">
+            
+                <a href="树Tree.html">
+            
+                    
+                    树Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="集群Cluster.html">
+            
+                <a href="集群Cluster.html">
+            
+                    
+                    集群Cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="层包Pack.html">
+            
+                <a href="层包Pack.html">
+            
+                    
+                    层包Pack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="矩阵树Treemap.html">
+            
+                <a href="矩阵树Treemap.html">
+            
+                    
+                    矩阵树Treemap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="地图Map.html">
+            
+                <a href="地图Map.html">
+            
+                    
+                    地图Map
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="堆叠图Stack.html">
+            
+                <a href="堆叠图Stack.html">
+            
+                    
+                    堆叠图Stack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="分区Partition.html">
+            
+                <a href="分区Partition.html">
+            
+                    
+                    分区Partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="捆图Bundle.html">
+            
+                <a href="捆图Bundle.html">
+            
+                    
+                    捆图Bundle
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="力学图Force.html">
+            
+                <a href="力学图Force.html">
+            
+                    
+                    力学图Force
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="弦图Chord.html">
+            
+                <a href="弦图Chord.html">
+            
+                    
+                    弦图Chord
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="直方图Histogram.html">
+            
+                <a href="直方图Histogram.html">
+            
+                    
+                    直方图Histogram
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >简介</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="d3-&#x5E03;&#x5C40;&#x7B97;&#x6CD5;d3-layout-layout-algorithm"><a href="https://sz-p.cn/blog/index.php/2019/07/08/205.html" target="_blank">d3 &#x5E03;&#x5C40;&#x7B97;&#x6CD5;(d3 Layout Layout algorithm)</a></h2>
+<p>D3&#x63D0;&#x4F9B;&#x7684;&#x5E03;&#x5C40;&#x6709;12&#x79CD;&#xFF0C;&#x5177;&#x4F53;&#x89C1;&#x5B98;&#x7F51;&#xFF1A;<a href="https://d3js.org/" target="_blank">https://d3js.org/</a>
+<code>&#x5E03;&#x5C40;&#x4E0D;&#x662F;&#x8981;&#x76F4;&#x63A5;&#x7ED8;&#x56FE;&#x800C;&#x662F;&#x83B7;&#x53D6;&#x7ED8;&#x56FE;&#x6240;&#x9700;&#x6570;&#x636E;</code> &#x6700;&#x65B0;&#x7248;&#x7684;API&#x6709;&#x6240;&#x66F4;&#x65B0;, &#x8FD9;&#x91CC;&#x4EE5;&#x7B97;&#x6CD5;&#x8BF4;&#x660E;&#x4E3A;&#x4E3B;</p>
+<p>&#x8FD9;&#x91CC;&#x4E3A;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x7F57;&#x5217;&#x4E00;&#x4E9B;D3&#x5E03;&#x5C40;&#x7B97;&#x6CD5;&#x7684;API&#xFF0C;title&#x4E3A;&#x76F8;&#x5BF9;&#x8BE6;&#x7EC6;&#x4E00;&#x4E9B;&#x7684;d3&#x7B97;&#x6CD5;&#x89E3;&#x6790;&#x3002;</p>
+<h3 id="&#x6346;&#x56FE;bundlemd"><a href="&#x6346;&#x56FE;(Bundle">&#x6346;&#x56FE;(Bundle)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.bundle - &#x6784;&#x9020;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6346;&#x56FE;&#x5E03;&#x5C40;
+bundle - &#x5E94;&#x7528;&#x970D;&#x987F;&#x7684;&#x8FB9;&#x7F18;&#x6346;&#x7ED1;&#x7B97;&#x6CD5;
+</code></pre>
+<h3 id="&#x5F26;&#x56FE;chordmd"><a href="&#x5F26;&#x56FE;(Chord">&#x5F26;&#x56FE;(Chord)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.chord - &#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;&#x5F26;&#x56FE;&#x5BF9;&#x8C61;, &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Chord &#x5B9E;&#x4F8B;
+
+chord.matrix - &#x8BBE;&#x7F6E;&#x6216;&#x8005;&#x83B7;&#x53D6;&#x5F26;&#x56FE;&#x5B9E;&#x4F8B;&#x5BF9;&#x5E94;&#x7684;&#x77E9;&#x9635;&#x6570;&#x636E;
+
+chord.padding - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x5F26;&#x56FE;&#x5404;&#x6BB5;&#x5706;&#x5F27;&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x9694;&#x89D2;&#x5EA6;
+
+chord.sortGroups - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x77E9;&#x9635;&#x5206;&#x7EC4;&#x7684;&#x6392;&#x5E8F;&#x51FD;&#x6570;
+
+chord.sortSubgroups - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x77E9;&#x9635;&#x4E8C;&#x7EA7;&#x5206;&#x7EC4;&#x7684;&#x6392;&#x5E8F;&#x51FD;&#x6570;
+
+chord.sortChords - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x5F26;&#x56FE;&#x5728;z&#x5E8F;&#x4E0A;&#x7684;&#x6392;&#x5E8F;&#x51FD;&#x6570;(&#x51B3;&#x5B9A;&#x54EA;&#x4E00;&#x7EC4;&#x663E;&#x793A;&#x5728;&#x6700;&#x4E0A;&#x5C42;)
+
+chord.chords - &#x8BE5;&#x51FD;&#x6570;&#x4F1A;&#x5C06;&#x53C2;&#x6570;&#x5904;&#x7406;&#x6210;&#x5BF9; chord &#x66F4;&#x53CB;&#x597D;&#x7684;&#x683C;&#x5F0F;&#x5E76;&#x8FD4;&#x56DE;, &#x82E5;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x53C2;&#x6570;, &#x4F1A;&#x8C03;&#x7528;matrix()&#x6765;&#x83B7;&#x53D6;&#x6570;&#x636E;
+
+chord.groups - &#x8BE5;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x5904;&#x7406;&#x6210;&#x66F4;&#x6613;&#x4E8E;&#x7406;&#x89E3;&#x7684;&#x5206;&#x7EC4;&#x4FE1;&#x606F;, &#x82E5;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x53C2;&#x6570;, &#x4F1A;&#x8C03;&#x7528;matrix()&#x6765;&#x83B7;&#x53D6;&#x6570;&#x636E;
+</code></pre>
+<h3 id="&#x96C6;&#x7FA4;clustermd"><a href="&#x96C6;&#x7FA4;(Cluster">&#x96C6;&#x7FA4;(Cluster)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.cluster - &#x7528;&#x9ED8;&#x8BA4;&#x8BBE;&#x7F6E;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;&#x5E03;&#x5C40;&#x5BF9;&#x8C61;.
+
+cluster.sort - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x51FD;&#x6570;, &#x7528;&#x6765;&#x7ED9;&#x5144;&#x5F1F;&#x8282;&#x70B9;(&#x540C;&#x4E00;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;)&#x7684;&#x6392;&#x5E8F;.
+
+cluster.children - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x8BBF;&#x95EE;&#x5668;.
+
+cluster.nodes - &#x8BA1;&#x7B97;&#x5E76;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;&#x5728;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x4FE1;&#x606F;(&#x5750;&#x6807;,&#x6DF1;&#x5EA6;&#x7B49;).
+
+cluster.links - &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5B50;&#x7ED3;&#x70B9;&#x6570;&#x7EC4;(&#x901A;&#x5E38;&#x662F;**nodes**&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;), &#x8BA1;&#x7B97;&#x5B83;&#x4EEC;&#x4E0E;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;.
+
+cluster.separation - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x76F8;&#x90BB;&#x7ED3;&#x70B9;&#x95F4;&#x7684;&#x95F4;&#x9694;(&#x4E0D;&#x4EC5;&#x9650;&#x4E8E;&#x5144;&#x5F1F;&#x7ED3;&#x70B9;).
+
+cluster.size - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5E03;&#x5C40;&#x7684; *&#x5BBD;* &#x548C; *&#x9AD8;* &#x7684;&#x5927;&#x5C0F;.
+
+cluster.nodeSize - &#x4E3A;&#x7ED3;&#x70B9;&#x6307;&#x5B9A;&#x5927;&#x5C0F;.
+</code></pre>
+<h3 id="&#x529B;&#x5B66;forcemd"><a href="&#x529B;&#x5B66;&#x56FE;(Force">&#x529B;&#x5B66;(Force)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.force -&#x8282;&#x70B9;&#xFF08;node&#xFF09;&#x57FA;&#x4E8E;&#x7269;&#x7406;&#x6A21;&#x62DF;&#x7684;&#x4F4D;&#x7F6E;&#x8FDE;&#x63A5;&#x3002;
+
+force.on - &#x76D1;&#x542C;&#x5E03;&#x5C40;&#x4F4D;&#x7F6E;&#x7684;&#x53D8;&#x5316;&#x3002;(&#x4EC5;&#x652F;&#x6301;<span class="hljs-string">&quot;start&quot;</span>,<span class="hljs-string">&quot;step&quot;</span>,<span class="hljs-string">&quot;end&quot;</span>&#x4E09;&#x79CD;&#x4E8B;&#x4EF6;)
+
+force.nodes - &#x83B7;&#x5F97;&#x6216;&#x8BBE;&#x7F6E;&#x5E03;&#x5C40;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#xFF08;node&#xFF09;&#x9635;&#x5217;&#x7EC4;&#x3002;
+
+force.links - &#x83B7;&#x5F97;&#x6216;&#x8BBE;&#x7F6E;&#x5E03;&#x5C40;&#x4E2D;&#x8282;&#x70B9;&#x95F4;&#x7684;&#x8FDE;&#x63A5;&#xFF08;Link&#xFF09;&#x9635;&#x5217;&#x7EC4;&#x3002;.
+
+force.size - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5E03;&#x5C40;&#x7684; *&#x5BBD;* &#x548C; *&#x9AD8;* &#x7684;&#x5927;&#x5C0F;.
+
+force.linkDistance - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x8282;&#x70B9;&#x95F4;&#x7684;&#x8FDE;&#x63A5;&#x7EBF;&#x8DDD;&#x79BB;.
+
+force.linkStrength - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x8282;&#x70B9;&#x95F4;&#x7684;&#x8FDE;&#x63A5;&#x5F3A;&#x5EA6;.
+
+force.friction - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x6469;&#x64E6;&#x7CFB;&#x6570;.
+
+force.charge - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x8282;&#x70B9;&#x7684;&#x7535;&#x8377;&#x6570;.(&#x7535;&#x8377;&#x6570;&#x51B3;&#x5B9A;&#x7ED3;&#x70B9;&#x662F;&#x4E92;&#x76F8;&#x6392;&#x65A5;&#x8FD8;&#x662F;&#x5438;&#x5F15;)
+
+force.gravity - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x8282;&#x70B9;&#x7684;&#x5F15;&#x529B;&#x5F3A;&#x5EA6;.
+
+force.theta - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x7535;&#x8377;&#x95F4;&#x4E92;&#x76F8;&#x4F5C;&#x7528;&#x7684;&#x5F3A;&#x5EA6;.
+
+force.start - &#x5F00;&#x542F;&#x6216;&#x6062;&#x590D;&#x7ED3;&#x70B9;&#x95F4;&#x7684;&#x4F4D;&#x7F6E;&#x5F71;&#x54CD;.
+
+force.resume - &#x8BBE;&#x7F6E;&#x51B7;&#x5374;&#x7CFB;&#x6570;&#x4E3A;<span class="hljs-number">0.1</span>,&#x5E76;&#x91CD;&#x65B0;&#x8C03;&#x7528;start()&#x51FD;&#x6570;.
+
+force.stop - &#x7ACB;&#x523B;&#x7EC8;&#x6B62;&#x7ED3;&#x70B9;&#x95F4;&#x7684;&#x4F4D;&#x7F6E;&#x5F71;&#x54CD;.(&#x7B49;&#x540C;&#x4E8E;&#x5C06;*&#x51B7;&#x5374;&#x7CFB;&#x6570;*&#x8BBE;&#x7F6E;&#x4E3A;<span class="hljs-number">0</span>)
+
+force.alpha - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5E03;&#x5C40;&#x7684;&#x51B7;&#x5374;&#x7CFB;&#x6570;.(&#x51B7;&#x5374;&#x7CFB;&#x6570;&#x4E3A;<span class="hljs-number">0</span>&#x65F6;,&#x8282;&#x70B9;&#x95F4;&#x4E0D;&#x518D;&#x4E92;&#x76F8;&#x5F71;&#x54CD;)
+
+force.tick - &#x8BA9;&#x5E03;&#x5C40;&#x8FD0;&#x884C;&#x5230;&#x4E0B;&#x4E00;&#x6B65;.
+
+force.drag - &#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5E03;&#x5C40;&#x7684;&#x62D6;&#x62FD;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x4EE5;&#x4FBF;&#x8FDB;&#x4E00;&#x6B65;&#x7ED1;&#x5B9A;&#x5904;&#x7406;&#x51FD;&#x6570;.
+</code></pre>
+<h3 id="&#x5C42;&#x7EA7;&#x5E03;&#x5C40;hierarchymd"><a href="&#x5C42;&#x7EA7;&#x5E03;&#x5C40;(Hierarchy">&#x5C42;&#x7EA7;&#x5E03;&#x5C40;(Hierarchy)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.hierarchy - &#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x5C42;&#x7EA7;&#x5E03;&#x5C40;&#x7684;&#x5B9E;&#x73B0;.
+
+hierarchy.ancestors - &#x8FD4;&#x56DE;&#x7956;&#x5148;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x4E3A;&#x81EA;&#x8EAB;&#xFF0C;&#x7136;&#x540E;&#x4F9D;&#x6B21;&#x4E3A;&#x4ECE;&#x81EA;&#x8EAB;&#x5230;&#x6839;&#x8282;&#x70B9;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x3002;
+
+hierarchy.descendants - &#x8FD4;&#x56DE;&#x540E;&#x4EE3;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x4E3A;&#x81EA;&#x8EAB;&#xFF0C;&#x7136;&#x540E;&#x4F9D;&#x6B21;&#x4E3A;&#x6240;&#x6709;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x62D3;&#x6251;&#x6392;&#x5E8F;&#x3002;
+
+hierarchy.leahierarchyves - &#x8FD4;&#x56DE;&#x53F6;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#xFF0C;&#x53F6;&#x8282;&#x70B9;&#x662F;&#x6CA1;&#x6709;&#x5B69;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x8282;&#x70B9;&#x3002;
+
+hierarchy.path - &#x8FD4;&#x56DE;&#x4ECE;&#x5F53;&#x524D; hierarchy. &#x5230;&#x6307;&#x5B9A; target &#x8282;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;&#x3002;&#x8DEF;&#x5F84;&#x4ECE;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x5F00;&#x59CB;&#xFF0C;&#x904D;&#x5386;&#x5230;&#x5F53;&#x524D; node &#x548C; target &#x8282;&#x70B9;&#x5171;&#x540C;&#x6700;&#x8FD1;&#x7956;&#x5148;&#xFF0C;&#x7136;&#x540E;&#x5230; target &#x8282;&#x70B9;&#x3002;
+
+hierarchy.links - &#x8FD4;&#x56DE;&#x5F53;&#x524D; node &#x7684; links &#x6570;&#x7EC4;, &#x5176;&#x4E2D;&#x6BCF;&#x4E2A; link &#x662F;&#x4E00;&#x4E2A;&#x5B9A;&#x4E49;&#x4E86; source &#x548C; target &#x5C5E;&#x6027;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x6BCF;&#x4E2A; link &#x7684; source &#x4E3A;&#x7236;&#x8282;&#x70B9;, target &#x4E3A;&#x5B50;&#x8282;&#x70B9;&#x3002;
+
+hierarchy.sum - &#x4E3A;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x4EE5;&#x53CA;&#x6BCF;&#x4E2A;&#x540E;&#x4EE3;&#x8282;&#x70B9;&#x8C03;&#x7528;&#x6307;&#x5B9A;&#x7684; value &#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x5F53;&#x524D; node&#x3002;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x9644;&#x52A0; hierarchy.value &#x6570;&#x503C;&#x5C5E;&#x6027;.
+
+hierarchy.count - &#x8BA1;&#x7B97;&#x5F53;&#x524D; node &#x4E0B;&#x6240;&#x6709;&#x53F6;&#x8282;&#x70B9;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x5206;&#x914D;&#x5230; hierarchy.value &#x5C5E;&#x6027;&#x3002;
+
+hierarchy.sort - &#x5BF9;&#x5F53;&#x524D; node &#x4EE5;&#x53CA;&#x5176;&#x6240;&#x6709;&#x7684;&#x540E;&#x4EE3;&#x8282;&#x70B9;&#x7684;&#x5B50;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x3002;
+
+hierarchy.each - &#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;&#x8282;&#x70B9;&#x3002;
+
+hierarchy.eachAfter - &#x540E;&#x5E8F;&#x904D;&#x5386;&#x8282;&#x70B9;&#x3002;
+
+hierarchy.eachBefore - &#x524D;&#x5E8F;&#x904D;&#x5386;&#x8282;&#x70B9;&#x3002;
+
+hierarchy.copy - &#x4EE5;&#x5F53;&#x524D;&#x8282;&#x70B9; node &#x4E3A;&#x6839;&#x8282;&#x70B9;&#xFF0C;&#x8FD4;&#x56DE;&#x5B50;&#x6811;&#x7684;&#x6DF1;&#x62F7;&#x8D1D;&#x526F;&#x672C;&#x3002;(&#x4F46;&#x662F;&#x526F;&#x672C;&#x4E0E;&#x5F53;&#x524D;&#x5B50;&#x6811;&#x4ECD;&#x7136;&#x5171;&#x4EAB;&#x540C;&#x4E00;&#x4EFD;&#x6570;&#x636E;)&#x3002;
+</code></pre>
+<h3 id="&#x76F4;&#x65B9;&#x56FE;histogrammd"><a href="&#x76F4;&#x65B9;&#x56FE;(Histogram">&#x76F4;&#x65B9;&#x56FE;(Histogram)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.histogram - &#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x76F4;&#x65B9;&#x56FE;(&#x7528;&#x6765;&#x8868;&#x793A;&#x4E00;&#x7EC4;&#x79BB;&#x6563;&#x6570;&#x5B57;&#x7684;&#x5206;&#x5E03;,&#x6A2A;&#x8F74;&#x8868;&#x793A;&#x533A;&#x95F4;,&#x7EB5;&#x8F74;&#x8868;&#x793A;&#x533A;&#x95F4;&#x5185;&#x6837;&#x672C;&#x6570;&#x91CF;&#x6216;&#x6837;&#x672C;&#x767E;&#x5206;&#x6BD4;).
+
+histogram.value - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x503C;&#x8BBF;&#x95EE;&#x5668;.
+
+histogram.range - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5408;&#x6CD5;&#x503C;&#x8303;&#x56F4;.
+
+histogram.bins - &#x6307;&#x5B9A;&#x5982;&#x4F55;&#x5C06;&#x6570;&#x636E;&#x5206;&#x7EC4;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x533A;&#x95F4;(bin)&#x91CC;, &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6784;&#x9020;&#x51FD;&#x6570;
+
+histogram - &#x6839;&#x636E;&#x5DF2;&#x8BBE;&#x7F6E;&#x7684;&#x533A;&#x95F4;&#x5C06;&#x6570;&#x636E;&#x5206;&#x7EC4;,&#x8FD4;&#x56DE;&#x5DF2;&#x5206;&#x7EC4;&#x7684;&#x4E8C;&#x7EF4;&#x6570;&#x7EC4;).
+
+histogram.frequency - &#x8BBE;&#x7F6E;&#x76F4;&#x65B9;&#x56FE;Y&#x8F74;&#x503C;&#x662F;&#x533A;&#x95F4;&#x5185;&#x6570;&#x636E;&#x7684;&#x603B;&#x91CF;&#x8FD8;&#x662F;&#x767E;&#x5206;&#x6BD4;
+</code></pre>
+<h3 id="&#x5C42;&#x5305;packmd"><a href="&#x5C42;&#x5305;(Pack">&#x5C42;&#x5305;(Pack)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.pack - &#x7528;&#x9012;&#x5F52;&#x7684;&#x5706;&#x73AF;&#x8868;&#x73B0;&#x4E00;&#x4E2A;&#x591A;&#x5C42;&#x7EA7;&#x5E03;&#x5C40;.
+
+pack.sort - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x51FD;&#x6570;, &#x7528;&#x6765;&#x7ED9;&#x5144;&#x5F1F;&#x8282;&#x70B9;(&#x540C;&#x4E00;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;)&#x6392;&#x5E8F;.
+
+pack.children - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x8BBF;&#x95EE;&#x5668;.
+
+pack.nodes - &#x8BA1;&#x7B97;&#x5E76;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;&#x4FE1;&#x606F;.
+
+pack.links - &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5B50;&#x7ED3;&#x70B9;&#x6570;&#x7EC4;(&#x901A;&#x5E38;&#x662F;**nodes**&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;), &#x8BA1;&#x7B97;&#x5B83;&#x4EEC;&#x4E0E;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;.
+
+pack.value - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x51FD;&#x6570;, &#x7528;&#x6765;&#x8BA1;&#x7B97;&#x5706;&#x73AF;&#x7684;&#x5927;&#x5C0F;(&#x8FD1;&#x4F3C;&#x503C;).
+
+pack.size - &#x8BBE;&#x7F6E;&#x6574;&#x4E2A;&#x5E03;&#x5C40;&#x753B;&#x5E03;&#x7684; *&#x5BBD;* and *&#x9AD8;*.
+
+pack.radius - &#x5982;&#x679C;&#x4E0D;&#x60F3;&#x7ED3;&#x70B9;&#x534A;&#x5F84;&#x4E0E;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x76F8;&#x540C;, &#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x7528;&#x6765;&#x8BA1;&#x7B97;&#x7ED3;&#x70B9;&#x534A;&#x5F84;.
+
+pack.padding - &#x6307;&#x5B9A;&#x76F8;&#x90BB;&#x7ED3;&#x70B9;&#x4E4B;&#x70B9;&#x7684;&#x95F4;&#x8DDD;(&#x8FD1;&#x4F3C;&#x503C;).
+</code></pre>
+<h3 id="&#x5206;&#x533A;partitionmd"><a href="&#x5206;&#x533A;(Partition">&#x5206;&#x533A;(Partition)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.partition - &#x5C06;&#x4E00;&#x68F5;&#x6811;&#x9012;&#x5F52;&#x7684;&#x5206;&#x533A;.
+
+partition.sort - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x51FD;&#x6570;, &#x7528;&#x6765;&#x7ED9;&#x5144;&#x5F1F;&#x8282;&#x70B9;(&#x540C;&#x4E00;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;)&#x6392;&#x5E8F;.
+
+partition.children - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x8BBF;&#x95EE;&#x5668;.
+
+partition.nodes - &#x8BA1;&#x7B97;&#x5E76;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;&#x4FE1;&#x606F;.
+
+partition.links - &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5B50;&#x7ED3;&#x70B9;&#x6570;&#x7EC4;(&#x901A;&#x5E38;&#x662F;**nodes**&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;), &#x8BA1;&#x7B97;&#x5B83;&#x4EEC;&#x4E0E;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;.
+
+partition.value - &#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6765;&#x6765;&#x8BA1;&#x7B97;&#x5206;&#x533A;&#x7684;&#x503C;.
+
+partition.size - &#x8BBE;&#x7F6E;&#x6574;&#x4E2A;&#x5E03;&#x5C40;&#x753B;&#x5E03;&#x7684; *&#x5BBD;* and *&#x9AD8;*.
+</code></pre>
+<h3 id="&#x997C;&#x56FE;piemd"><a href="&#x997C;&#x56FE;(Pie">&#x997C;&#x56FE;(Pie)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.pie - &#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x7684;&#x997C;&#x56FE;.
+
+pie - &#x8BE5;&#x51FD;&#x6570;&#x5C06;&#x4F20;&#x5165;&#x7684;&#x539F;&#x59CB;&#x53C2;&#x6570;&#x8F6C;&#x6362;&#x6210;&#x53EF;&#x7528;&#x4E8E;&#x997C;&#x56FE;&#x6216;&#x8005;&#x73AF;&#x5F62;&#x56FE;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;.
+
+pie.value - &#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x503C;&#x8BBF;&#x95EE;&#x5668;.
+
+pie.sort - &#x8BBE;&#x7F6E;&#x997C;&#x56FE;&#x987A;&#x65F6;&#x9488;&#x65B9;&#x5411;&#x7684;&#x6392;&#x5E8F;&#x65B9;&#x6CD5;.
+
+pie.startAngle - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x6574;&#x4E2A;&#x997C;&#x56FE;&#x7684;&#x8D77;&#x59CB;&#x89D2;&#x5EA6;.
+
+pie.endAngle - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x6574;&#x4E2A;&#x997C;&#x56FE;&#x7684;&#x7EC8;&#x6B62;&#x89D2;&#x5EA6;.
+</code></pre>
+<h3 id="&#x5806;&#x53E0;&#x56FE;stackmd"><a href="&#x5806;&#x53E0;&#x56FE;(Stack">&#x5806;&#x53E0;&#x56FE;(Stack)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.stack - &#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x7684;&#x5806;&#x53E0;&#x56FE;(&#x7528;&#x6765;&#x5C55;&#x793A;&#x4E00;&#x7CFB;&#x5217;x&#x8F74;&#x76F8;&#x540C;&#x7684;&#x9762;&#x79EF;&#x56FE;&#x6216;&#x8005;&#x7ACB;&#x65B9;&#x56FE;).
+
+stack - &#x8BA1;&#x7B97;&#x6BCF;&#x4E00;&#x5C42;&#x7684;&#x57FA;&#x7EBF;.
+
+stack.values - &#x8BBE;&#x7F6E;&#x6216;&#x8005;&#x83B7;&#x53D6;&#x6BCF;&#x5C42;&#x7684;&#x503C;&#x8BBF;&#x95EE;&#x5668;.
+
+stack.order - &#x8BBE;&#x7F6E;&#x6BCF;&#x5C42;&#x7684;&#x6392;&#x5E8F;.
+
+stack.offset - &#x6307;&#x5B9A;&#x603B;&#x7684;&#x57FA;&#x7EBF;&#x7B97;&#x6CD5;.
+
+stack.x - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x6BCF;&#x5C42;&#x7684;x&#x8F74;&#x8BBF;&#x95EE;&#x5668;.
+
+stack.y - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x6BCF;&#x5C42;&#x7684;y&#x8F74;&#x8BBF;&#x95EE;&#x5668;.
+
+stack.out - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x7528;&#x6765;&#x50A8;&#x5B58;&#x57FA;&#x7EBF;&#x7684;&#x8F93;&#x51FA;&#x51FD;&#x6570;.
+</code></pre>
+<h3 id="&#x6811;treemd"><a href="&#x6811;(Tree">&#x6811;(Tree)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.tree - position a tree <span class="hljs-keyword">of</span> nodes tidily.
+
+tree.sort - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x51FD;&#x6570;, &#x7528;&#x6765;&#x7ED9;&#x5144;&#x5F1F;&#x8282;&#x70B9;(&#x540C;&#x4E00;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;)&#x6392;&#x5E8F;.
+
+tree.children - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x8BBF;&#x95EE;&#x5668;.
+
+tree.nodes - &#x8BA1;&#x7B97;&#x5E76;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;&#x4FE1;&#x606F;.
+
+tree.links - &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5B50;&#x7ED3;&#x70B9;&#x6570;&#x7EC4;(&#x901A;&#x5E38;&#x662F;**nodes**&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;), &#x8BA1;&#x7B97;&#x5B83;&#x4EEC;&#x4E0E;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;.
+
+tree.separation - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x76F8;&#x9694;&#x7ED3;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x9694;&#x8BA1;&#x7B97;&#x51FD;&#x6570;.
+
+tree.size - &#x6307;&#x5B9A;&#x6574;&#x4E2A;&#x5E03;&#x5C40;&#x7684;&#x5BBD;&#x548C;&#x9AD8;.
+
+tree.nodeSize - &#x7ED9;&#x5168;&#x90E8;&#x7ED3;&#x70B9;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x7684;&#x5927;&#x5C0F;(&#x4F1A;&#x5BFC;&#x81F4;<span class="hljs-string">`tree.size`</span>&#x5931;&#x6548;)
+</code></pre>
+<h3 id="&#x77E9;&#x9635;&#x6811;treemapmd"><a href="&#x77E9;&#x9635;&#x6811;(Treemap">&#x77E9;&#x9635;&#x6811;(Treemap)</a>.md)</h3>
+<pre><code class="lang-javascript">d3.layout.treemap - &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x77E9;&#x9635;&#x6811;&#x5BF9;&#x8C61;(&#x7528;&#x77E9;&#x9635;&#x6765;&#x5C55;&#x793A;&#x4E00;&#x9897;&#x6811;).
+
+treemap.sort - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x51FD;&#x6570;, &#x7528;&#x6765;&#x7ED9;&#x5144;&#x5F1F;&#x8282;&#x70B9;(&#x540C;&#x4E00;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;)&#x6392;&#x5E8F;.
+
+treemap.children - &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x8BBF;&#x95EE;&#x5668;.
+
+treemap.nodes - &#x8BA1;&#x7B97;&#x5E76;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7ED3;&#x70B9;&#x7684;&#x5B50;&#x7ED3;&#x70B9;&#x4FE1;&#x606F;.
+
+treemap.links - &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5B50;&#x7ED3;&#x70B9;&#x6570;&#x7EC4;(&#x901A;&#x5E38;&#x662F;**nodes**&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x503C;), &#x8BA1;&#x7B97;&#x5B83;&#x4EEC;&#x4E0E;&#x7236;&#x7ED3;&#x70B9;&#x7684;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;.
+
+treemap.value- &#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x8BA1;&#x7B97;&#x5355;&#x5143;&#x683C;&#x5927;&#x5C0F;&#x7684;&#x503C;&#x8BBF;&#x95EE;&#x5668;.
+
+treemap.size - &#x6307;&#x5B9A;&#x6574;&#x4E2A;&#x5E03;&#x5C40;&#x7684;&#x5BBD;&#x548C;&#x9AD8;.
+
+treemap.padding - &#x6307;&#x5B9A;&#x7236;&#x7ED3;&#x70B9;&#x548C;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x95F4;&#x8DDD;.
+
+treemap.round - &#x7981;&#x7528;&#x6216;&#x542F;&#x7528;&#x8FB9;&#x754C;&#x8865;&#x507F;.
+
+treemap.sticky - &#x8BA9;&#x5E03;&#x5C40;&#x66F4;<span class="hljs-string">&quot;&#x7C98;&quot;</span>&#x4EE5;&#x4FDD;&#x8BC1;&#x5728;&#x66F4;&#x65B0;&#x6570;&#x636E;&#x65F6;&#x6709;&#x5E73;&#x6ED1;&#x7684;&#x52A8;&#x753B;&#x6548;&#x679C;.
+
+treemap.mode - &#x66F4;&#x6539;&#x77E9;&#x9635;&#x6811;&#x7684;&#x5E03;&#x5C40;&#x7B97;&#x6CD5;.
+</code></pre>
+<p>--------&#x4EE5;&#x4E0A;&#x4E3A;D3 &#x63D0;&#x4F9B;&#x7684;&#x5E03;&#x5C40;&#x76F8;&#x5173;api-------</p>
+<h2 id="&#x53C2;&#x8003;--&#x5F15;&#x7528;">&#x53C2;&#x8003; &amp; &#x5F15;&#x7528;</h2>
+<p><a href="https://www.jianshu.com/p/772db5d0597c" target="_blank">https://www.jianshu.com/p/772db5d0597c</a>
+<a href="https://www.jianshu.com/p/7167efc67945" target="_blank">https://www.jianshu.com/p/7167efc67945</a> </p>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2020-02-19 16:50:51
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="饼图Pie.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 饼图Pie">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"简介","level":"1.1","depth":1,"next":{"title":"饼图Pie","level":"1.2","depth":1,"path":"饼图Pie.md","ref":"饼图Pie.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","splitter","pageview-count","edit-link","tbfed-pagefooter","github","livereload"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/sz-p/d3-layout-algorithm-explanation"},"livereload":{},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"pageview-count":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/sz-p/d3-layout-algorithm-explanation/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"sz-p","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"D3 布局算法","language":"zh-hans","links":{"sidebar":{"GitHub":"https://github.com/sz-p/d3-layout-algorithm-explanation"}},"gitbook":"3.2.3","description":"D3布局算法解析"},"file":{"path":"README.md","mtime":"2020-02-19T08:50:51.502Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-04T14:37:48.533Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

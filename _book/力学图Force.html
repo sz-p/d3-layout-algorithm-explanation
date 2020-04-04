@@ -1,0 +1,1070 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>力学图Force · D3 布局算法</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="sz-p">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="弦图Chord.html" />
+    
+    
+    <link rel="prev" href="捆图Bundle.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://github.com/sz-p/d3-layout-algorithm-explanation" target="_blank" class="custom-link">GitHub</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="饼图Pie.html">
+            
+                <a href="饼图Pie.html">
+            
+                    
+                    饼图Pie
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="层级布局Hierarchy.html">
+            
+                <a href="层级布局Hierarchy.html">
+            
+                    
+                    层级布局Hierarchy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="树Tree.html">
+            
+                <a href="树Tree.html">
+            
+                    
+                    树Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="集群Cluster.html">
+            
+                <a href="集群Cluster.html">
+            
+                    
+                    集群Cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="层包Pack.html">
+            
+                <a href="层包Pack.html">
+            
+                    
+                    层包Pack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="矩阵树Treemap.html">
+            
+                <a href="矩阵树Treemap.html">
+            
+                    
+                    矩阵树Treemap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="地图Map.html">
+            
+                <a href="地图Map.html">
+            
+                    
+                    地图Map
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="堆叠图Stack.html">
+            
+                <a href="堆叠图Stack.html">
+            
+                    
+                    堆叠图Stack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="分区Partition.html">
+            
+                <a href="分区Partition.html">
+            
+                    
+                    分区Partition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="捆图Bundle.html">
+            
+                <a href="捆图Bundle.html">
+            
+                    
+                    捆图Bundle
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.12" data-path="力学图Force.html">
+            
+                <a href="力学图Force.html">
+            
+                    
+                    力学图Force
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="弦图Chord.html">
+            
+                <a href="弦图Chord.html">
+            
+                    
+                    弦图Chord
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="直方图Histogram.html">
+            
+                <a href="直方图Histogram.html">
+            
+                    
+                    直方图Histogram
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >力学图Force</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x529B;&#x5B66;&#x56FE;force">&#x529B;&#x5B66;&#x56FE;Force</h2>
+<p><img src="https://img.sz-p.cn/d3Layoutforce.png" alt=""></p>
+<p>&#x8FD9;&#x4E2A;&#x6A21;&#x5757;&#x5B9E;&#x73B0;&#x4E86;&#x7528;&#x4EE5;&#x6A21;&#x62DF;&#x7C92;&#x5B50;&#x7269;&#x7406;&#x8FD0;&#x52A8;&#x7684; <a href="https://en.wikipedia.org/wiki/Verlet_integration" target="_blank">velocity Verlet</a> &#x6570;&#x503C;&#x79EF;&#x5206;&#x5668;&#x3002;&#x4EFF;&#x771F;&#x7684;&#x6F14;&#x5316;: &#x5B83;&#x5047;&#x8BBE;&#x4EFB;&#x610F;&#x5355;&#x4F4D;&#x65F6;&#x95F4;&#x6B65;&#x957F; &#x394;<em>t</em> = 1&#xFF0C;&#x6240;&#x6709;&#x7684;&#x7C92;&#x5B50;&#x7684;&#x5355;&#x4F4D;&#x8D28;&#x91CF;&#x5E38;&#x91CF; <em>m</em> = 1&#x3002;&#x4F5C;&#x7528;&#x5728;&#x6BCF;&#x4E2A;&#x7C92;&#x5B50;&#x4E0A;&#x7684;&#x5408;&#x529B; <em>F</em> &#x76F8;&#x5F53;&#x4E8E;&#x5728;&#x5355;&#x4F4D;&#x65F6;&#x95F4; &#x394;<em>t</em> &#x5185;&#x7684;&#x6052;&#x5B9A;&#x52A0;&#x901F;&#x5EA6; <em>a</em>&#x3002;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7684;&#x901A;&#x8FC7;&#x4E3A;&#x6BCF;&#x4E2A;&#x7C92;&#x5B50;&#x6DFB;&#x52A0;&#x901F;&#x5EA6;&#x5E76;&#x8BA1;&#x7B97;&#x7C92;&#x5B50;&#x7684;&#x4F4D;&#x7F6E;&#x6765;&#x6A21;&#x62DF;&#x4EFF;&#x771F;&#x3002;</p>
+<p>&#x8BE5;&#x6A21;&#x5757;&#x4F9D;&#x8D56;<code>&#x8282;&#x70B9;&#x548C;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;</code>&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;<code>&#x57FA;&#x672C;&#x529B;</code>&#x3002;&#x5411;<code>&#x8282;&#x70B9;&#x4FE1;&#x606F;</code>&#x4E2D;&#x5199;&#x5165;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x5750;&#x6807;&#xFF0C;&#x5C06;<code>&#x8FDE;&#x63A5;&#x4FE1;&#x606F;</code>&#x4E2D;&#x7684;<code>source</code>&#xFF0C;<code>target</code>&#x90E8;&#x5206;&#x4FEE;&#x6539;&#x4E3A;&#x5BF9;&#x5E94;&#x7684;&#x8282;&#x70B9;&#x5F15;&#x7528;&#x3002;</p>
+<h3 id="api">API</h3>
+<p><a href="https://d3js.org.cn/document/d3-force/#forceSimulation" target="_blank">#</a> d3.<strong>forceSimulation</strong>([<em>nodes</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js" target="_blank">&lt;&gt;</a></p>
+<p>&#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x7684; <a href="https://d3js.org.cn/document/d3-force/#simulation_nodes" target="_blank"><em>nodes</em></a> &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6CA1;&#x6709;&#x4EFB;&#x4F55; <a href="https://d3js.org.cn/document/d3-force/#simulation_force" target="_blank">forces(&#x529B;&#x5B66;&#x6A21;&#x578B;)</a> &#x7684;&#x4EFF;&#x771F;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>nodes</em> &#x5219;&#x9ED8;&#x8BA4;&#x4E3A;&#x7A7A;&#x6570;&#x7EC4;&#x3002;&#x4EFF;&#x771F;&#x4F1A;&#x81EA;&#x52A8; <a href="https://d3js.org.cn/document/d3-force/#simulation_restart" target="_blank">starts</a>&#xFF1B;&#x4F7F;&#x7528; <a href="https://d3js.org.cn/document/d3-force/#simulation_on" target="_blank"><em>simulation</em>.on</a> &#x6765;&#x76D1;&#x542C;&#x4EFF;&#x771F;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684; <code>tick</code> &#x4E8B;&#x4EF6;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x624B;&#x52A8;&#x8FD0;&#x884C;&#x4EFF;&#x771F;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x8C03;&#x7528; <a href="https://d3js.org.cn/document/d3-force/#simulation_stop" target="_blank"><em>simulation</em>.stop</a> &#x7136;&#x540E;&#x6839;&#x636E;&#x9700;&#x6C42;&#x8C03;&#x7528; <a href="https://d3js.org.cn/document/d3-force/#simulation_tick" target="_blank"><em>simulation</em>.tick</a>&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_restart" target="_blank">#</a> <em>simulation</em>.<strong>restart</strong>() <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L80" target="_blank">&lt;&gt;</a></p>
+<p>&#x91CD;&#x65B0;&#x8C03;&#x7528;&#x4EFF;&#x771F;&#x7684;&#x5B9A;&#x65F6;&#x5668;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x4EFF;&#x771F;&#x3002;&#x4E0E; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaTarget" target="_blank"><em>simulation</em>.alphaTarget</a> &#x6216; <a href="https://d3js.org.cn/document/d3-force/#simulation_alpha" target="_blank"><em>simulation</em>.alpha</a> &#x7ED3;&#x5408;&#x4F7F;&#x7528;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x518D;&#x6B21;&#x6FC0;&#x6D3B;&#x4EFF;&#x771F;&#xFF0C;&#x5728;&#x6709;&#x4E9B;&#x4EA4;&#x4E92;&#x6BD4;&#x5982;&#x62D6;&#x62FD;&#x8282;&#x70B9;&#x6216;&#x8005;&#x5728;&#x4F7F;&#x7528; <a href="https://d3js.org.cn/document/d3-force/#simulation_stop" target="_blank"><em>simulation</em>.stop</a> &#x4E34;&#x65F6;&#x6682;&#x505C;&#x4EFF;&#x771F;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_stop" target="_blank">#</a> <em>simulation</em>.<strong>stop</strong>() <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L84" target="_blank">&lt;&gt;</a></p>
+<p>&#x6682;&#x505C;&#x4EFF;&#x771F;&#x5185;&#x90E8;&#x7684;&#x5B9A;&#x65F6;&#x5668;&#x5E76;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x4EFF;&#x771F;&#x3002;&#x5982;&#x679C;&#x4EFF;&#x771F;&#x5185;&#x90E8;&#x5B9A;&#x65F6;&#x5668;&#x5DF2;&#x7ECF;&#x5904;&#x4E8E;&#x505C;&#x6B62;&#x72B6;&#x6001;&#x5219;&#x4EC0;&#x4E48;&#x90FD;&#x4E0D;&#x505A;&#x3002;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5728;&#x624B;&#x52A8;&#x8FD0;&#x884C;&#x4EFF;&#x771F;&#x65F6;&#x5F88;&#x6709;&#x7528;&#xFF0C;&#x53C2;&#x8003; <a href="https://d3js.org.cn/document/d3-force/#simulation_tick" target="_blank"><em>simulation</em>.tick</a>&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_tick" target="_blank">#</a> <em>simulation</em>.<strong>tick</strong>() <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L38" target="_blank">&lt;&gt;</a></p>
+<p>&#x901A;&#x8FC7; (<a href="https://d3js.org.cn/document/d3-force/#simulation_alphaTarget" target="_blank"><em>alphaTarget</em></a> - <em>alpha</em>) &#xD7; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaDecay" target="_blank"><em>alphaDecay</em></a> &#x9012;&#x589E;&#x5F53;&#x524D;&#x7684; <a href="https://d3js.org.cn/document/d3-force/#simulation_alpha" target="_blank"><em>alpha</em></a> &#x503C;&#x3002;&#x7136;&#x540E;&#x8C03;&#x7528;&#x6BCF;&#x4E2A;&#x6CE8;&#x518C;&#x7684; <a href="https://d3js.org.cn/document/d3-force/#simulation_force" target="_blank">force</a> &#x5E76;&#x4F20;&#x9012;&#x65B0;&#x7684; <em>alpha</em>&#x3002;&#x7136;&#x540E;&#x901A;&#x8FC7; <em>velocity</em> &#xD7; <a href="https://d3js.org.cn/document/d3-force/#simulation_velocityDecay" target="_blank"><em>velocityDecay</em></a> &#x6765;&#x9012;&#x51CF;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x901F;&#x5EA6;&#x5E76;&#x8C03;&#x6574;&#x8282;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E0D;&#x4F1A;&#x5206;&#x53D1; <a href="https://d3js.org.cn/document/d3-force/#simulation_on" target="_blank">events</a>&#xFF0C;&#x4E8B;&#x4EF6;&#x4EC5;&#x4EC5;&#x5728; <a href="https://d3js.org.cn/document/d3-force/#forceSimulation" target="_blank">creation</a> &#x4EFF;&#x771F;&#x6216;&#x8005;&#x8C03;&#x7528; <a href="https://d3js.org.cn/document/d3-force/#simulation_restart" target="_blank"><em>simulation</em>.restart</a> &#x7684;&#x65F6;&#x5019;&#x624D;&#x4F1A;&#x88AB;&#x5206;&#x53D1;&#x3002;&#x4ECE;&#x4EFF;&#x771F;&#x5F00;&#x59CB;&#x5230;&#x7ED3;&#x675F;&#x7684; <code>tick</code> &#x6B21;&#x6570;&#x4E3A; &#x2308;<em>log</em>(<a href="https://d3js.org.cn/document/d3-force/#simulation_alphaMin" target="_blank"><em>alphaMin</em></a>) / <em>log</em>(1 - <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaDecay" target="_blank"><em>alphaDecay</em></a>)&#x2309; &#x4E5F;&#x5C31;&#x662F;&#x9ED8;&#x8BA4;&#x4E3A; 300 &#x6B21;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x4E0E; <a href="https://d3js.org.cn/document/d3-force/#simulation_stop" target="_blank"><em>simulation</em>.stop</a> &#x7ED3;&#x5408;&#x4F7F;&#x7528;&#x6765;&#x521B;&#x5EFA; <a href="https://bl.ocks.org/mbostock/1667139" target="_blank">static force layout(&#x9759;&#x6001;&#x529B;&#x5B66;&#x5E03;&#x5C40;)</a>&#x3002;&#x5BF9;&#x4E8E;&#x5927;&#x89C4;&#x6A21;&#x56FE;&#x800C;&#x8A00;&#x9759;&#x6001;&#x5E03;&#x5C40;&#x5E94;&#x8BE5; <a href="https://bl.ocks.org/mbostock/01ab2e85e8727d6529d20391c0fd9a16" target="_blank">in a web worker(&#x5728;worker)</a> &#x4E2D;&#x8BA1;&#x7B97;&#x4EE5;&#x907F;&#x514D;&#x963B;&#x585E; UI &#x8FDB;&#x7A0B;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_nodes" target="_blank">#</a> <em>simulation</em>.<strong>nodes</strong>([<em>nodes</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L88" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>nodes</em> &#x5219;&#x5C06;&#x4EFF;&#x771F;&#x7684;&#x8282;&#x70B9;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x6839;&#x636E;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x5B83;&#x4EEC;&#x7684;&#x4F4D;&#x7F6E;&#x548C;&#x901F;&#x5EA6;&#xFF0C;&#x7136;&#x540E; <a href="https://d3js.org.cn/document/d3-force/#force_initialize" target="_blank">re-initializes(&#x91CD;&#x65B0;&#x521D;&#x59CB;&#x5316;)</a> &#x5E76;&#x4E14;&#x7ED1;&#x5B9A; <a href="https://d3js.org.cn/document/d3-force/#simulation_force" target="_blank">forces(&#x529B;&#x6A21;&#x578B;)</a> &#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x4EFF;&#x771F;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>nodes</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x4EFF;&#x771F;&#x7684;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A; <em>node</em> &#x5FC5;&#x987B;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7C7B;&#x578B;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x51E0;&#x4E2A;&#x5C5E;&#x6027;&#x5C06;&#x4F1A;&#x88AB;&#x4EFF;&#x771F;&#x7CFB;&#x7EDF;&#x6DFB;&#x52A0;:</p>
+<ul>
+<li><code>index</code> - &#x8282;&#x70B9;&#x5728; <em>nodes</em> &#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x7D22;&#x5F15;</li>
+<li><code>x</code> - &#x8282;&#x70B9;&#x5F53;&#x524D;&#x7684; <em>x</em>-&#x5750;&#x6807;</li>
+<li><code>y</code> - &#x8282;&#x70B9;&#x5F53;&#x524D;&#x7684; <em>y</em>-&#x5750;&#x6807;</li>
+<li><code>vx</code> - &#x8282;&#x70B9;&#x5F53;&#x524D;&#x7684; <em>x</em>-&#x65B9;&#x5411;&#x901F;&#x5EA6;</li>
+<li><code>vy</code> - &#x8282;&#x70B9;&#x5F53;&#x524D;&#x7684; <em>y</em>-&#x65B9;&#x5411;&#x901F;&#x5EA6;</li>
+</ul>
+<p>&#x4F4D;&#x7F6E; &#x27E8;<em>x</em>,<em>y</em>&#x27E9; &#x4EE5;&#x53CA;&#x901F;&#x5EA6; &#x27E8;<em>vx</em>,<em>vy</em>&#x27E9; &#x968F;&#x540E;&#x53EF;&#x80FD;&#x88AB;&#x4EFF;&#x771F;&#x4E2D;&#x7684; <a href="https://d3js.org.cn/document/d3-force/#forces" target="_blank">forces</a> &#x4FEE;&#x6539;. &#x5982;&#x679C; <em>vx</em> &#x6216; <em>vy</em> &#x4E3A; NaN, &#x5219;&#x901F;&#x5EA6;&#x4F1A;&#x88AB;&#x521D;&#x59CB;&#x5316;&#x4E3A; &#x27E8;0,0&#x27E9;. &#x5982;&#x679C; <em>x</em> &#x6216; <em>y</em> &#x4E3A; NaN, &#x5219;&#x4F4D;&#x7F6E;&#x4F1A;&#x6309;&#x7167; <a href="http://bl.ocks.org/mbostock/11478058" target="_blank">phyllotaxis arrangement(&#x5E03;&#x5C40;&#x7B97;&#x6CD5;)</a> &#x88AB;&#x521D;&#x59CB;&#x5316;, &#x8FD9;&#x6837;&#x521D;&#x59CB;&#x5316;&#x5E03;&#x5C40;&#x662F;&#x4E3A;&#x4E86;&#x80FD;&#x4F7F;&#x5F97;&#x8282;&#x70B9;&#x5728;&#x539F;&#x70B9;&#x5468;&#x56F4;&#x5747;&#x5300;&#x5206;&#x5E03;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60F3;&#x8981;&#x67D0;&#x4E2A;&#x8282;&#x70B9;&#x56FA;&#x5B9A;&#x5728;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4EE5;&#x4E0B;&#x4E24;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x5C5E;&#x6027;:</p>
+<ul>
+<li><code>fx</code> - &#x8282;&#x70B9;&#x7684;&#x56FA;&#x5B9A; <em>x</em>-&#x4F4D;&#x7F6E;</li>
+<li><code>fy</code> - &#x8282;&#x70B9;&#x7684;&#x56FA;&#x5B9A; <em>y</em>-&#x4F4D;&#x7F6E;</li>
+</ul>
+<p>&#x6BCF;&#x6B21; <a href="https://d3js.org.cn/document/d3-force/#simulation_tick" target="_blank">tick</a> &#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x8282;&#x70B9;&#x7684; <em>node</em>.x &#x4F1A;&#x88AB;&#x91CD;&#x65B0;&#x8BBE;&#x7F6E;&#x4E3A; <em>node</em>.fx &#x5E76;&#x4E14; <em>node</em>.vx &#x4F1A;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A; 0&#xFF1B;&#x7406; <em>node</em>.y &#x4F1A;&#x88AB;&#x91CD;&#x65B0;&#x66FF;&#x6362;&#x4E3A; <em>node.fy</em> &#x5E76;&#x4E14; <em>node</em>.vy &#x88AB;&#x8BBE;&#x7F6E;&#x4E3A; 0&#xFF1B;&#x5982;&#x679C;&#x60F3;&#x8981;&#x67D0;&#x4E2A;&#x8282;&#x70B9;&#x89E3;&#x9664;&#x56FA;&#x5B9A;&#xFF0C;&#x5219;&#x5C06; <em>node</em>.fx &#x548C; <em>node</em>.fy &#x8BBE;&#x7F6E;&#x4E3A; null &#x6216;&#x8005;&#x5220;&#x9664;&#x8FD9;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x7684;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#xFF0C;&#x6BD4;&#x5982;&#x6DFB;&#x52A0;&#x6216;&#x5220;&#x9664;&#x4E86;&#x67D0;&#x4E9B;&#x8282;&#x70B9;&#xFF0C;&#x5219;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#x91CD;&#x65B0;&#x88AB;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#x4EE5;&#x901A;&#x77E5;&#x4EFF;&#x771F;&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#x3002;&#x4EFF;&#x771F;&#x4E0D;&#x4F1A;&#x5BF9;&#x8F93;&#x5165;&#x6570;&#x7EC4;&#x505A;&#x526F;&#x672C;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_alpha" target="_blank">#</a> <em>simulation</em>.<strong>alpha</strong>([<em>alpha</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L92" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>alpha</em> &#x5219;&#x5C06;&#x4EFF;&#x771F;&#x7684;&#x5F53;&#x524D; <em>alpha</em> &#x503C;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x503C;&#xFF0C;&#x5FC5;&#x987B;&#x5728; [0,1] &#x4E4B;&#x95F4;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>alpha</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684; <em>alpha</em> &#x503C;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 1&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_alphaMin" target="_blank">#</a> <em>simulation</em>.<strong>alphaMin</strong>([<em>min</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L96" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>min</em> &#x5219;&#x5C06; <em>alpha</em> &#x7684;&#x6700;&#x5C0F;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x503C;&#xFF0C;&#x9700;&#x8981;&#x5728; [0, 1] &#x4E4B;&#x95F4;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>min</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684;&#x6700;&#x5C0F; <em>alpha</em> &#x503C;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 0.001. &#x5728;&#x4EFF;&#x771F;&#x5185;&#x90E8;&#xFF0C;&#x4F1A;&#x4E0D;&#x65AD;&#x7684;&#x51CF;&#x5C0F; <a href="https://d3js.org.cn/document/d3-force/#simulation_alpha" target="_blank"><em>alpha</em></a> &#x503C;&#x76F4;&#x5230; <a href="https://d3js.org.cn/document/d3-force/#simulation_alpha" target="_blank"><em>alpha</em></a> &#x503C;&#x5C0F;&#x4E8E; &#x6700;&#x5C0F; <em>alpha</em>&#x3002;&#x9ED8;&#x8BA4;&#x7684; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaDecay" target="_blank">alpha decay rate(alpha &#x8870;&#x51CF;&#x7CFB;&#x6570;)</a> &#x4E3A; ~0.0228&#xFF0C;&#x56E0;&#x6B64;&#x4F1A;&#x8FDB;&#x884C; 300 &#x6B21;&#x8FED;&#x4EE3;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_alphaDecay" target="_blank">#</a> <em>simulation</em>.<strong>alphaDecay</strong>([<em>decay</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L100" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>decay</em> &#x5219;&#x5C06;&#x5F53;&#x524D;&#x7684; <a href="https://d3js.org.cn/document/d3-force/#simulation_alpha" target="_blank"><em>alpha</em></a> &#x8870;&#x51CF;&#x7CFB;&#x6570;&#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x503C;&#xFF0C;&#x8981;&#x5728;[0, 1] &#x4E4B;&#x95F4;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>decay</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684; <em>alpha</em> &#x8870;&#x51CF;&#x7CFB;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 0.0228&#x2026; = 1 - <em>pow</em>(0.001, 1 / 300)&#xFF0C;&#x5176;&#x4E2D; 0.001 &#x662F;&#x9ED8;&#x8BA4;&#x7684; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaMin" target="_blank">&#x6700;&#x5C0F; <em>alpha</em></a>.</p>
+<p><em>alpha</em> &#x8870;&#x51CF;&#x7CFB;&#x6570;&#x5B9A;&#x4E49;&#x4E86;&#x5F53;&#x524D;&#x7684; <em>alpha</em> &#x503C;&#x5411; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaTarget" target="_blank">target <em>alpha</em></a> &#x8FED;&#x4EE3;&#x5FEB;&#x6162;&#x3002;&#x9ED8;&#x8BA4;&#x7684;&#x76EE;&#x6807; <em>alpha</em> &#x4E3A; 0 &#x56E0;&#x6B64;&#x4ECE;&#x5E03;&#x5C40;&#x5F62;&#x5F0F;&#x4E0A;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x51B3;&#x5B9A;&#x4E86;&#x5E03;&#x5C40;&#x51B7;&#x5374;&#x7684;&#x5FEB;&#x6162;&#x3002;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x8D8A;&#x5927;&#xFF0C;&#x5E03;&#x5C40;&#x51B7;&#x5374;&#x7684;&#x8D8A;&#x5FEB;&#xFF0C;&#x4F46;&#x662F;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x5927;&#x7684;&#x8BDD;&#x4F1A;&#x5F15;&#x8D77;&#x8FED;&#x4EE3;&#x6B21;&#x6570;&#x4E0D;&#x591F;&#x5145;&#x5206;&#xFF0C;&#x5BFC;&#x81F4;&#x6548;&#x679C;&#x4E0D;&#x591F;&#x597D;&#x3002;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x8D8A;&#x5C0F;&#xFF0C;&#x8FED;&#x4EE3;&#x6B21;&#x6570;&#x8D8A;&#x591A;&#xFF0C;&#x6700;&#x7EC8;&#x7684;&#x5E03;&#x5C40;&#x6548;&#x679C;&#x8D8A;&#x597D;&#x3002;&#x5982;&#x679C;&#x60F3;&#x8981;&#x5E03;&#x5C40;&#x6C38;&#x8FDC;&#x505C;&#x4E0D;&#x4E0B;&#x6765;&#x5219;&#x53EF;&#x4EE5;&#x5C06;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x8BBE;&#x7F6E;&#x4E3A; 0&#xFF1B;&#x4E5F;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaTarget" target="_blank">target <em>alpha</em></a> &#x5927;&#x4E8E; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaMin" target="_blank">minimum <em>alpha</em></a> &#x8FBE;&#x5230;&#x76F8;&#x540C;&#x7684;&#x6548;&#x679C;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_alphaTarget" target="_blank">#</a> <em>simulation</em>.<strong>alphaTarget</strong>([<em>target</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L104" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>target</em> &#x5219;&#x5C06;&#x5F53;&#x524D;&#x7684;&#x76EE;&#x6807; <a href="https://d3js.org.cn/document/d3-force/#simulation_alpha" target="_blank"><em>alpha</em></a> &#x8BBE;&#x7F6E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x503C;&#xFF0C;&#x9700;&#x8981;&#x5728; [0, 1] &#x4E4B;&#x95F4;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>target</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x9ED8;&#x8BA4;&#x7684;&#x76EE;&#x6807; <em>alpha</em> &#x503C;, &#x9ED8;&#x8BA4;&#x4E3A; 0.</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_velocityDecay" target="_blank">#</a> <em>simulation</em>.<strong>velocityDecay</strong>([<em>decay</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L108" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>decay</em> &#x5219;&#x8BBE;&#x7F6E;&#x4EFF;&#x771F;&#x7684;&#x901F;&#x5EA6;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x5E76;&#x8FD4;&#x56DE;&#x4EFF;&#x771F;&#xFF0C;&#x8303;&#x56F4;&#x4E3A; [0, 1]&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>decay</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684;&#x901F;&#x5EA6;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 0.4&#xFF0C;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x7C7B;&#x4F3C;&#x4E8E;&#x963B;&#x529B;&#x3002;&#x6BCF;&#x6B21; <code>tick</code> &#x7ED3;&#x675F;&#x540E;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x901F;&#x5EA6;&#x90FD;&#x4F1A;&#x4E58;&#x4EE5; 1 - <em>decay</em> &#x4EE5;&#x964D;&#x4F4E;&#x8282;&#x70B9;&#x7684;&#x8FD0;&#x52A8;&#x901F;&#x5EA6;&#x3002;&#x901F;&#x5EA6;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x4E0E; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaDecay" target="_blank">alpha decay rate</a> &#x7C7B;&#x4F3C;&#xFF0C;&#x8F83;&#x4F4E;&#x7684;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x5F97;&#x8FED;&#x4EE3;&#x6B21;&#x6570;&#x66F4;&#x591A;&#xFF0C;&#x5176;&#x5E03;&#x5C40;&#x7ED3;&#x679C;&#x4E5F;&#x4F1A;&#x66F4;&#x7406;&#x6027;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x80FD;&#x4F1A;&#x5F15;&#x8D77;&#x6570;&#x503C;&#x4E0D;&#x7A33;&#x5B9A;&#x4ECE;&#x800C;&#x5BFC;&#x81F4;&#x9707;&#x8361;&#x3002;</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_force" target="_blank">#</a> <em>simulation</em>.<strong>force</strong>(<em>name</em>[, <em>force</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L112" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>force</em> &#x5219;&#x8868;&#x793A;&#x4E3A;&#x4EFF;&#x771F;&#x6DFB;&#x52A0;&#x6307;&#x5B9A; <em>name</em> &#x7684; <a href="https://d3js.org.cn/document/d3-force/#forces" target="_blank">force(&#x529B;&#x5B66;&#x6A21;&#x578B;)</a> &#x5E76;&#x8FD4;&#x56DE;&#x4EFF;&#x771F;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>force</em> &#x5219;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x4EFF;&#x771F;&#x7684;&#x5BF9;&#x5E94; <em>name</em> &#x7684;&#x529B;&#x6A21;&#x578B;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5BF9;&#x5E94;&#x7684; <em>name</em> &#x5219;&#x8FD4;&#x56DE; <code>undefined</code>. (&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x4EFF;&#x771F;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x529B;&#x5B66;&#x6A21;&#x578B;&#xFF0C;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6DFB;&#x52A0;). &#x4F8B;&#x5982;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x5BF9;&#x56FE;&#x8FDB;&#x884C;&#x5E03;&#x5C40;&#x7684;&#x4EFF;&#x771F;&#xFF0C;&#x53EF;&#x4EE5;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> simulation = d3.forceSimulation(nodes)
+    .force(<span class="hljs-string">&quot;charge&quot;</span>, d3.forceManyBody())
+    .force(<span class="hljs-string">&quot;link&quot;</span>, d3.forceLink(links))
+    .force(<span class="hljs-string">&quot;center&quot;</span>, d3.forceCenter());
+</code></pre>
+<p>&#x5982;&#x679C;&#x8981;&#x79FB;&#x9664;&#x5BF9;&#x5E94;&#x7684; <em>name</em> &#x7684;&#x4EFF;&#x771F;&#xFF0C;&#x53EF;&#x4EE5;&#x4E3A;&#x5176;&#x6307;&#x5B9A; <code>null</code>&#xFF0C;&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-js">simulation.force(<span class="hljs-string">&quot;charge&quot;</span>, <span class="hljs-literal">null</span>);
+</code></pre>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_find" target="_blank">#</a> <em>simulation</em>.<strong>find</strong>(<em>x</em>, <em>y</em>[, <em>radius</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L116" target="_blank">&lt;&gt;</a></p>
+<p>&#x8FD4;&#x56DE;&#x8DDD;&#x79BB; &#x27E8;<em>x</em>,<em>y</em>&#x27E9; &#x4F4D;&#x7F6E;&#x6700;&#x8FD1;&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x5E76;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x641C;&#x7D22;&#x534A;&#x5F84; <em>radius</em>. &#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>radius</em> &#x5219;&#x9ED8;&#x8BA4;&#x4E3A;&#x65E0;&#x7A77;&#x5927;&#x3002;&#x5982;&#x679C;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x641C;&#x7D22;&#x533A;&#x57DF;&#x5185;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x8282;&#x70B9;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; <code>undefined</code>.</p>
+<p><a href="https://d3js.org.cn/document/d3-force/#simulation_on" target="_blank">#</a> <em>simulation</em>.<strong>on</strong>(<em>typenames</em>, [<em>listener</em>]) <a href="https://github.com/d3/d3-force/blob/master/src/simulation.js#L139" target="_blank">&lt;&gt;</a></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; <em>listener</em> &#x5219;&#x5C06;&#x5176;&#x6307;&#x5B9A;&#x7684; <em>typenames</em> &#x7684;&#x56DE;&#x8C03;&#x3002;&#x5982;&#x679C;&#x5BF9;&#x5E94;&#x7684; <em>typenames</em> &#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#xFF0C;&#x5219;&#x5C06;&#x5176;&#x66FF;&#x6362;&#x3002;&#x5982;&#x679C; <em>listener</em> &#x4E3A; <code>null</code> &#x5219;&#x8868;&#x793A;&#x79FB;&#x9664;&#x5BF9;&#x5E94; <em>typenames</em> &#x7684;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <em>listener</em> &#x5219;&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x4E2A;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684; <em>typenams</em> &#x5BF9;&#x5E94;&#x7684;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#xFF0C;&#x5F53;&#x6307;&#x5B9A;&#x7684;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x65F6;&#xFF0C;&#x6BCF;&#x4E2A;&#x56DE;&#x8C03;&#x90FD;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x56DE;&#x8C03;&#x4E2D; <code>this</code> &#x6307;&#x5411;&#x4EFF;&#x771F;&#x672C;&#x8EAB;&#x3002;</p>
+<p><em>typenames</em> &#x53EF;&#x4EE5;&#x7531;&#x591A;&#x4E2A;&#x7531;&#x7A7A;&#x683C;&#x9694;&#x5F00;&#x7684; <em>typename</em>&#x3002;&#x6BCF;&#x4E2A; <em>typename</em> &#x90FD;&#x7531; <em>type</em> &#x548C;&#x53EF;&#x9009;&#x7684; <em>name</em> &#x7EC4;&#x6210;&#xFF0C;&#x7528; (<code>.</code>) &#x8FDE;&#x63A5;&#x3002;&#x6BD4;&#x5982; <code>tick.foo</code> &#x548C; <code>tick.bar</code>&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x53EF;&#x4EE5;&#x4E3A;&#x540C;&#x4E00;&#x79CD;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x6CE8;&#x518C;&#x591A;&#x4E2A;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x3002;&#x5176;&#x4E2D; <em>type</em> &#x5FC5;&#x987B;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;:</p>
+<ul>
+<li><code>tick</code> - &#x4EFF;&#x771F;&#x5185;&#x90E8;&#x5B9A;&#x65F6;&#x5668;&#x6BCF;&#x6B21; <code>tick</code> &#x4E4B;&#x540E;.</li>
+<li><code>end</code> - &#x5F53; <em>alpha</em> &lt; <a href="https://d3js.org.cn/document/d3-force/#simulation_alphaMin" target="_blank"><em>alphaMin</em></a> &#x65F6;&#x4EFF;&#x771F;&#x5185;&#x90E8;&#x5B9A;&#x65F6;&#x5668;&#x505C;&#x6B62;.</li>
+</ul>
+<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;<code>tick</code> &#x4E8B;&#x4EF6;&#x5728;&#x624B;&#x52A8;&#x8C03;&#x7528; <a href="https://d3js.org.cn/document/d3-force/#simulation_tick" target="_blank"><em>simulation</em>.tick</a> &#x65F6;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x3002;<code>tick</code> &#x4E8B;&#x4EF6;&#x53EA;&#x4F1A;&#x88AB;&#x5185;&#x90E8;&#x5B9A;&#x65F6;&#x5668;&#x8C03;&#x7528;&#x7528;&#x4EE5;&#x6A21;&#x62DF;&#x5E03;&#x5C40;&#x8FC7;&#x7A0B;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x4E2A;&#x6027;&#x5316;&#x8C03;&#x6574;&#x5E03;&#x5C40;&#xFF0C;&#x5E94;&#x8BE5;&#x5728; <a href="https://d3js.org.cn/document/d3-force/#simulation_force" target="_blank">forces</a> &#x4E2D;&#x6CE8;&#x518C;&#x800C;&#x4E0D;&#x662F;&#x5728;&#x6BCF;&#x6B21; <code>tick</code> &#x65F6;&#x4FEE;&#x6539;&#x8282;&#x70B9;&#x4F4D;&#x7F6E;&#x3002;</p>
+<h3 id="&#x5E03;&#x5C40;&#x4FE1;&#x606F;">&#x5E03;&#x5C40;&#x4FE1;&#x606F;</h3>
+<p>&#x5E03;&#x5C40;&#x4FE1;&#x606F;&#x5206;&#x4E3A;<code>nodes</code>&#x548C;<code>links</code>,&#x90FD;&#x662F;&#x6570;&#x7EC4;&#x7ED3;&#x6784;&#xFF0C;
+&#x5176;&#x4E2D;<code>nodes</code>&#x8868;&#x793A;&#x8282;&#x70B9;&#x529B;&#x5B66;&#x56FE;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x5217;&#x8868;&#xFF0C;&#x5176;&#x4E2D;<code>x</code>,<code>y</code>&#x4EE3;&#x8868;&#x5176;&#x5750;&#x6807;&#x4FE1;&#x606F;&#x3002;
+<code>links</code>&#x8868;&#x793A;&#x8FDE;&#x63A5;&#x5217;&#x8868;&#xFF0C;&#x5176;&#x4E2D;<code>source</code>,<code>target</code>&#x8868;&#x793A;&#x8D77;&#x6B62;&#x8282;&#x70B9;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;<code>nodes</code>&#x8282;&#x70B9;&#x7684;&#x5F15;&#x7528;&#x3002;</p>
+<pre><code class="lang-javascript">{
+    nodes:[
+        {
+            id: <span class="hljs-string">&quot;Myriel&quot;</span>
+            group: <span class="hljs-number">1</span>,
+            index: <span class="hljs-number">0</span>,
+            x: <span class="hljs-number">46.38649232626505</span>,
+            y: <span class="hljs-number">386.9555414528223</span>,
+            vy: <span class="hljs-number">-0.0006691095177627861</span>,
+            vx: <span class="hljs-number">0.0011235465030445093</span>
+        },
+        {
+           id: <span class="hljs-string">&quot;Napoleon&quot;</span>,
+            group: <span class="hljs-number">1</span>,
+            index: <span class="hljs-number">1</span>,
+            x: <span class="hljs-number">21.183168975952462</span>,
+            y: <span class="hljs-number">420.6280997789074</span>,
+            vy: <span class="hljs-number">-0.00031141180558930744</span>,
+            vx: <span class="hljs-number">0.0016790833308051134</span>
+        },
+    ],
+    links:[
+        {source:{id: <span class="hljs-string">&quot;Myriel&quot;</span>, ...},target:{id: <span class="hljs-string">&quot;Napoleon&quot;</span>, ...},index:<span class="hljs-number">0</span>}
+    ]
+}
+</code></pre>
+<h3 id="&#x57FA;&#x672C;&#x6570;&#x636E;">&#x57FA;&#x672C;&#x6570;&#x636E;</h3>
+<p><strong>&#x8282;&#x70B9;&#x4FE1;&#x606F;</strong></p>
+<pre><code class="lang-javascript">[
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;Myriel&quot;</span>, <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-number">1</span>},
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;Napoleon&quot;</span>, <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-number">1</span>}
+]
+</code></pre>
+<p><strong>&#x8FDE;&#x63A5;&#x4FE1;&#x606F;</strong></p>
+<pre><code class="lang-javascript">[
+    {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;Myriel&quot;</span>, <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;Myriel&quot;</span>}
+]
+</code></pre>
+<p><strong>&#x8282;&#x70B9;&#x548C;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;</strong></p>
+<pre><code class="lang-javascript">{
+    nodes:[
+      {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;Myriel&quot;</span>, <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-number">1</span>},
+      {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;Napoleon&quot;</span>, <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-number">1</span>}
+    ],
+    links:[
+      {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;Myriel&quot;</span>, <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;Myriel&quot;</span>}
+    ]
+}
+</code></pre>
+<p><strong>&#x57FA;&#x672C;&#x529B;</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// &#x5404;&#x4E2A;&#x8FDE;&#x63A5;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x5F39;&#x7C27;&#x529B; &#x4E24;&#x4E2A;&#x8282;&#x70B9;&#x8FDE;&#x63A5;&#x540E; &#x4F1A;&#x4EA7;&#x751F;&#x8282;&#x70B9;&#x95F4;&#x5F15;&#x529B; &#x5C0F;&#x4E8E;&#x4E00;&#x5B9A;&#x8DDD;&#x79BB;&#x5219;&#x4EA7;&#x751F;&#x65A5;&#x529B; &#x8BE6;&#x89C1;&#x6838;&#x5FC3;&#x4EE3;&#x7801;</span>
+d3.forceLink()
+
+<span class="hljs-comment">// &#x5404;&#x4E2A;&#x8FDE;&#x63A5;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x65A5;&#x529B;&#xFF0C;&#x6240;&#x6709;&#x5382;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x65A5;&#x529B;&#xFF0C;&#x53C2;&#x7167;&#x5E93;&#x4ED1;&#x65A5;&#x529B; &#x8BE6;&#x89C1;&#x6838;&#x5FC3;&#x4EE3;&#x7801;</span>
+d3.forceManyBody()
+
+<span class="hljs-comment">// &#x6240;&#x6709;&#x8282;&#x70B9;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x5411;&#x4E2D;&#x5FC3;&#x7684;&#x4E2D;&#x5FC3;&#x5F15;&#x529B; &#x53C2;&#x7167;&#x4E07;&#x6709;&#x5F15;&#x529B; &#x8BE6;&#x89C1;&#x6838;&#x5FC3;&#x4EE3;&#x7801;</span>
+d3.forceCenter(width / <span class="hljs-number">2</span>, height / <span class="hljs-number">2</span>)
+</code></pre>
+<h3 id="&#x6267;&#x884C;&#x903B;&#x8F91;">&#x6267;&#x884C;&#x903B;&#x8F91;</h3>
+<ol>
+<li><p>&#x521D;&#x59CB;&#x5316;&#x529B;&#x8870;&#x51CF;&#x5E38;&#x6570;<code>alpha</code></p>
+</li>
+<li><p>&#x5728;&#x4E00;&#x4E2A;&#x5706;&#x5F62;&#x533A;&#x57DF;&#x5185;&#x521D;&#x59CB;&#x5316;&#x8282;&#x70B9;&#x5BF9;&#x8C61;&#xFF0C;&#x7ED9;&#x8282;&#x70B9;&#x5199;&#x5165;<code>index</code>&#xFF0C;<code>x</code>&#xFF0C;<code>y</code>&#x5750;&#x6807;&#xFF0C;<code>x</code>&#xFF0C;<code>y</code>&#x65B9;&#x5411;&#x4E0A;&#x7684;&#x901F;&#x5EA6;&#xFF08;<code>xv</code>&#xFF0C;<code>yv</code>&#xFF09;&#x7B49;&#x3002;</p>
+</li>
+<li><p>&#x542F;&#x52A8;&#x529B;&#x4EFF;&#x771F;&#xFF0C;&#x5F00;&#x59CB;&#x4E0D;&#x65AD;&#x8FED;&#x4EE3;&#x76F4;&#x81F3;&#x529B;&#x8870;&#x51CF;&#x5E38;&#x6570;&#xFF0C;&#x8870;&#x51CF;&#x81F3;&#x89C4;&#x5B9A;&#x7684;&#x6700;&#x5C0F;&#x503C;&#x3002;</p>
+</li>
+<li><p>&#x6BCF;&#x6B21;&#x8FED;&#x4EE3;&#x4E2D;&#x8BBF;&#x95EE;&#x5DF2;&#x5B9A;&#x4E49;&#x7684;&#x529B;&#xFF0C;&#x5E76;&#x4F20;&#x5165;&#x5F53;&#x524D;&#x529B;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x3002;</p>
+<ol>
+<li><p>&#x5404;&#x4E2A;&#x8FDE;&#x63A5;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x5F39;&#x7C27;&#x529B;&#xFF1A;&#x6BCF;&#x4E24;&#x4E2A;&#x53D1;&#x751F;&#x8FDE;&#x63A5;&#x7684;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x5B58;&#x5728;&#x5F39;&#x7C27;&#x529B;&#xFF0C;&#x5C0F;&#x4E8E;&#x67D0;&#x4E2A;&#x9608;&#x503C;&#x65F6;&#x8FDC;&#x79BB;&#xFF0C;&#x5927;&#x4E8E;&#x67D0;&#x4E2A;&#x503C;&#x7684;&#x9760;&#x8FD1;&#x3002;&#x6700;&#x7EC8;&#x8D8B;&#x4E8E;&#x7ED9;&#x5B9A;&#x7684;&#x9608;&#x503C;&#x3002;&#x5C06;&#x79FB;&#x52A8;&#x8D8B;&#x52BF;&#x5199;&#x5165;&#x901F;&#x5EA6;&#x3002;</p>
+</li>
+<li><p>&#x5404;&#x4E2A;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x65A5;&#x529B;&#xFF1A;&#x5728;&#x573A;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x5747;&#x5B58;&#x5728;&#x65A5;&#x529B;&#xFF0C;&#x57FA;&#x4E8E;&#x56DB;&#x53C9;&#x6811;&#x8FDB;&#x884C;&#x4F18;&#x5316;&#x8BA1;&#x7B97;&#x6240;&#x6709;&#x8282;&#x70B9;&#x95F4;&#x65A5;&#x529B;&#xFF0C;&#x4F7F;&#x8282;&#x70B9;&#x76F8;&#x4E92;&#x8FDC;&#x79BB;&#xFF0C;&#x5C06;&#x79FB;&#x52A8;&#x8D8B;&#x52BF;&#x5199;&#x5165;&#x8282;&#x70B9;&#x901F;&#x5EA6;&#x3002;</p>
+</li>
+<li><p>&#x5411;&#x5FC3;&#x529B;&#xFF1A;&#x6240;&#x6709;&#x8282;&#x70B9;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x4E2D;&#x5FC3;&#x7684;&#x529B;&#xFF0C;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5411;&#x4E2D;&#x5FC3;&#x79FB;&#x52A8;&#xFF0C;&#x5C06;&#x79FB;&#x52A8;&#x8D8B;&#x52BF;&#x5199;&#x5165;&#x901F;&#x5EA6;&#x3002;</p>
+</li>
+<li><p>&#x6839;&#x636E;&#x8282;&#x70B9;&#x7684;&#x79FB;&#x52A8;&#x901F;&#x5EA6;&#xFF0C;&#x79FB;&#x52A8;&#x8282;&#x70B9;&#xFF0C;&#x5373;&#x5C06;<code>xv</code>&#xFF0C;<code>yv</code>&#x5199;&#x5165;&#xFF0C;<code>x</code>&#xFF0C;<code>y</code>&#x3002;</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="&#x6838;&#x5FC3;&#x4EE3;&#x7801;">&#x6838;&#x5FC3;&#x4EE3;&#x7801;</h3>
+<p><strong>&#x4EFF;&#x771F;&#x90E8;&#x5206;</strong></p>
+<p>&#x8BE5;&#x90E8;&#x5206;&#x521D;&#x59CB;&#x5316;&#x4E86;nodes&#x7684;&#x8282;&#x70B9;&#x6570;&#x636E;&#xFF0C;&#x5411;<code>&#x8282;&#x70B9;&#x4FE1;&#x606F;</code>&#x4E2D;&#x5199;&#x5165;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x521D;&#x59CB;&#x5316;&#x7684;&#x5750;&#x6807;&#x3002;&#x8FD9;&#x4E9B;&#x8282;&#x70B9;&#x5206;&#x5E03;&#x5728;&#x4E00;&#x4E2A;&#x5706;&#x5F62;&#x533A;&#x57DF;&#x5185;&#x3002;&#x5E76;&#x6839;&#x636E;&#x7ED9;&#x51FA;&#x7684;&#x529B;&#x542F;&#x52A8;&#x4E86;&#x529B;&#x5B66;&#x4EFF;&#x771F;&#x3002;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x7684;&#x57FA;&#x672C;&#x529B;&#x89C1;&#x4E0B;&#x6587;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> initialRadius = <span class="hljs-number">10</span>,
+    initialAngle = <span class="hljs-built_in">Math</span>.PI * (<span class="hljs-number">3</span> - <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-number">5</span>));
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nodes</span>) </span>{
+  <span class="hljs-keyword">var</span> simulation,
+      alpha = <span class="hljs-number">1</span>, <span class="hljs-comment">// &#x662F;&#x4E00;&#x4E2A;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#xFF0C;&#x8868;&#x793A;&#x5404;&#x4E2A;&#x5404;&#x4E2A;&#x529B;&#x5F53;&#x524D;&#x7684;&#x5F3A;&#x5EA6;&#x3002;&#x5F53;&#x8870;&#x51CF;&#x4E3A;alphaMin&#x65F6;&#x505C;&#x6B62;&#x529B;&#x4EFF;&#x771F;</span>
+      alphaMin = <span class="hljs-number">0.001</span>, <span class="hljs-comment">// &#x8868;&#x793A;&#x6700;&#x5C0F;&#x7684;&#x529B;&#x7CFB;&#x6570;&#x3002;</span>
+      alphaDecay = <span class="hljs-number">1</span> - <span class="hljs-built_in">Math</span>.pow(alphaMin, <span class="hljs-number">1</span> / <span class="hljs-number">300</span>),
+      alphaTarget = <span class="hljs-number">0</span>, <span class="hljs-comment">// &#x8868;&#x793A; &#x6700;&#x7EC8;&#x7684; alpha &#x503C; &#x5373; alpha &#x5411; alphaTarget &#x8870;&#x51CF;</span>
+      velocityDecay = <span class="hljs-number">0.6</span>,
+      forces = map(),
+      <span class="hljs-comment">//step 4 &#x542F;&#x52A8;&#x5404;&#x4E2A;&#x529B;&#x4EFF;&#x771F;</span>
+      stepper = timer(step),
+      event = dispatch(<span class="hljs-string">&quot;tick&quot;</span>, <span class="hljs-string">&quot;end&quot;</span>);
+
+  <span class="hljs-keyword">if</span> (nodes == <span class="hljs-literal">null</span>) nodes = [];
+
+  <span class="hljs-comment">// step 4 &#x542F;&#x52A8;&#x5404;&#x4E2A;&#x529B;&#x4EFF;&#x771F;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">step</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// &#x89E6;&#x53D1;&#x4E00;&#x4E2A;tick</span>
+    tick();
+    <span class="hljs-comment">// &#x89E6;&#x53D1;&#x56DE;&#x8C03;&#x51FD;&#x6570;</span>
+    event.call(<span class="hljs-string">&quot;tick&quot;</span>, simulation);
+    <span class="hljs-comment">// &#x5224;&#x65AD;&#x7EC8;&#x6B62;&#x6001;</span>
+    <span class="hljs-keyword">if</span> (alpha &lt; alphaMin) {
+      stepper.stop();
+      event.call(<span class="hljs-string">&quot;end&quot;</span>, simulation);
+    }
+  }
+
+  <span class="hljs-comment">// &#x6BCF;&#x4E00;&#x6B65;&#x8BBF;&#x95EE;&#x5404;&#x4E2A;&#x529B;&#x5BF9;nodes&#x7684;&#x901F;&#x5EA6;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#xFF0C;&#x5E76;&#x5C06;&#x6839;&#x636E;&#x901F;&#x5EA6;&#x79FB;&#x52A8;&#x8282;&#x70B9;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tick</span>(<span class="hljs-params">iterations</span>) </span>{
+    <span class="hljs-keyword">var</span> i, n = nodes.length, node;
+
+    <span class="hljs-keyword">if</span> (iterations === <span class="hljs-literal">undefined</span>) iterations = <span class="hljs-number">1</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">0</span>; k &lt; iterations; ++k) {
+      <span class="hljs-comment">// &#x5BF9;&#x529B;&#x7CFB;&#x6570;&#x8FDB;&#x884C;&#x8870;&#x51CF;</span>
+      alpha += (alphaTarget - alpha) * alphaDecay;
+
+      <span class="hljs-comment">// step 5 &#x6BCF;&#x4E00;&#x6B65;&#x8BBF;&#x95EE;&#x5404;&#x4E2A;&#x529B;&#x5BF9;nodes&#x7684;&#x901F;&#x5EA6;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;</span>
+      forces.each(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">force</span>) </span>{
+        force(alpha);
+      });
+
+      <span class="hljs-comment">// step 6 &#x6839;&#x636E;&#x901F;&#x5EA6;&#x79FB;&#x52A8;&#x8282;&#x70B9;,&#x5E76;&#x5C06;&#x901F;&#x5EA6;&#x91CD;&#x7F6E;&#x4E3A;0&#xFF0C;&#x65B9;&#x4FBF;&#x4E0B;&#x4E00;&#x6B65;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;</span>
+      <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+        node = nodes[i];
+        <span class="hljs-keyword">if</span> (node.fx == <span class="hljs-literal">null</span>) node.x += node.vx *= velocityDecay;
+        <span class="hljs-keyword">else</span> node.x = node.fx, node.vx = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">if</span> (node.fy == <span class="hljs-literal">null</span>) node.y += node.vy *= velocityDecay;
+        <span class="hljs-keyword">else</span> node.y = node.fy, node.vy = <span class="hljs-number">0</span>;
+      }
+    }
+
+    <span class="hljs-keyword">return</span> simulation;
+  }
+  <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;nodes&#x5BF9;&#x8C61;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initializeNodes</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, n = nodes.length, node; i &lt; n; ++i) {
+      <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;nodes&#x7684;index&#x4FE1;&#x606F;</span>
+      node = nodes[i], node.index = i;
+      <span class="hljs-keyword">if</span> (node.fx != <span class="hljs-literal">null</span>) node.x = node.fx;
+      <span class="hljs-keyword">if</span> (node.fy != <span class="hljs-literal">null</span>) node.y = node.fy;
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(node.x) || <span class="hljs-built_in">isNaN</span>(node.y)) {
+        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5728;&#x4E00;&#x4E2A;&#x5706;&#x5F62;&#x533A;&#x57DF;&#x5185;&#x521D;&#x59CB;&#x5316;&#x4E86;&#x8282;&#x70B9;&#x7684;&#x5750;&#x6807;&#x3002;</span>
+        <span class="hljs-comment">// TODO &#x8FD9;&#x91CC;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;&#x521D;&#x59CB;&#x5316;&#x5176;&#x5B9E;&#x53EF;&#x4EE5;&#x6316;&#x4E00;&#x4E0B;</span>
+        <span class="hljs-keyword">var</span> radius = initialRadius * <span class="hljs-built_in">Math</span>.sqrt(i), angle = i * initialAngle;
+        node.x = radius * <span class="hljs-built_in">Math</span>.cos(angle);
+        node.y = radius * <span class="hljs-built_in">Math</span>.sin(angle);
+      }
+      <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x5404;&#x4E2A;&#x8282;&#x70B9;&#x7684;x&#xFF0C;y&#x65B9;&#x5411;&#x4E0A;&#x7684;&#x901F;&#x5EA6;&#x4E3A;0</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(node.vx) || <span class="hljs-built_in">isNaN</span>(node.vy)) {
+        node.vx = node.vy = <span class="hljs-number">0</span>;
+      }
+    }
+  }
+  <span class="hljs-comment">// &#x542F;&#x52A8;&#x5404;&#x4E2A;&#x529B;&#x4EFF;&#x771F;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initializeForce</span>(<span class="hljs-params">force</span>) </span>{
+    <span class="hljs-keyword">if</span> (force.initialize) force.initialize(nodes);
+    <span class="hljs-keyword">return</span> force;
+  }
+  <span class="hljs-comment">// step 1 &#x521D;&#x59CB;&#x5316;nodes&#x5BF9;&#x8C61;</span>
+  initializeNodes();
+
+  <span class="hljs-comment">// step 2 &#x8FD4;&#x56DE;&#x4E86;&#x4EFF;&#x771F;&#x5BF9;&#x8C61;</span>
+  <span class="hljs-keyword">return</span> simulation = {
+    tick: tick,
+
+    restart: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">return</span> stepper.restart(step), simulation;
+    },
+
+    stop: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">return</span> stepper.stop(), simulation;
+    },
+
+    nodes: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (nodes = _, initializeNodes(), forces.each(initializeForce), simulation) : nodes;
+    },
+
+    alpha: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (alpha = +_, simulation) : alpha;
+    },
+
+    alphaMin: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (alphaMin = +_, simulation) : alphaMin;
+    },
+
+    alphaDecay: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (alphaDecay = +_, simulation) : +alphaDecay;
+    },
+
+    alphaTarget: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (alphaTarget = +_, simulation) : alphaTarget;
+    },
+
+    velocityDecay: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (velocityDecay = <span class="hljs-number">1</span> - _, simulation) : <span class="hljs-number">1</span> - velocityDecay;
+    },
+
+    <span class="hljs-comment">// &#x5728;&#x4E00;&#x4E2A;map&#x91CC;&#x7EF4;&#x62A4;&#x5404;&#x4E2A;&#x529B;&#xFF08;&#x5373;&#x5404;&#x4E2A;&#x5BF9;nodes&#x7684;&#x901F;&#x5EA6;(vx,vy)&#x5750;&#x6807;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x7684;&#x65B9;&#x6CD5;&#xFF09;</span>
+    force: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, _</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> 
+          ? ((_ == <span class="hljs-literal">null</span> 
+              ? forces.remove(name) 
+              : forces.set(name, initializeForce(_))), simulation) 
+      : forces.get(name);
+    },
+
+    find: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x, y, radius</span>) </span>{
+      <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>,
+          n = nodes.length,
+          dx,
+          dy,
+          d2,
+          node,
+          closest;
+
+      <span class="hljs-keyword">if</span> (radius == <span class="hljs-literal">null</span>) radius = <span class="hljs-literal">Infinity</span>;
+      <span class="hljs-keyword">else</span> radius *= radius;
+
+      <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+        node = nodes[i];
+        dx = x - node.x;
+        dy = y - node.y;
+        d2 = dx * dx + dy * dy;
+        <span class="hljs-keyword">if</span> (d2 &lt; radius) closest = node, radius = d2;
+      }
+
+      <span class="hljs-keyword">return</span> closest;
+    },
+
+    on: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, _</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> ? (event.on(name, _), simulation) : event.on(name);
+    }
+  };
+}
+</code></pre>
+<p><strong>d3.forceLink()</strong></p>
+<p>&#x5DF2;&#x8FDE;&#x63A5;&#x8282;&#x70B9;&#x7684;&#x8282;&#x70B9;&#x95F4;&#x5F39;&#x7C27;&#x529B;&#x3002;</p>
+<p>&#x8BE5;&#x90E8;&#x5206;&#x4F9D;&#x8D56;&#x4E00;&#x4E2A;<code>&#x8282;&#x70B9;&#x8BBF;&#x95EE;&#x5668;</code>&#xFF0C;<code>&#x8FDE;&#x63A5;&#x4FE1;&#x606F;</code>&#x4EE5;&#x53CA;&#x4EFF;&#x771F;&#x4F20;&#x8FDB;&#x6765;&#x7684;&#x529B;&#x8870;&#x51CF;&#x7CFB;&#x6570;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">strength</span>(<span class="hljs-params">link</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> / <span class="hljs-built_in">Math</span>.min(count[link.source.index], count[link.target.index]);
+}
+<span class="hljs-comment">// &#x4E00;&#x4E2A;&#x5FAE;&#x5C0F;&#x7684;&#x6296;&#x52A8; &#x9632;&#x6B62; x y &#x90FD;&#x4E3A;&#x96F6;&#x65F6;&#x8BA1;&#x7B97;&#x5F02;&#x5E38;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">jiggle</span>(<span class="hljs-params"></span>)</span>{
+   <span class="hljs-keyword">return</span> (<span class="hljs-built_in">Math</span>.random() - <span class="hljs-number">0.5</span>) * <span class="hljs-number">1e-6</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">links</span>) </span>{
+  <span class="hljs-keyword">var</span> id = index,
+      strength = defaultStrength,
+      strengths, <span class="hljs-comment">// &#x5404;&#x4E2A;&#x8FDE;&#x63A5;&#x4E4B;&#x95F4;&#x7684;&#x8FDE;&#x63A5;&#x5F3A;&#x5EA6;</span>
+      distance = constant(<span class="hljs-number">30</span>),
+      distances, <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x5F39;&#x7C27;&#x529B;&#x4E3A;&#x96F6;&#x7684;&#x8DDD;&#x79BB; &#x8FD9;&#x662F;&#x7EDF;&#x4E00;&#x662F;30</span>
+      nodes,
+      count,<span class="hljs-comment">// &#x8282;&#x70B9; &#x5EA6; &#x4FE1;&#x606F; &#x5373;&#x51FA;&#x5EA6;&#x548C;&#x5165;&#x5EA6;&#x4E4B;&#x548C; &#x8FD9;&#x91CC;&#x7528;&#x8282;&#x70B9;&#x7684;&#x5EA6;&#x4F5C;&#x4E3A;&#x8282;&#x70B9;&#x7684;&#x8D28;&#x91CF;&#xFF0C;&#x8D28;&#x91CF;&#x8D8A;&#x5927;&#x8D8A;&#x4E0D;&#x6613;&#x79FB;&#x52A8;</span>
+      bias,
+      iterations = <span class="hljs-number">1</span>;
+
+  <span class="hljs-keyword">if</span> (links == <span class="hljs-literal">null</span>) links = [];
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defaultStrength</span>(<span class="hljs-params">link</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> / <span class="hljs-built_in">Math</span>.min(count[link.source.index], count[link.target.index]);
+  }
+
+  <span class="hljs-comment">// &#x8FDE;&#x63A5;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684; &#x529B;&#x5B66;&#x8BA1;&#x7B97;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">force</span>(<span class="hljs-params">alpha</span>) </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">0</span>, n = links.length; k &lt; iterations; ++k) {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, link, source, target, x, y, l, b; i &lt; n; ++i) {
+        <span class="hljs-comment">// &#x83B7;&#x53D6;source&#x548C;target&#x8282;&#x70B9;</span>
+        link = links[i], source = link.source, target = link.target;
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x4E24;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;x&#x65B9;&#x5411;&#x7684;&#x8DDD;&#x79BB;&#x5DEE;</span>
+        x = target.x + target.vx - source.x - source.vx || jiggle();
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x4E24;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;y&#x65B9;&#x5411;&#x7684;&#x8DDD;&#x79BB;&#x5DEE;</span>
+        y = target.y + target.vy - source.y - source.vy || jiggle();
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x8DDD;&#x79BB;</span>
+        l = <span class="hljs-built_in">Math</span>.sqrt(x * x + y * y);
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x79FB;&#x52A8;&#x8DDD;&#x79BB;</span>
+        l = (l - distances[i]) / l * alpha * strengths[i];
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;x&#x548C;y&#x65B9;&#x5411;&#x4E0A;&#x7684;&#x79FB;&#x52A8;&#x8DDD;&#x79BB;</span>
+        x *= l, y *= l;
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;source&#x548C;target&#x8282;&#x70B9;&#x7684;&#x5C06;&#x8981;&#x79FB;&#x52A8;&#x7684;&#x8DDD;&#x79BB;&#xFF0C;&#x5199;&#x5165;&#x901F;&#x5EA6;&#x4E2D;</span>
+        target.vx -= x * (b = bias[i]);
+        target.vy -= y * b;
+        source.vx += x * (b = <span class="hljs-number">1</span> - b);
+        source.vy += y * b;
+      }
+    }
+  }
+
+  <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x8282;&#x70B9;&#x5217;&#x8868;&#x4FE1;&#x606F;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (!nodes) <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-keyword">var</span> i,
+        n = nodes.length,
+        m = links.length,
+        nodeById = map(nodes, id),
+        link;
+
+    <span class="hljs-comment">// &#x904D;&#x5386;&#x6240;&#x6709;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, count = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(n); i &lt; m; ++i) {
+      <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;links&#x7684;index&#x4FE1;&#x606F;</span>
+      link = links[i], link.index = i;
+      <span class="hljs-comment">// &#x6839;&#x636E;links&#x4FE1;&#x606F;&#x4E2D;&#x7684;source&#x548C;target&#x8BBF;&#x95EE;&#x5668;&#x5728;nodes&#x4E2D;&#x67E5;&#x627E;&#x8282;&#x70B9;&#x5E76;&#x8FD4;&#x56DE;&#x8282;&#x70B9;&#x7684;&#x5F15;&#x7528;</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> link.source !== <span class="hljs-string">&quot;object&quot;</span>) link.source = find(nodeById, link.source);
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> link.target !== <span class="hljs-string">&quot;object&quot;</span>) link.target = find(nodeById, link.target);
+      <span class="hljs-comment">// &#x7EDF;&#x8BA1;&#x51FA;&#x5EA6; &#x5373; &#x8BE5;&#x8282;&#x70B9;&#x7684; &#x8FDE;&#x63A5;&#x8282;&#x70B9;&#x4E2A;&#x6570;</span>
+      count[link.source.index] = (count[link.source.index] || <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>;
+      <span class="hljs-comment">// &#x7EDF;&#x8BA1;&#x5165;&#x5EA6; &#x5373; &#x8FDE;&#x63A5;&#x8BE5;&#x8282;&#x70B9;&#x7684; &#x8282;&#x70B9;&#x4E2A;&#x6570;</span>
+      count[link.target.index] = (count[link.target.index] || <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, bias = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(m); i &lt; m; ++i) {
+       <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x4E86;&#x6BCF;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;&#x7684; source &#x8282;&#x70B9;&#x5EA6; &#x5360; source&#x548C;target&#x8282;&#x70B9;&#x5EA6;&#x4E4B;&#x548C;&#x7684;&#x6BD4;&#x4F8B;&#xFF0C;&#x7528;&#x4E8E;&#x786E;&#x5B9A;source&#x8282;&#x70B9;&#x5728;&#x4E24;&#x4E2A;&#x8282;&#x70B9;&#x5F15;&#x529B;&#x4F5C;&#x7528;&#x4E0B;&#xFF0C;&#x79FB;&#x52A8;&#x7684;&#x8DDD;&#x79BB;&#x3002;&#x5360;&#x6BD4;&#x8D8A;&#x5927;&#x8D28;&#x91CF;&#x8D8A;&#x91CD;&#xFF0C;&#x8D8A;&#x4E0D;&#x6613;&#x79FB;&#x52A8;&#x3002;&#x5360;&#x6BD4;&#x8D8A;&#x5C0F;&#x8D28;&#x91CF;&#x8D8A;&#x8F7B;&#x7EA6;&#x6613;&#x79FB;&#x52A8;&#x3002;</span>
+      link = links[i], bias[i] = count[link.source.index] / (count[link.source.index] + count[link.target.index]);
+    }
+
+    <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x8FDE;&#x63A5;&#x5F3A;&#x5EA6;</span>
+    strengths = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(m), initializeStrength();
+    <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x8FDE;&#x63A5;&#x8DDD;&#x79BB;</span>
+    distances = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(m), initializeDistance();
+  }
+
+  <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x8FDE;&#x63A5;&#x5F3A;&#x5EA6;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initializeStrength</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (!nodes) <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, n = links.length; i &lt; n; ++i) {
+      strengths[i] = +strength(links[i], i, links);
+    }
+  }
+
+  <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x8FDE;&#x63A5;&#x8DDD;&#x79BB;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initializeDistance</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (!nodes) <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, n = links.length; i &lt; n; ++i) {
+      <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x521D;&#x59CB;&#x5316;&#x7684;&#x90FD;&#x662F; 30</span>
+      distances[i] = +distance(links[i], i, links);
+    }
+  }
+
+  force.initialize = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    nodes = _;
+    initialize();
+  };
+
+  <span class="hljs-comment">// &#x4F20;&#x5165;&#x8FDE;&#x63A5;&#x5217;&#x8868;&#xFF0C;&#x5E76;&#x521D;&#x59CB;&#x5316;&#x8282;&#x70B9;&#x5217;&#x8868;&#x4FE1;&#x606F;</span>
+  force.links = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (links = _, initialize(), force) : links;
+  };
+
+  force.id = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (id = _, force) : id;
+  };
+
+  force.iterations = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (iterations = +_, force) : iterations;
+  };
+
+  force.strength = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (strength = <span class="hljs-keyword">typeof</span> _ === <span class="hljs-string">&quot;function&quot;</span> ? _ : constant(+_), initializeStrength(), force) : strength;
+  };
+
+  force.distance = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (distance = <span class="hljs-keyword">typeof</span> _ === <span class="hljs-string">&quot;function&quot;</span> ? _ : constant(+_), initializeDistance(), force) : distance;
+  };
+
+  <span class="hljs-keyword">return</span> force;
+}
+</code></pre>
+<p><strong>d3.forceCenter(width / 2, height / 2)</strong></p>
+<p>&#x5411;&#x5FC3;&#x5F15;&#x529B;&#xFF0C;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5747;&#x53D7;&#x5230;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x753B;&#x5E03;&#x4E2D;&#x5FC3;&#x7684;&#x5F15;&#x529B;&#x3002;</p>
+<p>&#x8BE5;&#x90E8;&#x5206;&#x4F9D;&#x8D56;&#x4E00;&#x4E2A;<code>&#x5F15;&#x529B;&#x4E2D;&#x5FC3;</code>&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x, y</span>) </span>{
+  <span class="hljs-keyword">var</span> nodes;
+
+  <span class="hljs-keyword">if</span> (x == <span class="hljs-literal">null</span>) x = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span> (y == <span class="hljs-literal">null</span>) y = <span class="hljs-number">0</span>;
+
+  <span class="hljs-comment">// &#x4E2D;&#x5FC3;&#x5F15;&#x529B; &#x529B;&#x5B66;&#x8BA1;&#x7B97;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">force</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> i,
+        n = nodes.length,
+        node,
+        sx = <span class="hljs-number">0</span>,
+        sy = <span class="hljs-number">0</span>;
+
+    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x7C97;&#x7565;&#x7684;&#x770B;&#x6210; &#x8BA1;&#x7B97;&#x4E86;&#x6574;&#x4E2A;&#x56FE;&#x7684; &#x91CD;&#x5FC3;&#x3002;</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+      node = nodes[i], sx += node.x, sy += node.y;
+    }
+
+    <span class="hljs-comment">// sx = sx / n - x, sy = sy / n - y</span>
+    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x8BA1;&#x7B97;&#x4E86; &#x8BA1;&#x7B97;&#x51FA;&#x7684;&#x56FE;&#x91CD;&#x5FC3;&#x4E0E;&#x7ED9;&#x51FA;&#x7684;&#x5F15;&#x529B;&#x4E2D;&#x5FC3;&#x7684;&#x5DEE;&#x503C;</span>
+    <span class="hljs-keyword">for</span> (sx = sx / n - x, sy = sy / n - y, i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+      <span class="hljs-comment">// &#x6839;&#x636E;&#x8BA1;&#x7B97;&#x51FA;&#x7684;&#x5DEE;&#x503C;&#x5BF9;&#x56FE;&#x50CF;&#x505A;&#x6574;&#x4F53;&#x5E73;&#x79FB;&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x79FB;&#x52A8;&#x8DDD;&#x79BB;&#x5199;&#x5165;&#x901F;&#x5EA6;&#x3002;</span>
+      node = nodes[i], node.x -= sx, node.y -= sy;
+    }
+  }
+
+  force.initialize = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    nodes = _;
+  };
+
+  force.x = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (x = +_, force) : x;
+  };
+
+  force.y = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (y = +_, force) : y;
+  };
+
+  <span class="hljs-keyword">return</span> force;
+}
+</code></pre>
+<p><strong>d3.forceManyBody()</strong></p>
+<p>&#x5404;&#x4E2A;&#x8FDE;&#x63A5;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x65A5;&#x529B;&#xFF0C;&#x6240;&#x6709;&#x573A;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x4E0E;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x65A5;&#x529B;&#xFF0C;&#x53C2;&#x7167;&#x5E93;&#x4ED1;&#x65A5;&#x529B; &#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> nodes,
+      node,
+      alpha,
+      strength = constant(<span class="hljs-number">-30</span>),
+      strengths,<span class="hljs-comment">// &#x65A5;&#x529B;&#x5F3A;&#x5EA6; &#x8FD9;&#x91CC;&#x7EDF;&#x4E00;&#x662F;30</span>
+      distanceMin2 = <span class="hljs-number">1</span>,
+      distanceMax2 = <span class="hljs-literal">Infinity</span>,
+      theta2 = <span class="hljs-number">0.81</span>;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">force</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x5404;&#x4E2A;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x65A5;&#x529B;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;On^2,&#x8FD9;&#x91CC;&#x4E3A;&#x4E86;&#x4F18;&#x5316;&#x6027;&#x80FD;&#x5F15;&#x5165;&#x4E86;&#x56DB;&#x53C9;&#x6811;&#xFF0C;&#x5728;&#x56DB;&#x53C9;&#x6811;&#x4E2D;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x8C61;&#x9650;&#x5185;&#x7684;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x3002;&#x540C;&#x6837;&#x4E3A;&#x4E86;&#x8282;&#x7EA6;&#x8BA1;&#x7B97;&#x529B;&#xFF0C;&#x5BF9;&#x6BCF;&#x4E2A;&#x8C61;&#x9650;&#x7684;&#x529B;&#x8FDB;&#x884C;&#x4E86;&#x62BD;&#x8C61;&#x6210;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x3002;&#x8BE5;&#x8C61;&#x9650;&#x5185;&#x7684;&#x8282;&#x70B9;&#x4E0E;&#x8BE5;&#x8C61;&#x9650;&#x7684;&#x865A;&#x62DF;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x529B;&#x5B66;&#x8BA1;&#x7B97;&#x3002;</span>
+    <span class="hljs-keyword">var</span> i, n = nodes.length, tree = quadtree(nodes, x, y).visitAfter(accumulate);
+    <span class="hljs-keyword">for</span> (alpha = _, i = <span class="hljs-number">0</span>; i &lt; n; ++i) node = nodes[i], tree.visit(apply);
+  }
+
+   <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x5E93;&#x4ED1;&#x529B;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (!nodes) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">var</span> i, n = nodes.length, node;
+    strengths = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(n);
+     <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316; &#x5404;&#x4E2A;&#x65A5;&#x529B; &#x5F3A;&#x5EA6;</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) node = nodes[i], strengths[node.index] = +strength(node, i, nodes);
+  }
+
+  <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x6BCF;&#x4E2A;&#x8C61;&#x9650;&#x7684;&#x529B;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">accumulate</span>(<span class="hljs-params">quad</span>) </span>{
+    <span class="hljs-keyword">var</span> strength = <span class="hljs-number">0</span>, q, c, weight = <span class="hljs-number">0</span>, x, y, i;
+
+    <span class="hljs-comment">//&#x5BF9;&#x4E8E;&#x5185;&#x90E8;&#x8282;&#x70B9;&#xFF0C;&#x4ECE;&#x5B50;&#x8C61;&#x9650;&#x4E2D;&#x7D2F;&#x79EF;&#x529B;&#x3002;</span>
+    <span class="hljs-keyword">if</span> (quad.length) {
+      <span class="hljs-keyword">for</span> (x = y = i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; ++i) {
+        <span class="hljs-keyword">if</span> ((q = quad[i]) &amp;&amp; (c = <span class="hljs-built_in">Math</span>.abs(q.value))) {
+          <span class="hljs-comment">// &#x7D2F;&#x8BA1;&#x529B;</span>
+          strength += q.value;
+          <span class="hljs-comment">// &#x7D2F;&#x8BA1;&#x8D28;&#x91CF;</span>
+          weight += c;
+          <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x5750;&#x6807;</span>
+          x += c * q.x;
+          y += c * q.y;
+        }
+      }
+      <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x5E73;&#x5747;&#x5750;&#x6807;</span>
+      quad.x = x / weight;
+      quad.y = y / weight;
+    }
+
+    <span class="hljs-comment">//&#x5BF9;&#x4E8E;&#x53F6;&#x8282;&#x70B9;&#xFF0C;&#x4ECE;&#x91CD;&#x5408;&#x8C61;&#x9650;&#x4E2D;&#x7D2F;&#x79EF;&#x529B;&#x3002;</span>
+    <span class="hljs-keyword">else</span> {
+      q = quad;
+      q.x = q.data.x;
+      q.y = q.data.y;
+      <span class="hljs-comment">// &#x8BBF;&#x95EE;&#x91CD;&#x5408;&#x8C61;&#x9650; &#x79EF;&#x7D2F;&#x529B;</span>
+      <span class="hljs-keyword">do</span> strength += strengths[q.data.index];
+      <span class="hljs-keyword">while</span> (q = q.next);
+    }
+
+    quad.value = strength;
+  }
+
+  <span class="hljs-comment">// &#x6839;&#x636E;&#x6BCF;&#x4E2A;&#x8C61;&#x9650;&#x7684;&#x529B;&#x548C;&#x5404;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x529B;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x7684;&#x4F4D;&#x79FB;&#x901F;&#x5EA6;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">apply</span>(<span class="hljs-params">quad, x1, _, x2</span>) </span>{
+    <span class="hljs-keyword">if</span> (!quad.value) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+
+    <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x4E0E;&#x8C61;&#x9650;&#x865A;&#x62DF;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x8DDD;&#x79BB;</span>
+    <span class="hljs-keyword">var</span> x = quad.x - node.x,
+        y = quad.y - node.y,
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x8C61;&#x9650;&#x5BBD;&#x5EA6;</span>
+        w = x2 - x1,
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x4E0E;&#x865A;&#x62DF;&#x8C61;&#x9650;&#x8282;&#x70B9;&#x7684;&#x8DDD;&#x79BB;</span>
+        l = x * x + y * y;
+
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x8C61;&#x9650;&#x5BBD;&#x5EA6;&#x5C0F;&#x4E8E;&#xFF0C;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x4E0E;&#x865A;&#x62DF;&#x8C61;&#x9650;&#x8282;&#x70B9;&#x7684;&#x8DDD;&#x79BB;&#xFF0C;&#x8BF4;&#x660E;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x4E0A;&#x7EA7;&#x8C61;&#x9650;&#x5185;&#x90E8;&#x3002;</span>
+    <span class="hljs-comment">// &#x6839;&#x636E;&#x7535;&#x8377;&#x529B;&#x8BA1;&#x7B97;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x7684;&#x79FB;&#x52A8;&#x8D8B;&#x52BF;&#x5199;&#x5165;&#x901F;&#x5EA6;&#x3002;</span>
+    <span class="hljs-keyword">if</span> (w * w / theta2 &lt; l) {
+      <span class="hljs-keyword">if</span> (l &lt; distanceMax2) {
+        <span class="hljs-keyword">if</span> (x === <span class="hljs-number">0</span>) x = jiggle(), l += x * x;
+        <span class="hljs-keyword">if</span> (y === <span class="hljs-number">0</span>) y = jiggle(), l += y * y;
+        <span class="hljs-keyword">if</span> (l &lt; distanceMin2) l = <span class="hljs-built_in">Math</span>.sqrt(distanceMin2 * l);
+        <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x79FB;&#x52A8;&#x8D8B;&#x52BF;</span>
+        node.vx += x * quad.value * alpha / l;
+        node.vy += y * quad.value * alpha / l;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-comment">// &#x7EE7;&#x7EED;&#x904D;&#x5386;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x7684;&#x5B50;&#x8282;&#x70B9;</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (quad.length || l &gt;= distanceMax2) <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-comment">// &#x8BBF;&#x95EE;&#x91CD;&#x5408;&#x8C61;&#x9650; </span>
+    <span class="hljs-keyword">if</span> (quad.data !== node || quad.next) {
+      <span class="hljs-keyword">if</span> (x === <span class="hljs-number">0</span>) x = jiggle(), l += x * x;
+      <span class="hljs-keyword">if</span> (y === <span class="hljs-number">0</span>) y = jiggle(), l += y * y;
+      <span class="hljs-keyword">if</span> (l &lt; distanceMin2) l = <span class="hljs-built_in">Math</span>.sqrt(distanceMin2 * l);
+    }
+
+    <span class="hljs-keyword">do</span> <span class="hljs-keyword">if</span> (quad.data !== node) {
+      w = strengths[quad.data.index] * alpha / l;
+      <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x79FB;&#x52A8;&#x8D8B;&#x52BF;</span>
+      node.vx += x * w;
+      node.vy += y * w;
+    } <span class="hljs-keyword">while</span> (quad = quad.next);
+  }
+
+  force.initialize = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    nodes = _;
+    initialize();
+  };
+
+  force.strength = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (strength = <span class="hljs-keyword">typeof</span> _ === <span class="hljs-string">&quot;function&quot;</span> ? _ : constant(+_), initialize(), force) : strength;
+  };
+
+  force.distanceMin = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (distanceMin2 = _ * _, force) : <span class="hljs-built_in">Math</span>.sqrt(distanceMin2);
+  };
+
+  force.distanceMax = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (distanceMax2 = _ * _, force) : <span class="hljs-built_in">Math</span>.sqrt(distanceMax2);
+  };
+
+  force.theta = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (theta2 = _ * _, force) : <span class="hljs-built_in">Math</span>.sqrt(theta2);
+  };
+
+  <span class="hljs-keyword">return</span> force;
+}
+</code></pre>
+<h2 id="&#x53C2;&#x8003;--&#x5F15;&#x7528;">&#x53C2;&#x8003; &amp; &#x5F15;&#x7528;</h2>
+<p><a href="https://d3js.org.cn/document/d3-force/" target="_blank">https://d3js.org.cn/document/d3-force/</a></p>
+<p><a href="https://blockbuilder.org/ColinEberhardt/6ceb7ca74aabac9c8534d7120d31b382" target="_blank">https://blockbuilder.org/ColinEberhardt/6ceb7ca74aabac9c8534d7120d31b382</a></p>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2020-04-04 22:34:10
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="捆图Bundle.html" class="navigation navigation-prev " aria-label="Previous page: 捆图Bundle">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="弦图Chord.html" class="navigation navigation-next " aria-label="Next page: 弦图Chord">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"力学图Force","level":"1.12","depth":1,"next":{"title":"弦图Chord","level":"1.13","depth":1,"path":"弦图Chord.md","ref":"弦图Chord.md","articles":[]},"previous":{"title":"捆图Bundle","level":"1.11","depth":1,"path":"捆图Bundle.md","ref":"捆图Bundle.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","splitter","pageview-count","edit-link","tbfed-pagefooter","github","livereload"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/sz-p/d3-layout-algorithm-explanation"},"livereload":{},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"pageview-count":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/sz-p/d3-layout-algorithm-explanation/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"sz-p","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"D3 布局算法","language":"zh-hans","links":{"sidebar":{"GitHub":"https://github.com/sz-p/d3-layout-algorithm-explanation"}},"gitbook":"3.2.3","description":"D3布局算法解析"},"file":{"path":"力学图Force.md","mtime":"2020-04-04T14:34:10.371Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-04T14:37:48.533Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

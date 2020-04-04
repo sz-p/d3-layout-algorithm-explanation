@@ -1,0 +1,4 @@
+export const CHANGE_PAGE = 'CHANGE_PAGE';
+export const GET_CATEGORY = 'GET_CATEGORY';
+export const GET_ITEM = 'GET_ITEM';
+export const GET_RELAODINTRODUCTION = 'GET_RELAODINTRODUCTION';
