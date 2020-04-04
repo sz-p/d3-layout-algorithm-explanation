@@ -13,7 +13,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  checkFile:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -21,7 +21,37 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+  Deploy:
+    # This is a basic workflow to help you get started with Actions
 
-    # Runs a single command using the runners shell
-    - name: logfile
-      run: ls
+name: deployToServer
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # 检出分支
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # 部署文件
+    steps:
+    - name: Deploy
+      uses: easingthemes/ssh-deploy@v2.0.9
+      env:
+        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        TARGET: ${{ secrets.TARGET }}
+        SOURCE: "./ *.md"
