@@ -20,6 +20,8 @@ function IndexPage() {
       <Link to={'/force'}>force</Link>
       <br></br>
       <Link to={'/map'}>map</Link>
+      <br></br>
+      <Link to={'/chord'}>chord</Link>
     </div>
   );
 }
