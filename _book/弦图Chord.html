@@ -384,12 +384,157 @@
 <p><a href="https://d3js.org.cn/document/d3-chord/#chord_sortChords" target="_blank">#</a> <em>chord</em>.<strong>sortChords</strong>([<em>compare</em>]) <a href="https://github.com/d3/d3-chord/blob/master/src/chord.js#L116" target="_blank">&lt;&#x6E90;&#x7801;&gt;</a></p>
 <p>&#x8BBE;&#x7F6E;&#x6216;&#x83B7;&#x53D6;&#x5F26;&#x7684;&#x6392;&#x5E8F;&#x89C4;&#x5219;</p>
 <h3 id="&#x5E03;&#x5C40;&#x4FE1;&#x606F;">&#x5E03;&#x5C40;&#x4FE1;&#x606F;</h3>
+<p>&#x5E03;&#x5C40;&#x4FE1;&#x606F;&#x5206;&#x4E3A;&#x4E24;&#x90E8;&#x5206;&#x3001;&#x4E00;&#x90E8;&#x5206;&#x63CF;&#x8FF0;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;&#xFF0C;&#x4E00;&#x90E8;&#x5206;&#x63CF;&#x8FF0;&#x5206;&#x533A;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x5176;&#x4E2D;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;&#x5305;&#x542B;<code>source</code>,<code>target</code>&#x5206;&#x522B;&#x63CF;&#x8FF0;&#x8D77;&#x6B62;&#x4FE1;&#x606F;&#xFF0C;&#x5176;&#x4E2D;&#x53C8;&#x5305;&#x542B;<code>startAngle</code>,<code>endAngle</code>&#x5206;&#x522B;&#x8868;&#x793A;&#x5F00;&#x59CB;&#x70B9;&#x7684;&#x8D77;&#x6B62;&#x89D2;&#x5EA6;&#x548C;&#x7ED3;&#x675F;&#x70B9;&#x7684;&#x8D77;&#x6B62;&#x89D2;&#x5EA6;&#x3002;&#x5355;&#x4F4D;&#x4E3A;&#x5F27;&#x5EA6;&#x5236;&#x3002;</p>
+<p>&#x5206;&#x533A;&#x4FE1;&#x606F;&#x5305;&#x542B;<code>startAngle</code>,<code>endAngle</code>&#x6765;&#x63CF;&#x8FF0;&#x5404;&#x4E2A;&#x5206;&#x533A;&#x7684;&#x8D77;&#x6B62;&#x89D2;&#x5EA6;&#x3002;</p>
+<pre><code class="lang-javascript">[
+    {
+      source:{
+        endAngle: <span class="hljs-number">0.9974692393028675</span>
+        index: <span class="hljs-number">0</span>
+        startAngle: <span class="hljs-number">0.9239095608882018</span>
+        subindex: <span class="hljs-number">0</span>
+        value: <span class="hljs-number">1000</span>
+      },
+      target:{
+        endAngle: <span class="hljs-number">0.9974692393028675</span>
+        index: <span class="hljs-number">0</span>
+        startAngle: <span class="hljs-number">0.9239095608882018</span>
+        subindex: <span class="hljs-number">0</span>
+        value: <span class="hljs-number">1000</span>
+      }
+    }
+]
+groups:[
+  {
+    angle: <span class="hljs-number">0.49873461965143373</span>
+    endAngle: <span class="hljs-number">0.9974692393028675</span>
+    index: <span class="hljs-number">0</span>
+    name: <span class="hljs-string">&quot;&#x5317;&#x4EAC;&quot;</span>
+    startAngle: <span class="hljs-number">0</span>
+    value: <span class="hljs-number">13560</span>
+  }
+]
+</code></pre>
 <h3 id="&#x57FA;&#x672C;&#x6570;&#x636E;">&#x57FA;&#x672C;&#x6570;&#x636E;</h3>
+<p><strong>&#x539F;&#x59CB;&#x6570;&#x636E;</strong>
+<code>city_name</code>&#x5BB9;&#x6613;&#x7406;&#x89E3;&#x5373;&#x6570;&#x636E;&#x6709;&#x51E0;&#x5217;,<code>matrix</code>&#x4E3A;&#x4E00;&#x4E2A;<code>n*n</code>&#x7684;&#x77E9;&#x9635;&#xFF0C;&#x5206;&#x522B;&#x8868;&#x793A;&#x5404;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x4E0E;&#x5404;&#x4E2A;&#x6570;&#x636E;&#x9879;<code>n*n</code>&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#x3002;</p>
+<pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> city_name = [<span class="hljs-string">&quot;&#x5317;&#x4EAC;&quot;</span>, <span class="hljs-string">&quot;&#x4E0A;&#x6D77;&quot;</span>, <span class="hljs-string">&quot;&#x5E7F;&#x5DDE;&quot;</span>, <span class="hljs-string">&quot;&#x6DF1;&#x5733;&quot;</span>, <span class="hljs-string">&quot;&#x9999;&#x6E2F;&quot;</span>];
+  <span class="hljs-keyword">const</span> matrix = [
+    [<span class="hljs-number">1000</span>, <span class="hljs-number">3045</span>, <span class="hljs-number">4567</span>, <span class="hljs-number">1234</span>, <span class="hljs-number">3714</span>],
+    [<span class="hljs-number">3214</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">2060</span>, <span class="hljs-number">124</span>, <span class="hljs-number">3234</span>],
+    [<span class="hljs-number">8761</span>, <span class="hljs-number">6545</span>, <span class="hljs-number">3000</span>, <span class="hljs-number">8045</span>, <span class="hljs-number">647</span>],
+    [<span class="hljs-number">3211</span>, <span class="hljs-number">1067</span>, <span class="hljs-number">3214</span>, <span class="hljs-number">4000</span>, <span class="hljs-number">1006</span>],
+    [<span class="hljs-number">2146</span>, <span class="hljs-number">1034</span>, <span class="hljs-number">6745</span>, <span class="hljs-number">4764</span>, <span class="hljs-number">5000</span>]
+  ];
+</code></pre>
+<p><strong>&#x95F4;&#x9694;&#x89D2;&#x5EA6;</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-number">0.03</span>
+</code></pre>
 <h3 id="&#x6267;&#x884C;&#x903B;&#x8F91;">&#x6267;&#x884C;&#x903B;&#x8F91;</h3>
+<ol>
+<li>&#x8BA1;&#x7B97;&#x77E9;&#x9635;&#x7684;&#x3001;&#x603B;&#x548C;&#x3001;&#x6BCF;&#x884C;&#x7684;&#x548C;(&#x4F5C;&#x4E3A;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;group&#x7684;&#x503C;)</li>
+<li>&#x6839;&#x636E;&#x7ED9;&#x51FA;&#x7684;&#x95F4;&#x9694;&#x89D2;&#x5EA6;&#x8BA1;&#x7B97;<strong>&#x5355;&#x4F4D;&#x6570;&#x503C;</strong>&#x5360;2*pi&#x7684;&#x6BD4;&#x4F8B;</li>
+<li>&#x8BA1;&#x7B97;&#x77E9;&#x9635;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x8D77;&#x6B62;&#x89D2;&#x5EA6;&#xFF0C;&#x540E;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x5F00;&#x59CB;&#x89D2;&#x5EA6;&#x4E3A;&#x4E0A;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x7ED3;&#x675F;&#x89D2;&#x5EA6;</li>
+</ol>
 <h3 id="&#x6838;&#x5FC3;&#x4EE3;&#x7801;">&#x6838;&#x5FC3;&#x4EE3;&#x7801;</h3>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">chord</span>(<span class="hljs-params">matrix</span>) </span>{
+    <span class="hljs-keyword">var</span> n = matrix.length,
+        groupSums = [],
+        groupIndex = range(n),
+        subgroupIndex = [],
+        chords = [],
+        groups = chords.groups = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(n),
+        subgroups = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(n * n),
+        k,
+        x,
+        x0,
+        dx,
+        i,
+        j;
+
+    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x8BA1;&#x7B97;&#x4E86;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x548C;</span>
+    <span class="hljs-comment">// &#x4F8B;&#x5982;&#x8BA1;&#x7B97;&#x4E86;&#x5317;&#x4EAC;&#x7684;&#x6570;&#x636E;&#x603B;&#x548C;&#x4E3A; 13560</span>
+    k = <span class="hljs-number">0</span>, i = <span class="hljs-number">-1</span>; <span class="hljs-keyword">while</span> (++i &lt; n) {
+      x = <span class="hljs-number">0</span>, j = <span class="hljs-number">-1</span>; <span class="hljs-keyword">while</span> (++j &lt; n) {
+        x += matrix[i][j];
+      }
+      groupSums.push(x);
+      subgroupIndex.push(range(n));
+      k += x;
+    }
+
+    <span class="hljs-comment">// &#x5FC5;&#x8981;&#x7684;&#x8BDD; &#x4F1A;&#x5BF9;&#x7EC4; &#x4E5F;&#x5C31;&#x662F;&#x8868;&#x8FF0;&#x73AF;&#x5927;&#x5C0F;&#x7684;&#x6570;&#x636E; &#x505A;&#x4E2A;&#x6392;&#x5E8F;&#x4F7F;&#x56FE;&#x66F4;&#x597D;&#x770B;</span>
+    <span class="hljs-keyword">if</span> (sortGroups) groupIndex.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>{
+      <span class="hljs-keyword">return</span> sortGroups(groupSums[a], groupSums[b]);
+    });
+
+    <span class="hljs-comment">// &#x5FC5;&#x8981;&#x7684;&#x8BDD; &#x4F1A;&#x5BF9;&#x7EC4;&#x5185;&#x7684;&#x5404;&#x4E2A;&#x6570;&#x636E;&#x9879; &#x4E5F;&#x5C31;&#x662F;&#x8868;&#x793A;&#x8FDE;&#x63A5;&#x5173;&#x7CFB;&#x6570;&#x636E; &#x505A;&#x4E2A;&#x6392;&#x5E8F;&#x4F7F;&#x56FE;&#x66F4;&#x597D;&#x770B;</span>
+    <span class="hljs-keyword">if</span> (sortSubgroups) subgroupIndex.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d, i</span>) </span>{
+      d.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>{
+        <span class="hljs-keyword">return</span> sortSubgroups(matrix[i][a], matrix[i][b]);
+      });
+    });
+
+
+    k = max(<span class="hljs-number">0</span>, tau - padAngle * n) / k;
+    <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x4E86;&#x5355;&#x4F4D;&#x6570;&#x503C; &#x5360;&#x7684;&#x89D2;&#x5EA6;&#x5927;&#x5C0F;</span>
+    dx = k ? padAngle : tau / n;
+
+    <span class="hljs-comment">// Compute the start and end angle for each group and subgroup.</span>
+    <span class="hljs-comment">// Note: Opera has a bug reordering object literal properties!</span>
+    x = <span class="hljs-number">0</span>, i = <span class="hljs-number">-1</span>; <span class="hljs-keyword">while</span> (++i &lt; n) {
+      x0 = x, j = <span class="hljs-number">-1</span>; <span class="hljs-keyword">while</span> (++j &lt; n) {
+        <span class="hljs-keyword">var</span> di = groupIndex[i],
+            dj = subgroupIndex[di][j],
+            v = matrix[di][dj],
+            <span class="hljs-comment">// &#x8D77;&#x6B62;&#x89D2;&#x5EA6;&#x4ECE;0&#x5F00;&#x59CB;&#x7B97;&#xFF0C;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x89D2;&#x5EA6;&#x4E3A; &#x5F53;&#x524D;&#x6570;&#x636E;&#x9879;&#x6570;&#x503C;*k</span>
+            <span class="hljs-comment">// &#x4E0B;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x5F00;&#x59CB;&#x89D2;&#x5EA6;&#x4E3A;&#x4E0A;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x7EC8;&#x6B62;&#x89D2;&#x5EA6;&#x52A0;&#x95F4;&#x9694;&#x89D2;&#x5EA6;</span>
+            a0 = x,
+            a1 = x += v * k;
+
+        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x6839;&#x636E; &#x5F53;&#x524D;&#x6570;&#x636E;&#x9879;&#x7684;&#x503C; &#x8BA1;&#x7B97;&#x4E86;&#x6BCF;&#x4E00;&#x4E2A;&#x5B50;&#x9879;&#x7684;&#x8D77;&#x6B62;&#x89D2;&#x5EA6;&#xFF0C;&#x5E76;&#x7ED9;&#x4E86;&#x4E00;&#x4E2A;&#x7F16;&#x53F7;</span>
+        subgroups[dj * n + di] = {
+          index: di,
+          subindex: dj,
+          startAngle: a0,
+          endAngle: a1,
+          value: v
+        };
+      }
+      <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x4E86;&#x6BCF;&#x4E2A;&#x7EC4;&#x7684;&#x8D77;&#x6B62;&#x89D2;&#x5EA6; &#x539F;&#x7406;&#x76F8;&#x540C;</span>
+      groups[di] = {
+        index: di,
+        startAngle: x0,
+        endAngle: x,
+        value: groupSums[di]
+      };
+      x += dx;
+    }
+
+    <span class="hljs-comment">// &#x6839;&#x636E;n*n&#x77E9;&#x9635;&#x81EA;&#x5E26;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;,&#x4ECE;subgroups&#x4E2D;&#x53D6;&#x51FA;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x9879;&#x5728;&#x5BF9;&#x5E94;&#x7684;&#x7EC4;&#x4E2D;&#x7684;&#x8D77;&#x6B62;&#x89D2;&#x5EA6;&#x3002;</span>
+    <span class="hljs-comment">// &#x5E76;&#x5199;&#x5165; source target</span>
+    i = <span class="hljs-number">-1</span>; <span class="hljs-keyword">while</span> (++i &lt; n) {
+      j = i - <span class="hljs-number">1</span>; <span class="hljs-keyword">while</span> (++j &lt; n) {
+        <span class="hljs-keyword">var</span> source = subgroups[j * n + i],
+            target = subgroups[i * n + j];
+        <span class="hljs-keyword">if</span> (source.value || target.value) {
+          chords.push(source.value &lt; target.value
+              ? {source: target, target: source}
+              : {source: source, target: target});
+        }
+      }
+    }
+
+    <span class="hljs-keyword">return</span> sortChords ? chords.sort(sortChords) : chords;
+  }
+</code></pre>
 <h2 id="&#x53C2;&#x8003;--&#x5F15;&#x7528;">&#x53C2;&#x8003; &amp; &#x5F15;&#x7528;</h2>
+<p><a href="https://d3js.org.cn/document/d3-chord/#api-reference" target="_blank">https://d3js.org.cn/document/d3-chord/#api-reference</a></p>
+<p><a href="https://www.jianshu.com/p/4b44c708c2da" target="_blank">https://www.jianshu.com/p/4b44c708c2da</a></p>
+<p><a href="https://www.pianshen.com/article/9705100564/" target="_blank">https://www.pianshen.com/article/9705100564/</a></p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-04-04 22:34:21
+2020-05-07 23:00:04
 </span></footer>
                                 
                                 </section>
@@ -433,7 +578,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"弦图Chord","level":"1.13","depth":1,"next":{"title":"直方图Histogram","level":"1.14","depth":1,"path":"直方图Histogram.md","ref":"直方图Histogram.md","articles":[]},"previous":{"title":"力学图Force","level":"1.12","depth":1,"path":"力学图Force.md","ref":"力学图Force.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","splitter","pageview-count","edit-link","tbfed-pagefooter","github","livereload"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/sz-p/d3-layout-algorithm-explanation"},"livereload":{},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"pageview-count":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/sz-p/d3-layout-algorithm-explanation/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"sz-p","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"D3 布局算法","language":"zh-hans","links":{"sidebar":{"GitHub":"https://github.com/sz-p/d3-layout-algorithm-explanation"}},"gitbook":"3.2.3","description":"D3布局算法解析"},"file":{"path":"弦图Chord.md","mtime":"2020-04-04T14:34:21.223Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-04T14:37:48.533Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"弦图Chord","level":"1.13","depth":1,"next":{"title":"直方图Histogram","level":"1.14","depth":1,"path":"直方图Histogram.md","ref":"直方图Histogram.md","articles":[]},"previous":{"title":"力学图Force","level":"1.12","depth":1,"path":"力学图Force.md","ref":"力学图Force.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","splitter","pageview-count","edit-link","tbfed-pagefooter","github"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/sz-p/d3-layout-algorithm-explanation"},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"pageview-count":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/sz-p/d3-layout-algorithm-explanation/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"sz-p","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"D3 布局算法","language":"zh-hans","links":{"sidebar":{"GitHub":"https://github.com/sz-p/d3-layout-algorithm-explanation"}},"gitbook":"3.2.3","description":"D3布局算法解析"},"file":{"path":"弦图Chord.md","mtime":"2020-05-07T15:00:04.241Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-07T15:15:37.010Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -460,10 +605,6 @@
     
         
         <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
