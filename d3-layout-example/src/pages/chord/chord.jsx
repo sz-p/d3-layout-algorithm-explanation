@@ -24,13 +24,13 @@ function Chord() {
     .chord()
     .padAngle(0.03)
     .sortSubgroups(d3.descending);
-
+  const chordData = chord(matrix)
+  console.log(chordData)
 
   let color = d3.scaleOrdinal(d3.schemeCategory10)
 
   const outerRadius = Math.min(width, height) * 0.5 - 40;
   const innerRadius = outerRadius - 30;
-  const formatValue = d3.formatPrefix(",.0", 1e3);
   const ribbon = d3.ribbon().radius(innerRadius);
 
   const arc = d3
@@ -50,7 +50,7 @@ function Chord() {
     var g = svg
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-      .datum(chord(matrix));
+      .datum(chordData);
     var group = g
       .append("g")
       .attr("class", "groups")
@@ -73,7 +73,7 @@ function Chord() {
       .attr("d", arc);
     g
       .selectAll(".outerText")
-      .data(chord(matrix).groups)
+      .data(chordData.groups)
       .enter()
       .append("text")
       .each(function (d, i) {
@@ -96,7 +96,7 @@ function Chord() {
 
     g
       .selectAll(".innerPath")
-      .data(chord(matrix))
+      .data(chordData)
       .enter()
       .append("path")
       .attr("class", "innerPath")
