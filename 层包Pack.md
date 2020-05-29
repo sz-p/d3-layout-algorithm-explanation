@@ -163,6 +163,9 @@ function pack(root) {
 每个圆必须包含 circle.r 属性表示半径，以及 circle.x 以及 circle.y 属性表示圆的中心，最小包裹圆的实现见 论文 [Matoušek-Sharir-Welzl algorithm](https://inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf)。
 
 ## 参考 & 引用
+
+https://dl.acm.org/doi/epdf/10.1145/1124772.1124851
+
 https://github.com/xswei/d3-hierarchy/blob/master/README.md#node_sum
 
 https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L15
