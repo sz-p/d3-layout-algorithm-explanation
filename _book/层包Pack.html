@@ -33,6 +33,10 @@
                 
             
                 
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
                 <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -383,26 +387,180 @@
 <h3 id="&#x6267;&#x884C;&#x903B;&#x8F91;">&#x6267;&#x884C;&#x903B;&#x8F91;</h3>
 <p>TODO</p>
 <h3 id="&#x6838;&#x5FC3;&#x4EE3;&#x7801;">&#x6838;&#x5FC3;&#x4EE3;&#x7801;</h3>
-<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pack</span>(<span class="hljs-params">root</span>) </span>{
-  root.x = dx / <span class="hljs-number">2</span>, root.y = dy / <span class="hljs-number">2</span>;
-  <span class="hljs-keyword">if</span> (radius) {
-    <span class="hljs-comment">//&#x5C06;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x5199;&#x5165;&#x8282;&#x70B9;&#x7684;r&#x5C5E;&#x6027;</span>
-    root.eachBefore(radiusLeaf(radius))
-      <span class="hljs-comment">//&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#xFF0C;&#x5BF9;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x5E03;&#x5C40;&#x3002;(&#x8BA1;&#x7B97;node.x,node.y&#x503C;)</span>
-      .eachAfter(packChildren(padding, <span class="hljs-number">0.5</span>))
-      <span class="hljs-comment">//&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#x5C06;&#x5B50;&#x8282;&#x70B9;&#x79FB;&#x5230;&#x7236;&#x8282;&#x70B9;&#x4E0A;,&#x7531;&#x4E8E;&#x6307;&#x5B9A;&#x4E86;r&#x5C31;&#x4E0D;&#x518D;&#x5BF9;node.r&#x8FDB;&#x884C;zoom</span>
-      .eachBefore(translateChild(<span class="hljs-number">1</span>));
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">//&#x5C06;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x5199;&#x5165;&#x8282;&#x70B9;&#x7684;r&#x5C5E;&#x6027;</span>
-    root.eachBefore(radiusLeaf(defaultRadius))
-      <span class="hljs-comment">//&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#xFF0C;&#x5BF9;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x5E03;&#x5C40;&#x3002;(&#x8BA1;&#x7B97;node.x,node.y&#x503C;)</span>
-      .eachAfter(packChildren(constantZero, <span class="hljs-number">1</span>))
-      <span class="hljs-comment">//&#x5BF9;padding&#x505A;&#x4E86;&#x4E00;&#x4E9B;&#x8C03;&#x6574;</span>
-      .eachAfter(packChildren(padding, root.r / <span class="hljs-built_in">Math</span>.min(dx, dy)))
-      <span class="hljs-comment">//&#x6839;&#x636E;&#x753B;&#x5E03;&#x6700;&#x5C0F;&#x5706;&#x4E0E;root.r&#x7684;&#x6BD4;&#x503C;&#x5BF9;node.r&#x8FDB;&#x884C;zoom&#x3002; &#x4EE5;&#x53CA;&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#x5C06;&#x5B50;&#x8282;&#x70B9;&#x79FB;&#x5230;&#x7236;&#x8282;&#x70B9;&#x4E0A;</span>
-      .eachBefore(translateChild(<span class="hljs-built_in">Math</span>.min(dx, dy) / (<span class="hljs-number">2</span> * root.r)));
+<pre><code class="lang-javascript"><span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x7684;&#x6C42;&#x534A;&#x5F84;&#x65B9;&#x6CD5;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defaultRadius</span>(<span class="hljs-params">d</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.sqrt(d.value);
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> radius = <span class="hljs-literal">null</span>,
+      dx = <span class="hljs-number">1</span>,
+      dy = <span class="hljs-number">1</span>,
+      padding = constantZero;
+
+  <span class="hljs-comment">// &#x6838;&#x5FC3;&#x65B9;&#x6CD5;</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pack</span>(<span class="hljs-params">root</span>) </span>{
+    root.x = dx / <span class="hljs-number">2</span>, root.y = dy / <span class="hljs-number">2</span>;
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x6709;&#x9ED8;&#x8BA4;&#x7684;&#x534A;&#x5F84;&#x4F1A;&#x91C7;&#x7528;&#x4F20;&#x5165;&#x7684;&#x534A;&#x5F84; &#x5982;&#x679C;&#x6CA1;&#x6709;&#x4F1A;&#x6839;&#x636E;size&#x8BA1;&#x7B97;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x7684;&#x534A;&#x5F84;</span>
+    <span class="hljs-keyword">if</span> (radius) {
+      <span class="hljs-comment">//&#x5C06;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x5199;&#x5165;&#x8282;&#x70B9;&#x7684;r&#x5C5E;&#x6027;</span>
+      root.eachBefore(radiusLeaf(radius))
+        <span class="hljs-comment">//&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#xFF0C;&#x5BF9;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x5E03;&#x5C40;&#x3002;(&#x8BA1;&#x7B97;node.x,node.y&#x503C;)</span>
+        .eachAfter(packChildren(padding, <span class="hljs-number">0.5</span>))
+        <span class="hljs-comment">//&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#x5C06;&#x5B50;&#x8282;&#x70B9;&#x79FB;&#x5230;&#x7236;&#x8282;&#x70B9;&#x4E0A;,&#x7531;&#x4E8E;&#x6307;&#x5B9A;&#x4E86;r&#x5C31;&#x4E0D;&#x518D;&#x5BF9;node.r&#x8FDB;&#x884C;zoom</span>
+        .eachBefore(translateChild(<span class="hljs-number">1</span>));
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">//&#x5C06;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x5199;&#x5165;&#x8282;&#x70B9;&#x7684;r&#x5C5E;&#x6027;</span>
+      root.eachBefore(radiusLeaf(defaultRadius))
+        <span class="hljs-comment">//&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#xFF0C;&#x5BF9;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x5E03;&#x5C40;&#x3002;(&#x8BA1;&#x7B97;node.x,node.y&#x503C;)</span>
+        .eachAfter(packChildren(constantZero, <span class="hljs-number">1</span>))
+        <span class="hljs-comment">//&#x5BF9;padding&#x505A;&#x4E86;&#x4E00;&#x4E9B;&#x8C03;&#x6574;</span>
+        .eachAfter(packChildren(padding, root.r / <span class="hljs-built_in">Math</span>.min(dx, dy)))
+        <span class="hljs-comment">//&#x6839;&#x636E;&#x753B;&#x5E03;&#x6700;&#x5C0F;&#x5706;&#x4E0E;root.r&#x7684;&#x6BD4;&#x503C;&#x5BF9;node.r&#x8FDB;&#x884C;zoom&#x3002; &#x4EE5;&#x53CA;&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#x5C06;&#x5B50;&#x8282;&#x70B9;&#x79FB;&#x5230;&#x7236;&#x8282;&#x70B9;&#x4E0A;</span>
+        .eachBefore(translateChild(<span class="hljs-built_in">Math</span>.min(dx, dy) / (<span class="hljs-number">2</span> * root.r)));
+    }
+    <span class="hljs-keyword">return</span> root;
   }
-  <span class="hljs-keyword">return</span> root;
+
+  pack.radius = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (radius = optional(x), pack) : radius;
+  };
+
+  pack.size = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (dx = +x[<span class="hljs-number">0</span>], dy = +x[<span class="hljs-number">1</span>], pack) : [dx, dy];
+  };
+
+  pack.padding = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length ? (padding = <span class="hljs-keyword">typeof</span> x === <span class="hljs-string">&quot;function&quot;</span> ? x : constant(+x), pack) : padding;
+  };
+
+  <span class="hljs-keyword">return</span> pack;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">radiusLeaf</span>(<span class="hljs-params">radius</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>{
+    <span class="hljs-keyword">if</span> (!node.children) {
+      node.r = <span class="hljs-built_in">Math</span>.max(<span class="hljs-number">0</span>, +radius(node) || <span class="hljs-number">0</span>);
+    }
+  };
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">packChildren</span>(<span class="hljs-params">padding, k</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>{
+    <span class="hljs-keyword">if</span> (children = node.children) {
+      <span class="hljs-keyword">var</span> children,
+          i,
+          n = children.length,
+          r = padding(node) * k || <span class="hljs-number">0</span>,
+          e;
+      <span class="hljs-keyword">if</span> (r) <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) children[i].r += r;
+      e = packEnclose(children);
+      <span class="hljs-keyword">if</span> (r) <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) children[i].r -= r;
+      node.r = e + r;
+    }
+  };
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">packEnclose</span>(<span class="hljs-params">circles</span>) </span>{
+  <span class="hljs-keyword">if</span> (!(n = circles.length)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">var</span> a, b, c, n, aa, ca, i, j, k, sj, sk;
+
+  <span class="hljs-comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9; &#x76F4;&#x63A5;&#x521D;&#x59CB;&#x5316;&#x8282;&#x70B9;&#x5750;&#x6807;&#x4E3A;[0,0]</span>
+  a = circles[<span class="hljs-number">0</span>], a.x = <span class="hljs-number">0</span>, a.y = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span> (!(n &gt; <span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span> a.r; 
+
+  <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5C06;&#x7B2C;&#x4E8C;&#x4E2A;&#x8282;&#x70B9;&#x653E;&#x5728;&#x4E86;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x5DE6;&#x4FA7;(&#x53EA;&#x8981;&#x548C;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x76F8;&#x5207;&#x5373;&#x53EF;)</span>
+  b = circles[<span class="hljs-number">1</span>], a.x = -b.r, b.x = a.r, b.y = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span> (!(n &gt; <span class="hljs-number">2</span>)) <span class="hljs-keyword">return</span> a.r + b.r; 
+
+  <span class="hljs-comment">// &#x653E;&#x7F6E;&#x7B2C;&#x4E09;&#x4E2A;&#x8282;&#x70B9;</span>
+  place(b, a, c = circles[<span class="hljs-number">2</span>]); 
+
+  <span class="hljs-comment">// &#x6839;&#x636E;&#x524D;&#x4E09;&#x4E2A;&#x8282;&#x70B9;&#x521D;&#x59CB;&#x5316;&#x524D;&#x94FE;</span>
+  a = <span class="hljs-keyword">new</span> Node(a), b = <span class="hljs-keyword">new</span> Node(b), c = <span class="hljs-keyword">new</span> Node(c);
+  a.next = c.previous = b;
+  b.next = a.previous = c;
+  c.next = b.previous = a; <span class="hljs-comment">// Attempt to place each remaining circle&#x2026;</span>
+
+  pack: <span class="hljs-keyword">for</span> (i = <span class="hljs-number">3</span>; i &lt; n; ++i) {
+    place(a._, b._, c = circles[i]), c = <span class="hljs-keyword">new</span> Node(c); <span class="hljs-comment">// Find the closest intersecting circle on the front-chain, if any.</span>
+    <span class="hljs-comment">// &#x201C;Closeness&#x201D; is determined by linear distance along the front-chain.</span>
+    <span class="hljs-comment">// &#x201C;Ahead&#x201D; or &#x201C;behind&#x201D; is likewise determined by linear distance.</span>
+
+    j = b.next, k = a.previous, sj = b._.r, sk = a._.r;
+
+    <span class="hljs-keyword">do</span> {
+      <span class="hljs-keyword">if</span> (sj &lt;= sk) {
+        <span class="hljs-keyword">if</span> (intersects(j._, c._)) {
+          b = j, a.next = b, b.previous = a, --i;
+          <span class="hljs-keyword">continue</span> pack;
+        }
+
+        sj += j._.r, j = j.next;
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (intersects(k._, c._)) {
+          a = k, a.next = b, b.previous = a, --i;
+          <span class="hljs-keyword">continue</span> pack;
+        }
+
+        sk += k._.r, k = k.previous;
+      }
+    } <span class="hljs-keyword">while</span> (j !== k.next); <span class="hljs-comment">// Success! Insert the new circle c between a and b.</span>
+
+
+    c.previous = a, c.next = b, a.next = b.previous = b = c; <span class="hljs-comment">// Compute the new closest circle pair to the centroid.</span>
+
+    aa = score(a);
+
+    <span class="hljs-keyword">while</span> ((c = c.next) !== b) {
+      <span class="hljs-keyword">if</span> ((ca = score(c)) &lt; aa) {
+        a = c, aa = ca;
+      }
+    }
+
+    b = a.next;
+  } <span class="hljs-comment">// Compute the enclosing circle of the front chain.</span>
+
+
+  a = [b._], c = b;
+
+  <span class="hljs-keyword">while</span> ((c = c.next) !== b) a.push(c._);
+
+  c = enclose(a); <span class="hljs-comment">// Translate the circles to put the enclosing circle around the origin.</span>
+
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) a = circles[i], a.x -= c.x, a.y -= c.y;
+
+  <span class="hljs-keyword">return</span> c.r;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">place</span>(<span class="hljs-params">b, a, c</span>) </span>{
+  <span class="hljs-keyword">var</span> dx = b.x - a.x,
+      x,
+      a2,
+      dy = b.y - a.y,
+      y,
+      b2,
+      d2 = dx * dx + dy * dy;
+
+  <span class="hljs-keyword">if</span> (d2) {
+    a2 = a.r + c.r, a2 *= a2;
+    b2 = b.r + c.r, b2 *= b2;
+
+    <span class="hljs-keyword">if</span> (a2 &gt; b2) {
+      x = (d2 + b2 - a2) / (<span class="hljs-number">2</span> * d2);
+      y = <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-built_in">Math</span>.max(<span class="hljs-number">0</span>, b2 / d2 - x * x));
+      c.x = b.x - x * dx - y * dy;
+      c.y = b.y - x * dy + y * dx;
+    } <span class="hljs-keyword">else</span> {
+      x = (d2 + a2 - b2) / (<span class="hljs-number">2</span> * d2);
+      y = <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-built_in">Math</span>.max(<span class="hljs-number">0</span>, a2 / d2 - x * x));
+      c.x = a.x + x * dx - y * dy;
+      c.y = a.y + x * dy + y * dx;
+    }
+  } <span class="hljs-keyword">else</span> {
+    c.x = a.x + c.r;
+    c.y = a.y;
+  }
 }
 </code></pre>
 <h4 id="&#x8BE6;&#x89E3;">&#x8BE6;&#x89E3;</h4>
@@ -460,26 +618,32 @@
 <h3 id="&#x6838;&#x5FC3;&#x7B97;&#x6CD5;">&#x6838;&#x5FC3;&#x7B97;&#x6CD5;</h3>
 <p>&#x8981;&#x5B9E;&#x73B0;pack&#x5E03;&#x5C40;&#xFF0C;&#x5C06;&#x4E00;&#x4E9B;&#x5DF2;&#x77E5;&#x534A;&#x5F84;&#x7684;&#x5706;&#x8FDB;&#x884C;&#x5E03;&#x5C40;&#xFF0C;&#x5E76;&#x4E14;&#x6C42;&#x51FA;&#x6700;&#x5C0F;&#x5916;&#x63A5;&#x5706;&#xFF0C;&#x5F53;&#x5706;&#x7684;&#x4E2A;&#x6570;&#x5C0F;&#x4E8E;&#x4E09;&#x65F6;&#x5BB9;&#x6613;&#x89E3;&#x51B3;&#x3002;&#x5F53;&#x5706;&#x7684;&#x4E2A;&#x6570;&#x5927;&#x4E8E;&#x4E09;&#x65F6;&#x53EF;&#x4EE5;&#x5C06;&#x8BE5;&#x95EE;&#x9898;&#x5206;&#x89E3;&#x4E3A;&#x4E09;&#x4E2A;&#x5B50;&#x95EE;&#x9898;&#x3002;</p>
 <ol>
-<li><strong>&#x5DF2;&#x77E5;&#x4E24;&#x5706;&#x7684;&#x5706;&#x5FC3;&#x548C;&#x534A;&#x5F84;&#xFF0C;&#x7B2C;&#x4E09;&#x5706;&#x7684;&#x534A;&#x5F84;&#xFF0C;&#x4E14;&#x4E09;&#x5706;&#x4E24;&#x4E24;&#x76F8;&#x5207;&#xFF0C;&#x6C42;&#x7B2C;&#x4E09;&#x5706;&#x5706;&#x5FC3;&#x5750;&#x6807;&#x3002;</strong>
-&#x8BBE;&#x5706;1&#x5706;&#x5FC3;,&#x534A;&#x5F84;&#x4E3A;$x_1$,$y_1$,$r_1$, &#x5706;2$x_2$,$y_2$,$r_2$&#x3002;&#x5706;3$x_3$,$y_3$,$r_3$&#x5373;&#x53EF;&#x5F97;<ol>
-<li>$$ (x_3-x_1)^2 + (y_3-y_1)^2 = (r_3+r_1)^2 = d31 $$</li>
-<li>$$ (x_3-x_2)^2 + (y_3-y_2)^2 = (r_3+r_2)^2 = d32 $$</li>
-<li>$$ (x_2-x_1)^2 + (y_2-y_1)^2 = (r_1+r_2)^2 = d21 $$
-&#x6839;&#x636E;1&#x3001;2&#x3001;3&#x5F0F;&#x5373;&#x5F97;&#xFF1A;</li>
-<li>$$ x = (d21+d32-d31)/(2*d21) $$</li>
-<li>$$ y = \sqrt{d32/d21 - x^2} $$</li>
+<li><p><strong>&#x5DF2;&#x77E5;&#x4E24;&#x5706;&#x7684;&#x5706;&#x5FC3;&#x548C;&#x534A;&#x5F84;&#xFF0C;&#x7B2C;&#x4E09;&#x5706;&#x7684;&#x534A;&#x5F84;&#xFF0C;&#x4E14;&#x4E09;&#x5706;&#x4E24;&#x4E24;&#x76F8;&#x5207;&#xFF0C;&#x6C42;&#x7B2C;&#x4E09;&#x5706;&#x5706;&#x5FC3;&#x5750;&#x6807;&#x3002;</strong></p>
+<p>&#x8BBE;&#x5706;1&#x5706;&#x5FC3;,&#x534A;&#x5F84;&#x4E3A; <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>r</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex"> x_1,y_1,r_1 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span> , &#x5706;2 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>r</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex"> x_2,y_2,r_2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span> &#x3002;&#x5706;3 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mn>3</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>3</mn></msub><mo separator="true">,</mo><msub><mi>r</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex"> x_3,y_3,r_3 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span> &#x5373;&#x53EF;&#x5F97;</p>
+<ol>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><msub><mi>x</mi><mn>3</mn></msub><mo>&#x2212;</mo><msub><mi>x</mi><mn>1</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>+</mo><mo>(</mo><msub><mi>y</mi><mn>3</mn></msub><mo>&#x2212;</mo><msub><mi>y</mi><mn>1</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>=</mo><mo>(</mo><msub><mi>r</mi><mn>3</mn></msub><mo>+</mo><msub><mi>r</mi><mn>1</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>=</mo><mi>d</mi><mn>3</mn><mn>1</mn></mrow><annotation encoding="application/x-tex"> (x_3-x_1)^2 + (y_3-y_1)^2 = (r_3+r_1)^2 = d31 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">(</span><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">&#x2212;</span><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">+</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">&#x2212;</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord mathit">d</span><span class="mord mathrm">3</span><span class="mord mathrm">1</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><msub><mi>x</mi><mn>3</mn></msub><mo>&#x2212;</mo><msub><mi>x</mi><mn>2</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>+</mo><mo>(</mo><msub><mi>y</mi><mn>3</mn></msub><mo>&#x2212;</mo><msub><mi>y</mi><mn>2</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>=</mo><mo>(</mo><msub><mi>r</mi><mn>3</mn></msub><mo>+</mo><msub><mi>r</mi><mn>2</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>=</mo><mi>d</mi><mn>3</mn><mn>2</mn></mrow><annotation encoding="application/x-tex"> (x_3-x_2)^2 + (y_3-y_2)^2 = (r_3+r_2)^2 = d32 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">(</span><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">&#x2212;</span><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">+</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">&#x2212;</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord mathit">d</span><span class="mord mathrm">3</span><span class="mord mathrm">2</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><msub><mi>x</mi><mn>2</mn></msub><mo>&#x2212;</mo><msub><mi>x</mi><mn>1</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>+</mo><mo>(</mo><msub><mi>y</mi><mn>2</mn></msub><mo>&#x2212;</mo><msub><mi>y</mi><mn>1</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>=</mo><mo>(</mo><msub><mi>r</mi><mn>1</mn></msub><mo>+</mo><msub><mi>r</mi><mn>2</mn></msub><msup><mo>)</mo><mn>2</mn></msup><mo>=</mo><mi>d</mi><mn>2</mn><mn>1</mn></mrow><annotation encoding="application/x-tex"> (x_2-x_1)^2 + (y_2-y_1)^2 = (r_1+r_2)^2 = d21 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">(</span><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">&#x2212;</span><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">+</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">&#x2212;</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.03588em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord mathit">d</span><span class="mord mathrm">2</span><span class="mord mathrm">1</span></span></span></span></li>
+</ol>
+<p>&#x6839;&#x636E;1&#x3001;2&#x3001;3&#x5F0F;&#x5373;&#x5F97;&#xFF1A;</p>
+<ol>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mo>(</mo><mi>d</mi><mn>2</mn><mn>1</mn><mo>+</mo><mi>d</mi><mn>3</mn><mn>2</mn><mo>&#x2212;</mo><mi>d</mi><mn>3</mn><mn>1</mn><mo>)</mo><mi mathvariant="normal">/</mi><mo>(</mo><mn>2</mn><mo>&#x2217;</mo><mi>d</mi><mn>2</mn><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex"> x = (d21+d32-d31)/(2*d21) </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">x</span><span class="mrel">=</span><span class="mopen">(</span><span class="mord mathit">d</span><span class="mord mathrm">2</span><span class="mord mathrm">1</span><span class="mbin">+</span><span class="mord mathit">d</span><span class="mord mathrm">3</span><span class="mord mathrm">2</span><span class="mbin">&#x2212;</span><span class="mord mathit">d</span><span class="mord mathrm">3</span><span class="mord mathrm">1</span><span class="mclose">)</span><span class="mord mathrm">/</span><span class="mopen">(</span><span class="mord mathrm">2</span><span class="mbin">&#x2217;</span><span class="mord mathit">d</span><span class="mord mathrm">2</span><span class="mord mathrm">1</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><msqrt><mrow><mi>d</mi><mn>3</mn><mn>2</mn><mi mathvariant="normal">/</mi><mi>d</mi><mn>2</mn><mn>1</mn><mo>&#x2212;</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex"> y = \sqrt{d32/d21 - x^2} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.9350050000000001em;"></span><span class="strut bottom" style="height:1.24001em;vertical-align:-0.3050049999999999em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mrel">=</span><span class="mord sqrt"><span class="sqrt-sign" style="top:-0.04500500000000007em;"><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing size1">&#x221A;</span></span></span><span class="vlist"><span style="top:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">&#x200B;</span></span><span class="mord textstyle cramped"><span class="mord mathit">d</span><span class="mord mathrm">3</span><span class="mord mathrm">2</span><span class="mord mathrm">/</span><span class="mord mathit">d</span><span class="mord mathrm">2</span><span class="mord mathrm">1</span><span class="mbin">&#x2212;</span><span class="mord"><span class="mord mathit">x</span><span class="msupsub"><span class="vlist"><span style="top:-0.289em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span><span style="top:-0.855005em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped sqrt-line"></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></li>
 </ol>
 </li>
-<li><strong>&#x786E;&#x5B9A;&#x65B0;&#x5706;&#x5728;&#x5E03;&#x5C40;&#x4E2D;&#xFF0C;&#x63D2;&#x5165;&#x54EA;&#x4E24;&#x4E2A;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x5176;&#x6700;&#x5C0F;&#x5916;&#x63A5;&#x5706;&#x534A;&#x5F84;&#x6700;&#x5C0F;</strong>
-&#x4F8B;&#x5982;&#x73B0;&#x5728;&#x6709;ABC&#x4E09;&#x4E2A;&#x5706;&#xFF0C;&#x65B0;&#x5706;&#x662F;&#x4EE5;AB&#x4E3A;&#x57FA;&#x51C6;&#x63D2;&#x5165;&#x3001;&#x8FD8;&#x662F;&#x4EE5;AC&#xFF0C;BC&#x4E3A;&#x57FA;&#x51C6;&#x63D2;&#x5165;&#x3002;
-&#x8FD9;&#x90E8;&#x5206;&#x6CA1;&#x770B;&#x61C2; &#x7559;&#x7740;&#x8865;
-TODO</li>
-<li><strong>&#x6C42;&#x591A;&#x4E2A;&#x5706;&#x7684;&#x6700;&#x5C0F;&#x5916;&#x63A5;&#x5706;</strong>
-&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x6210;<br>TODO</li>
+<li><p><strong>&#x786E;&#x5B9A;&#x65B0;&#x5706;&#x5728;&#x5E03;&#x5C40;&#x4E2D;&#xFF0C;&#x63D2;&#x5165;&#x54EA;&#x4E24;&#x4E2A;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x5176;&#x6700;&#x5C0F;&#x5916;&#x63A5;&#x5706;&#x534A;&#x5F84;&#x6700;&#x5C0F;</strong></p>
+<p>&#x4F8B;&#x5982;&#x73B0;&#x5728;&#x6709;ABC&#x4E09;&#x4E2A;&#x5706;&#xFF0C;&#x65B0;&#x5706;&#x662F;&#x4EE5;AB&#x4E3A;&#x57FA;&#x51C6;&#x63D2;&#x5165;&#x3001;&#x8FD8;&#x662F;&#x4EE5;AC&#xFF0C;BC&#x4E3A;&#x57FA;&#x51C6;&#x63D2;&#x5165;&#x3002;
+&#x8FD9;&#x90E8;&#x5206;&#x6CA1;&#x770B;&#x61C2; &#x7559;&#x7740;&#x8865;</p>
+<p>TODO</p>
+</li>
+<li><p><strong>&#x6C42;&#x591A;&#x4E2A;&#x5706;&#x7684;&#x6700;&#x5C0F;&#x5916;&#x63A5;&#x5706;</strong></p>
+<p>&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x6210;<br>TODO</p>
+</li>
 </ol>
 <h3 id="&#x7B97;&#x6CD5;&#x7406;&#x8BBA;">&#x7B97;&#x6CD5;&#x7406;&#x8BBA;</h3>
 <p>&#x6BCF;&#x4E2A;&#x5706;&#x5FC5;&#x987B;&#x5305;&#x542B; circle.r &#x5C5E;&#x6027;&#x8868;&#x793A;&#x534A;&#x5F84;&#xFF0C;&#x4EE5;&#x53CA; circle.x &#x4EE5;&#x53CA; circle.y &#x5C5E;&#x6027;&#x8868;&#x793A;&#x5706;&#x7684;&#x4E2D;&#x5FC3;&#xFF0C;&#x6700;&#x5C0F;&#x5305;&#x88F9;&#x5706;&#x7684;&#x5B9E;&#x73B0;&#x89C1; &#x8BBA;&#x6587; <a href="https://inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf" target="_blank">Matou&#x161;ek-Sharir-Welzl algorithm</a>&#x3002;</p>
 <h2 id="&#x53C2;&#x8003;--&#x5F15;&#x7528;">&#x53C2;&#x8003; &amp; &#x5F15;&#x7528;</h2>
+<p><a href="https://dl.acm.org/doi/epdf/10.1145/1124772.1124851" target="_blank">https://dl.acm.org/doi/epdf/10.1145/1124772.1124851</a></p>
 <p><a href="https://github.com/xswei/d3-hierarchy/blob/master/README.md#node_sum" target="_blank">https://github.com/xswei/d3-hierarchy/blob/master/README.md#node_sum</a></p>
 <p><a href="https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L15" target="_blank">https://github.com/d3/d3-hierarchy/blob/master/src/pack/index.js#L15</a></p>
 <p><a href="https://github.com/d3/d3-hierarchy/blob/master/src/pack/enclose.js" target="_blank">https://github.com/d3/d3-hierarchy/blob/master/src/pack/enclose.js</a></p>
@@ -488,7 +652,7 @@ TODO</li>
 <p><a href="https://dl.acm.org/doi/10.1145/1124772.1124851" target="_blank">https://dl.acm.org/doi/10.1145/1124772.1124851</a></p>
 <p><a href="http://www.inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf" target="_blank">http://www.inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf</a></p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-04-04 22:33:28
+2020-06-03 18:18:44
 </span></footer>
                                 
                                 </section>
@@ -532,7 +696,7 @@ TODO</li>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"层包Pack","level":"1.6","depth":1,"next":{"title":"矩阵树Treemap","level":"1.7","depth":1,"path":"矩阵树Treemap.md","ref":"矩阵树Treemap.md","articles":[]},"previous":{"title":"集群Cluster","level":"1.5","depth":1,"path":"集群Cluster.md","ref":"集群Cluster.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","splitter","pageview-count","edit-link","tbfed-pagefooter","github"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/sz-p/d3-layout-algorithm-explanation"},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"pageview-count":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/sz-p/d3-layout-algorithm-explanation/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"sz-p","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"D3 布局算法","language":"zh-hans","links":{"sidebar":{"GitHub":"https://github.com/sz-p/d3-layout-algorithm-explanation"}},"gitbook":"3.2.3","description":"D3布局算法解析"},"file":{"path":"层包Pack.md","mtime":"2020-04-04T14:33:28.070Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-07T15:15:37.010Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"层包Pack","level":"1.6","depth":1,"next":{"title":"矩阵树Treemap","level":"1.7","depth":1,"path":"矩阵树Treemap.md","ref":"矩阵树Treemap.md","articles":[]},"previous":{"title":"集群Cluster","level":"1.5","depth":1,"path":"集群Cluster.md","ref":"集群Cluster.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","splitter","pageview-count","edit-link","tbfed-pagefooter","github","katex","livereload"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/sz-p/d3-layout-algorithm-explanation"},"livereload":{},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"pageview-count":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"编辑此页面","base":"https://github.com/sz-p/d3-layout-algorithm-explanation/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"sz-p","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"D3 布局算法","language":"zh-hans","links":{"sidebar":{"GitHub":"https://github.com/sz-p/d3-layout-algorithm-explanation"}},"gitbook":"3.2.3","description":"D3布局算法解析"},"file":{"path":"层包Pack.md","mtime":"2020-06-03T10:18:44.233Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-03T10:19:05.687Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -559,6 +723,10 @@ TODO</li>
     
         
         <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

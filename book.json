@@ -22,7 +22,8 @@
         "pageview-count",
         "edit-link",
         "tbfed-pagefooter",
-        "github" 
+        "github",
+        "katex" 
     ],
     "pluginsConfig": {
         "code": {

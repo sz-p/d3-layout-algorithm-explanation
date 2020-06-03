@@ -65,26 +65,180 @@ TODO
 
 ### 核心代码
 ```javascript
-function pack(root) {
-  root.x = dx / 2, root.y = dy / 2;
-  if (radius) {
-    //将叶子节点的大小，写入节点的r属性
-    root.eachBefore(radiusLeaf(radius))
-      //根据层级关系，对节点进行布局。(计算node.x,node.y值)
-      .eachAfter(packChildren(padding, 0.5))
-      //根据层级关系将子节点移到父节点上,由于指定了r就不再对node.r进行zoom
-      .eachBefore(translateChild(1));
-  } else {
-    //将叶子节点的大小，写入节点的r属性
-    root.eachBefore(radiusLeaf(defaultRadius))
-      //根据层级关系，对节点进行布局。(计算node.x,node.y值)
-      .eachAfter(packChildren(constantZero, 1))
-      //对padding做了一些调整
-      .eachAfter(packChildren(padding, root.r / Math.min(dx, dy)))
-      //根据画布最小圆与root.r的比值对node.r进行zoom。 以及根据层级关系将子节点移到父节点上
-      .eachBefore(translateChild(Math.min(dx, dy) / (2 * root.r)));
+// 默认的求半径方法
+function defaultRadius(d) {
+  return Math.sqrt(d.value);
+}
+function () {
+  var radius = null,
+      dx = 1,
+      dy = 1,
+      padding = constantZero;
+
+  // 核心方法
+  function pack(root) {
+    root.x = dx / 2, root.y = dy / 2;
+    // 如果有默认的半径会采用传入的半径 如果没有会根据size计算一个默认的半径
+    if (radius) {
+      //将叶子节点的大小，写入节点的r属性
+      root.eachBefore(radiusLeaf(radius))
+        //根据层级关系，对节点进行布局。(计算node.x,node.y值)
+        .eachAfter(packChildren(padding, 0.5))
+        //根据层级关系将子节点移到父节点上,由于指定了r就不再对node.r进行zoom
+        .eachBefore(translateChild(1));
+    } else {
+      //将叶子节点的大小，写入节点的r属性
+      root.eachBefore(radiusLeaf(defaultRadius))
+        //根据层级关系，对节点进行布局。(计算node.x,node.y值)
+        .eachAfter(packChildren(constantZero, 1))
+        //对padding做了一些调整
+        .eachAfter(packChildren(padding, root.r / Math.min(dx, dy)))
+        //根据画布最小圆与root.r的比值对node.r进行zoom。 以及根据层级关系将子节点移到父节点上
+        .eachBefore(translateChild(Math.min(dx, dy) / (2 * root.r)));
+    }
+    return root;
   }
-  return root;
+
+  pack.radius = function (x) {
+    return arguments.length ? (radius = optional(x), pack) : radius;
+  };
+
+  pack.size = function (x) {
+    return arguments.length ? (dx = +x[0], dy = +x[1], pack) : [dx, dy];
+  };
+
+  pack.padding = function (x) {
+    return arguments.length ? (padding = typeof x === "function" ? x : constant(+x), pack) : padding;
+  };
+
+  return pack;
+}
+
+function radiusLeaf(radius) {
+  return function (node) {
+    if (!node.children) {
+      node.r = Math.max(0, +radius(node) || 0);
+    }
+  };
+}
+
+
+function packChildren(padding, k) {
+  return function (node) {
+    if (children = node.children) {
+      var children,
+          i,
+          n = children.length,
+          r = padding(node) * k || 0,
+          e;
+      if (r) for (i = 0; i < n; ++i) children[i].r += r;
+      e = packEnclose(children);
+      if (r) for (i = 0; i < n; ++i) children[i].r -= r;
+      node.r = e + r;
+    }
+  };
+}
+
+function packEnclose(circles) {
+  if (!(n = circles.length)) return 0;
+  var a, b, c, n, aa, ca, i, j, k, sj, sk;
+
+  // 第一个节点 直接初始化节点坐标为[0,0]
+  a = circles[0], a.x = 0, a.y = 0;
+  if (!(n > 1)) return a.r; 
+
+  // 这里将第二个节点放在了第一个节点的左侧(只要和第一个节点相切即可)
+  b = circles[1], a.x = -b.r, b.x = a.r, b.y = 0;
+  if (!(n > 2)) return a.r + b.r; 
+
+  // 放置第三个节点
+  place(b, a, c = circles[2]); 
+
+  // 根据前三个节点初始化前链
+  a = new Node(a), b = new Node(b), c = new Node(c);
+  a.next = c.previous = b;
+  b.next = a.previous = c;
+  c.next = b.previous = a; // Attempt to place each remaining circle…
+
+  pack: for (i = 3; i < n; ++i) {
+    place(a._, b._, c = circles[i]), c = new Node(c); // Find the closest intersecting circle on the front-chain, if any.
+    // “Closeness” is determined by linear distance along the front-chain.
+    // “Ahead” or “behind” is likewise determined by linear distance.
+
+    j = b.next, k = a.previous, sj = b._.r, sk = a._.r;
+
+    do {
+      if (sj <= sk) {
+        if (intersects(j._, c._)) {
+          b = j, a.next = b, b.previous = a, --i;
+          continue pack;
+        }
+
+        sj += j._.r, j = j.next;
+      } else {
+        if (intersects(k._, c._)) {
+          a = k, a.next = b, b.previous = a, --i;
+          continue pack;
+        }
+
+        sk += k._.r, k = k.previous;
+      }
+    } while (j !== k.next); // Success! Insert the new circle c between a and b.
+
+
+    c.previous = a, c.next = b, a.next = b.previous = b = c; // Compute the new closest circle pair to the centroid.
+
+    aa = score(a);
+
+    while ((c = c.next) !== b) {
+      if ((ca = score(c)) < aa) {
+        a = c, aa = ca;
+      }
+    }
+
+    b = a.next;
+  } // Compute the enclosing circle of the front chain.
+
+
+  a = [b._], c = b;
+
+  while ((c = c.next) !== b) a.push(c._);
+
+  c = enclose(a); // Translate the circles to put the enclosing circle around the origin.
+
+  for (i = 0; i < n; ++i) a = circles[i], a.x -= c.x, a.y -= c.y;
+
+  return c.r;
+}
+
+function place(b, a, c) {
+  var dx = b.x - a.x,
+      x,
+      a2,
+      dy = b.y - a.y,
+      y,
+      b2,
+      d2 = dx * dx + dy * dy;
+
+  if (d2) {
+    a2 = a.r + c.r, a2 *= a2;
+    b2 = b.r + c.r, b2 *= b2;
+
+    if (a2 > b2) {
+      x = (d2 + b2 - a2) / (2 * d2);
+      y = Math.sqrt(Math.max(0, b2 / d2 - x * x));
+      c.x = b.x - x * dx - y * dy;
+      c.y = b.y - x * dy + y * dx;
+    } else {
+      x = (d2 + a2 - b2) / (2 * d2);
+      y = Math.sqrt(Math.max(0, a2 / d2 - x * x));
+      c.x = a.x + x * dx - y * dy;
+      c.y = a.y + x * dy + y * dx;
+    }
+  } else {
+    c.x = a.x + c.r;
+    c.y = a.y;
+  }
 }
 ```
 
@@ -142,20 +296,31 @@ function pack(root) {
    ```
 
 ### 核心算法
+
 要实现pack布局，将一些已知半径的圆进行布局，并且求出最小外接圆，当圆的个数小于三时容易解决。当圆的个数大于三时可以将该问题分解为三个子问题。
+
 1. **已知两圆的圆心和半径，第三圆的半径，且三圆两两相切，求第三圆圆心坐标。**
-   设圆1圆心,半径为$x_1$,$y_1$,$r_1$, 圆2$x_2$,$y_2$,$r_2$。圆3$x_3$,$y_3$,$r_3$即可得
+   
+   设圆1圆心,半径为 $$ x_1,y_1,r_1 $$ , 圆2 $$ x_2,y_2,r_2 $$ 。圆3 $$ x_3,y_3,r_3 $$ 即可得
+   
    1. $$ (x_3-x_1)^2 + (y_3-y_1)^2 = (r_3+r_1)^2 = d31 $$
    2. $$ (x_3-x_2)^2 + (y_3-y_2)^2 = (r_3+r_2)^2 = d32 $$
    3. $$ (x_2-x_1)^2 + (y_2-y_1)^2 = (r_1+r_2)^2 = d21 $$
+   
    根据1、2、3式即得：
+   
    1. $$ x = (d21+d32-d31)/(2*d21) $$
    2. $$ y = \sqrt{d32/d21 - x^2} $$
+
 2. **确定新圆在布局中，插入哪两个节点之间其最小外接圆半径最小**
+   
    例如现在有ABC三个圆，新圆是以AB为基准插入、还是以AC，BC为基准插入。
    这部分没看懂 留着补
+   
    TODO
+
 3. **求多个圆的最小外接圆**
+   
    这个问题可以转化成   
    TODO
 
