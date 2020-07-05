@@ -1,0 +1,98 @@
+html, body
+  color var(--text-color)
+  background-color var(--background-color) !important
+
+.navbar
+  border-bottom 1px solid var(--border-color) !important
+  background-color var(--background-color) !important
+  color var(--text-color)  !important
+  box-shadow var(--box-shadow) !important
+  .site-name 
+    color var(--text-color) !important
+  .links
+    background-color var(--background-color) !important
+   .search-box
+      input 
+        background-color var(--background-color) !important
+        border-color var(--border-color) !important
+        color var(--text-color) !important
+        transition auto
+      input:focus 
+        border-color #3eaf7c !important
+      
+
+.algolia-search-wrapper
+  & > span
+  .algolia-autocomplete
+    .ds-dropdown-menu
+      background-color var(--background-color)
+    .ds-cursor .algolia-docsearch-suggestion--content
+      background-color var(--background-color)
+
+.badge
+  background-color var(--background-color)
+
+.dropdown-wrapper
+  .nav-dropdown
+    background-color var(--background-color)  !important
+    border 1px solid var(--border-color) !important
+    border-bottom-color var(--border-color) !important
+    box-shadow: var(--box-shadow) !important
+.dropdown-wrapper .dropdown-title 
+  color var(--text-color) !important
+a.sidebar-link
+  color var(--text-color) !important
+
+a.sidebar-link.active
+  color #3eaf7c !important
+
+tr
+  border-top 1px solid var(--border-color) !important
+  &:nth-child(2n)
+    background-color var(--background-color) !important
+
+th, td
+  border 1px solid var(--border-color) !important
+
+hr
+  border 0
+  border-top 1px solid var(--border-color) !important
+
+h2
+  // border-bottom 1px solid var(--border-color) !important
+
+blockquote
+  background-color var(--background-color) !important
+
+.sidebar
+  background-color var(--background-color) !important
+  border-right 1px solid var(--border-color) !important
+  & > .sidebar-links
+    & > li > a.sidebar-link
+      color var(--text-color) !important
+
+.sidebar-heading
+  color var(--text-color) !important
+
+.home
+  .hero
+    .description
+      color var(--text-color-sub) !important
+  .features
+    border-top 1px solid var(--border-color) !important
+  .feature
+    h2
+      color var(--text-color) !important
+    p
+      color var(--text-color-sub) !important
+  .footer
+    border-top 1px solid var(--border-color) !important
+
+.page-nav
+    .inner
+      border-top 1px solid var(--border-color) !important
+
+.page-edit
+  .last-updated
+    .prefix
+     color #3eaf7c !important

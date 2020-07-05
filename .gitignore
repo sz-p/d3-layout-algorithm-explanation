@@ -1,22 +1,17 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn.lock
+test/unit/coverage
 
-# webStorm Controller files
+# Editor directories and files
 .idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+
+dist
+.temp
