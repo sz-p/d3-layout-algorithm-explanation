@@ -61,7 +61,66 @@ const nodes = [
 TODO
 
 ### 执行逻辑
-TODO
+
+1. 如果有默认的半径会采用传入的半径 如果没有会根据size计算一个默认的半径
+   
+2. 将叶子节点的大小，写入节点的r属性
+   
+3. 根据层级关系，对节点进行布局。(计算node.x,node.y值)(详见核心算法2)
+   
+4. 根据层级关系将子节点移到父节点上(详见核心算法3)
+   
+
+### 核心算法
+
+要实现pack布局，将一些已知半径的圆进行布局，并且求出最小外接圆，当圆的个数小于三时容易解决。当圆的个数大于三时可以将该问题分解为三个子问题。
+
+1. **已知两圆的圆心和半径，第三圆的半径，且三圆两两相切，求第三圆圆心坐标。**
+   
+   设圆1圆心,半径为 $$ x_1,y_1,r_1 $$ , 圆2 $$ x_2,y_2,r_2 $$ 。圆3 $$ x_3,y_3,r_3 $$ 即可得
+   
+   1. 公式1.1 $$ (x_3-x_1)^2 + (y_3-y_1)^2 = (r_3+r_1)^2 = d31 $$
+   
+   2. $$ (x_3-x_2)^2 + (y_3-y_2)^2 = (r_3+r_2)^2 = d32 $$
+   
+   3. $$ (x_2-x_1)^2 + (y_2-y_1)^2 = (r_1+r_2)^2 = d21 $$
+   
+   根据1、2、3式即得：
+   
+   1. $$ x = (d21+d32-d31)/(2*d21) $$
+   
+   2. $$ y = \sqrt{d32/d21 - x^2} $$
+
+2. **确定新圆在布局中，插入哪两个节点之间其最小外接圆半径最小**
+   
+   例如现在有ABC三个圆，新圆是以AB为基准插入、还是以AC，BC为基准插入。
+   这部分没看懂 留着补
+
+   1. 构建一个双向链表存储外围节点如下图，例如有节点`a`,`b`,由`核心算法1`可以计算节点`c`的坐标。构成链表`a<->b,b<->c,c<->a`
+   ![](https://img.sz-p.cn/pack-1.jpg)
+
+   2. 计算节点`a,b,c`中距离中心最近的节点作为节点`a`当作下一个准备插入节点的基准点。
+   
+   2. 以节点`a`以及节点`a`的下一个节点`b`作为基准点准备插入节点`c`
+   
+   3. 以`a`,`b`为基准点计算节点`c`的坐标，遍历双向链，判断有无重合，无重合则插入链表，有重合则跳转**步骤5**
+   
+   4. 判断节点`a`和节点`b`谁的半径大，如果`a`的半径大则以`a`为中心向双向链的后方进行搜索，同时从双链中移除节点`b`,即尝试以节点`a`,`c`为基准点插入新节点(`a->b,b->c`)。同理如果`b`节点圆心较大则以`b`为基准向双链的前方搜索。并移除节点`a`跳转**步骤4**继续判断是否有重合，无重合后插入节点。
+   ![](https://img.sz-p.cn/pack-2.jpg)
+   
+   5. 跳转**步骤2**继续插入新的节点。
+
+3. **求多个圆的最小外接圆**
+   
+   这个问题可以转化成   
+   TODO
+
+
+### 算法理论
+每个圆必须包含 circle.r 属性表示半径，以及 circle.x 以及 circle.y 属性表示圆的中心，最小包裹圆的实现见 论文 [Matoušek-Sharir-Welzl algorithm](https://inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf)。
+
+包布局布局算法见论文[Visualization of Large Hierarchical Data by Circle Packing](https://dl.acm.org/doi/epdf/10.1145/1124772.1124851)
+
 
 ### 核心代码
 ```javascript
@@ -131,8 +190,12 @@ function packChildren(padding, k) {
           n = children.length,
           r = padding(node) * k || 0,
           e;
+      // 针对padding的一些处理 如果padding不为0的话 先给子节点加上。
       if (r) for (i = 0; i < n; ++i) children[i].r += r;
+      // 定位算法 这里写入了node.x node.y。
+      // 这里利用r做了一些操作。
       e = packEnclose(children);
+      // 再给子节点减去
       if (r) for (i = 0; i < n; ++i) children[i].r -= r;
       node.r = e + r;
     }
@@ -151,25 +214,35 @@ function packEnclose(circles) {
   b = circles[1], a.x = -b.r, b.x = a.r, b.y = 0;
   if (!(n > 2)) return a.r + b.r; 
 
-  // 放置第三个节点
+  // 在a和b之间放置第三个节点c
   place(b, a, c = circles[2]); 
 
   // 根据前三个节点初始化前链
   a = new Node(a), b = new Node(b), c = new Node(c);
   a.next = c.previous = b;
   b.next = a.previous = c;
-  c.next = b.previous = a; // Attempt to place each remaining circle…
+  c.next = b.previous = a; 
 
   pack: for (i = 3; i < n; ++i) {
-    place(a._, b._, c = circles[i]), c = new Node(c); // Find the closest intersecting circle on the front-chain, if any.
-    // “Closeness” is determined by linear distance along the front-chain.
-    // “Ahead” or “behind” is likewise determined by linear distance.
+    // 在a和b节点上继续布局节第四个节点
+    
+    // 节点a是链上距离中心最近的节点。
+    place(a._, b._, c = circles[i]), c = new Node(c);
+    
 
+    // 找到链上最近的重叠节点
+    // “紧密度”由沿前链的直线距离决定。
+    // “前”或“后”同样由线性距离决定。
     j = b.next, k = a.previous, sj = b._.r, sk = a._.r;
 
+    // 解决在ab节点上插入节点c，节点c可能与其他节点重合的问题。
+    // 遍历链上的节点 判断当前节点是否与链上的节点重合
+    // 在链上搜索的时候以两个节点中半径大的为中心去搜索，即如果a大于b则向后搜索，如果b大于a则向前搜索。
     do {
       if (sj <= sk) {
+        // 判断节点c是否和当前节点重合
         if (intersects(j._, c._)) {
+          // 因为是在向前搜索，节点c和j重合后，节点b出链，节点j进链，重新计算以a,j为节点构建相切节点c的圆心坐标。之后再判断节点c是否与链上的节点有重合
           b = j, a.next = b, b.previous = a, --i;
           continue pack;
         }
@@ -183,13 +256,14 @@ function packEnclose(circles) {
 
         sk += k._.r, k = k.previous;
       }
-    } while (j !== k.next); // Success! Insert the new circle c between a and b.
+    } while (j !== k.next);
 
+    // 解决掉重叠问题后插入节点
+    // 在ab节点之后插入节点c
+    c.previous = a, c.next = b, a.next = b.previous = b = c; 
 
-    c.previous = a, c.next = b, a.next = b.previous = b = c; // Compute the new closest circle pair to the centroid.
-
+    // 重新计算最近的距离中心最近的节点，作为节点a
     aa = score(a);
-
     while ((c = c.next) !== b) {
       if ((ca = score(c)) < aa) {
         a = c, aa = ca;
@@ -197,21 +271,26 @@ function packEnclose(circles) {
     }
 
     b = a.next;
-  } // Compute the enclosing circle of the front chain.
+  } 
 
-
+  //计算前链的包围圈。
   a = [b._], c = b;
 
   while ((c = c.next) !== b) a.push(c._);
 
-  c = enclose(a); // Translate the circles to put the enclosing circle around the origin.
+  c = enclose(a); 
 
+
+  //平移圆以使包围圆围绕原点。
   for (i = 0; i < n; ++i) a = circles[i], a.x -= c.x, a.y -= c.y;
 
   return c.r;
 }
 
+// 详见核心算法 1
+// 由于a节点恒是前节点b节点恒是后节点、即由a->b计算节点c的一直在a->b节点的一侧
 function place(b, a, c) {
+  // 计算了a b节点之间的距离
   var dx = b.x - a.x,
       x,
       a2,
@@ -225,12 +304,16 @@ function place(b, a, c) {
     b2 = b.r + c.r, b2 *= b2;
 
     if (a2 > b2) {
+      // 见公式1.4
       x = (d2 + b2 - a2) / (2 * d2);
+      // 见公式1.5
       y = Math.sqrt(Math.max(0, b2 / d2 - x * x));
       c.x = b.x - x * dx - y * dy;
       c.y = b.y - x * dy + y * dx;
     } else {
+      // 见公式1.4
       x = (d2 + a2 - b2) / (2 * d2);
+      // 见公式1.5 
       y = Math.sqrt(Math.max(0, a2 / d2 - x * x));
       c.x = a.x + x * dx - y * dy;
       c.y = a.y + x * dy + y * dx;
@@ -240,92 +323,27 @@ function place(b, a, c) {
     c.y = a.y;
   }
 }
+
+// 判断ab是否相交
+function intersects(a, b) {
+  var dr = a.r + b.r - 1e-6,
+      dx = b.x - a.x,
+      dy = b.y - a.y;
+  return dr > 0 && dr * dr > dx * dx + dy * dy;
+}
+
+// 由于这里还没平移，中心点的坐标为(0,0)这里计算了圆心到图形中心的距离
+function score(node) {
+  var a = node._,
+      b = node.next._,
+      ab = a.r + b.r,
+      dx = (a.x * b.r + b.x * a.r) / ab,
+      dy = (a.y * b.r + b.y * a.r) / ab;
+  return dx * dx + dy * dy;
+}
 ```
 
-#### 详解
-1. **将叶子节点的大小，写入节点的r属性**
-    `root.eachBefore(radiusLeaf(defaultRadius))`第一趟对节点的先序遍历，这里取`node.value`属性、开方得到`node.r`属性。
-    ```javascript
-    function defaultRadius(d) {
-      return Math.sqrt(d.value);
-    }
-    ```
-2. **根据层级关系，对节点进行布局。(计算node.x,node.y值)**
-    `.eachAfter(packChildren(constantZero, 1))`第二趟对节点后续遍历，如果是父节点则将该节点的子节点作为一组对节点进行[定位](#定位算法)。
-    ```javascript
-    function packChildren(padding, k /* 一个padding的比例系数 */) {
-      return function (node) {
-        if (children = node.children) {
-          var children, i, n = children.length,
-            r = padding(node) * k || 0,
-            e;
 
-          // 针对padding的一些处理 如果padding不为0的话 先给子节点加上。
-          if (r)
-            for (i = 0; i < n; ++i)
-              children[i].r += r;
-          
-          // 定位算法 这里写入了node.x node.y。
-          // 这里利用r做了一些操作。
-          e = packEnclose(children);
-
-          // 再给子节点减去
-          if (r)
-            for (i = 0; i < n; ++i)
-              children[i].r -= r;
-
-          node.r = e + r;
-        }
-      };
-    }
-    ```
-3. **根据画布最小圆与root.r的比值对node.r进行zoom。 以及根据层级关系将子节点移到父节点上**
-   `.eachBefore(translateChild(Math.min(dx, dy) / (2 * root.r)))`第四趟先序遍历，确定最小圆直径与`root.value`(root.r = Math.sqrt(node.value))的比值，根据这个比值对node.r进行zoom操作。
-   根据层级进行打包时，对一个层级的节点是进行独立打包的，这里将子节点移动到父节点上。
-   ```javascript
-   function translateChild(k) {
-      return function (node) {
-        var parent = node.parent;
-        node.r *= k;
-        if (parent) {
-          node.x = parent.x + k * node.x;
-          node.y = parent.y + k * node.y;
-        }
-      };
-    }
-   ```
-
-### 核心算法
-
-要实现pack布局，将一些已知半径的圆进行布局，并且求出最小外接圆，当圆的个数小于三时容易解决。当圆的个数大于三时可以将该问题分解为三个子问题。
-
-1. **已知两圆的圆心和半径，第三圆的半径，且三圆两两相切，求第三圆圆心坐标。**
-   
-   设圆1圆心,半径为 $$ x_1,y_1,r_1 $$ , 圆2 $$ x_2,y_2,r_2 $$ 。圆3 $$ x_3,y_3,r_3 $$ 即可得
-   
-   1. $$ (x_3-x_1)^2 + (y_3-y_1)^2 = (r_3+r_1)^2 = d31 $$
-   2. $$ (x_3-x_2)^2 + (y_3-y_2)^2 = (r_3+r_2)^2 = d32 $$
-   3. $$ (x_2-x_1)^2 + (y_2-y_1)^2 = (r_1+r_2)^2 = d21 $$
-   
-   根据1、2、3式即得：
-   
-   1. $$ x = (d21+d32-d31)/(2*d21) $$
-   2. $$ y = \sqrt{d32/d21 - x^2} $$
-
-2. **确定新圆在布局中，插入哪两个节点之间其最小外接圆半径最小**
-   
-   例如现在有ABC三个圆，新圆是以AB为基准插入、还是以AC，BC为基准插入。
-   这部分没看懂 留着补
-   
-   TODO
-
-3. **求多个圆的最小外接圆**
-   
-   这个问题可以转化成   
-   TODO
-
-### 算法理论
-每个圆必须包含 circle.r 属性表示半径，以及 circle.x 以及 circle.y 属性表示圆的中心，最小包裹圆的实现见 论文 [Matoušek-Sharir-Welzl algorithm](https://inf.ethz.ch/personal/emo/PublFiles/SubexLinProg_ALG16_96.pdf)。
 
 ## 参考 & 引用
 
