@@ -15,7 +15,7 @@
         class="site-name"
         :class="{ 'can-hide': $site.themeConfig.logo }"
       >{{ $siteTitle }}</span>
-      <span>{{ version }}</span>
+      <!-- <span>{{ version }}</span> -->
     </RouterLink>
 
     <div

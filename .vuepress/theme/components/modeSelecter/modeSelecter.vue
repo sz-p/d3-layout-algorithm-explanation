@@ -21,6 +21,7 @@ export default {
       } else if (this.mode === "light") {
         this.mode = "dark";
       }
+      localStorage.setItem("mode", this.mode);
       this.useMode(this.mode);
     },
     useMode(modeName) {
@@ -33,14 +34,17 @@ export default {
     }
   },
   mounted() {
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      this.mode = "dark";
-    } else {
-      this.mode = "light";
-    }
+    // if (
+    //   window.matchMedia &&
+    //   window.matchMedia("(prefers-color-scheme: dark)").matches
+    // ) {
+    //   this.mode = "dark";
+    // } else {
+    //   this.mode = "light";
+    // }
+    this.mode = "light";
+    const mode = localStorage.getItem("mode");
+    if (mode) this.mode = mode;
     this.useMode(this.mode);
   }
 };
