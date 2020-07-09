@@ -2,9 +2,9 @@ const path = require('path');
 const IS_PRO = process.env.NODE_ENV === 'production';
 
 // 默认路径 即部署后的路径前缀
-const defaultPath = 'doc-starter';
+const defaultPath = 'd3Layoutdoc';
 
-const BASE_URI = IS_PRO ? `/f/${defaultPath}/` : '/';
+const BASE_URI = IS_PRO ? `/${defaultPath}/` : '/';
 const STATIC_PATH = IS_PRO ? `/static/${defaultPath}/` : '/';
 
 // 用于本地build查看 build之后的产物是否正常
@@ -23,7 +23,7 @@ module.exports = {
 	// },
 	theme: require.resolve('../../.vuepress/theme'),
 	themeConfig: {
-		displayAllHeaders: true, // 展开全部侧边栏
+		displayAllHeaders: false, // 展开全部侧边栏
 		sidebar: require('./config/sidebar'), // 侧边栏配置
 		smoothScroll: true,
 		lastUpdated: '上次更新'
