@@ -26,14 +26,14 @@ jobs:
     - uses: actions/cache@v2
       id: yarn-cache
       with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-node-
-    
+          ${{ runner.os }}-yarn-
+
     # install
     - name: Install Dependencies # step3 name
-      if: steps.cache.outputs.cache-hit != 'true' # 如果变量 cache-hit 不等于 true
+      if: steps.yarn-cache.outputs.cache-hit != 'true' # 如果变量 cache-hit 不等于 true
       run: yarn install # 安装 node modules 相关依赖
 
     - name: build # step3 name
