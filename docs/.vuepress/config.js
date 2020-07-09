@@ -5,7 +5,7 @@ const IS_PRO = process.env.NODE_ENV === 'production';
 const defaultPath = 'd3Layoutdoc';
 
 const BASE_URI = IS_PRO ? `/${defaultPath}/` : '/';
-const STATIC_PATH = IS_PRO ? `/static/${defaultPath}/` : '/';
+const STATIC_PATH = IS_PRO ? `/${defaultPath}/` : '/';
 
 // 用于本地build查看 build之后的产物是否正常
 // const BASE_URI = IS_PRO ? '/' : '/';
