@@ -12,6 +12,7 @@ test/unit/coverage
 *.njsproj
 *.sln
 
+yarn.lock
 
 dist
 .temp
