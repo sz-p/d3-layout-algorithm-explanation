@@ -49,16 +49,5 @@ module.exports = {
 	],
 	less: {
 		javascriptEnabled: true
-	},
-	devServer: {
-		// proxy: [
-		// 	{
-		// 		target: 'https://vis.qianxin-inc.cn',
-		// 		changeOrigin: true,
-		// 		agent: false,
-		// 		logLevel: 'debug',
-		// 		context: [ '/falcon-files' ]
-		// 	}
-		// ]
 	}
 };
