@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       //输入
+      thresholds: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
       oriData: d3.range(1000).map(function() {
         return d3.randomBates(10)();
       })
@@ -22,8 +23,7 @@ export default {
       this.layouter = d3
         .histogram()
         .domain(this.xScale.domain())
-        .thresholds(this.xScale.ticks(10));
-
+        .thresholds(this.thresholds);
       this.layoutData = this.layouter(this.oriData);
 
       this.yScale = d3
@@ -64,7 +64,7 @@ export default {
         .call(this.yAxis)
         .attr("transform", "translate(" + this.padding.left + ",0)")
         .attr("color", "White");
-        
+
       const bar = svg
         .selectAll(".bar")
         .data(this.layoutData)
