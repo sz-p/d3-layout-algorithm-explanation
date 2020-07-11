@@ -33,7 +33,8 @@ jobs:
 
     # install
     - name: Install Dependencies # step3 name
-      if: steps.yarn-cache.outputs.cache-hit != 'true' # 如果变量 cache-hit 不等于 true
+      # 这里cache之后拿不到 vuepress 全局方法
+      # if: steps.yarn-cache.outputs.cache-hit != 'true' # 如果变量 cache-hit 不等于 true
       run: yarn install # 安装 node modules 相关依赖
 
     - name: build # step3 name

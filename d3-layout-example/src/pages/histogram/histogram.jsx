@@ -14,7 +14,7 @@ function Histogram() {
     right: 40,
     bottom: 40,
     left: 40
-  };;
+  };
 
   const data = d3.range(1000).map(function () {
     return d3.randomBates(10)();
