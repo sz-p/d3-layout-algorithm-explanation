@@ -9,6 +9,7 @@ export const getDefauteParams = function() {
 		top: 10,
 		right: 40,
 		bottom: 40,
-		left: 40
+		left: 40,
+		padding: 30
 	};
 };
