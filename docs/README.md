@@ -74,3 +74,22 @@
 许多数据集从从本质上是嵌套结构的。例如一个[族谱结构](/层级布局#族谱结构)。
 
 该模块依赖一个`族谱结构`，将族谱结构的的数据按照层级结构进行格式化，最终生成`布局信息`。详情见[输入](/层级布局#输入)，[输出](/层级布局#输出)。
+
+## [分区Partition](./分区图.md)
+
+<RecoDemo>
+  <Demo-Partition slot="demo" />
+  <template slot="code-template">
+    <<< @/docs/.vuepress/components/Demo/Partition.vue?template
+  </template>
+  <template slot="code-script">
+    <<< @/docs/.vuepress/components/Demo/Partition.vue?script
+  </template>
+  <template slot="code-style">
+    <<< @/docs/.vuepress/components/Demo/Partition.vue?style
+  </template>
+</RecoDemo>
+
+分区图，是[层级布局(Hierarchy)](/层级布局)的一种
+
+该模块依赖一个[层级布局(Hierarchy)](/层级布局#布局信息)结果,和一个`画布区大小(size)`。输出一个`布局信息`,`布局信息`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[输入](/分区图#输入)，及[输出](/分区图#输出)。
