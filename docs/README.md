@@ -64,3 +64,32 @@
 + 可以使用不同的颜色来区分不同的关系。
 
 该模块依赖一个`n*n`的`matrix`矩阵,以及各行**数据的名称**和**间隔角度**，输出一个包含**连接信息**和**分区信息**的布局结果。其中**连接信息**包含`source`,`target`分别描述起止节点，其中又包含`startAngle`,`endAngle`分别表示**开始点**的起止角度和**结束点**的起止角度。单位为弧度制。**分区信息**包含`startAngle`,`endAngle`来描述各个分区的起止角度。
+
+## [层级布局Hierarchy](./层级布局.md)
+
+> 层级布局模块一般不直接用于绘图，而是为一些基于层级布局结构的布局算法提供基础数据结构。
+
+一个好的层次结构可视化能促进快速的促进多尺度推理: 对单个单元的微观观察和对整体的宏观观察.
+
+许多数据集从从本质上是嵌套结构的。例如一个[族谱结构](/层级布局#族谱结构)。
+
+该模块依赖一个`族谱结构`，将族谱结构的的数据按照层级结构进行格式化，最终生成`布局信息`。详情见[输入](/层级布局#输入)，[输出](/层级布局#输出)。
+
+## [分区Partition](./分区图.md)
+
+<RecoDemo>
+  <Demo-Partition slot="demo" />
+  <template slot="code-template">
+    <<< @/docs/.vuepress/components/Demo/Partition.vue?template
+  </template>
+  <template slot="code-script">
+    <<< @/docs/.vuepress/components/Demo/Partition.vue?script
+  </template>
+  <template slot="code-style">
+    <<< @/docs/.vuepress/components/Demo/Partition.vue?style
+  </template>
+</RecoDemo>
+
+分区图，是[层级布局(Hierarchy)](/层级布局)的一种
+
+该模块依赖一个[层级布局(Hierarchy)](/层级布局#布局信息)结果,和一个`画布区大小(size)`。输出一个`布局信息`,`布局信息`本质上是给`层级布局(Hierarchy)`写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[输入](/分区图#输入)，及[输出](/分区图#输出)。
