@@ -15,6 +15,7 @@
   "license": "MIT",
   "creator": ">=2.0.0",
   "dependencies": {
+    "@maginapp/vuepress-plugin-katex": "^1.0.7",
     "@vuepress-reco/vuepress-plugin-extract-code": "^1.0.4",
     "axios": "^0.19.2",
     "core-js": "2",

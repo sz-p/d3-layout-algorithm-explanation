@@ -45,7 +45,11 @@ module.exports = {
 	plugins: [
 		// ['@vuepress/back-to-top', true],
 		[ '@vuepress/last-updated' ], // 显示最后更新时间
-		[ path.resolve(__dirname, './vuepress-plugin-extract-code') ]
+		[ path.resolve(__dirname, './vuepress-plugin-extract-code') ],
+		'@maginapp/vuepress-plugin-katex',
+		{
+			delimiters: 'dollars'
+		}
 	],
 	less: {
 		javascriptEnabled: true
