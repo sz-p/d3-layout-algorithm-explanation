@@ -65,6 +65,24 @@
 
 该模块依赖一个`n*n`的`matrix`矩阵,以及各行**数据的名称**和**间隔角度**，输出一个包含**连接信息**和**分区信息**的布局结果。其中**连接信息**包含`source`,`target`分别描述起止节点，其中又包含`startAngle`,`endAngle`分别表示**开始点**的起止角度和**结束点**的起止角度。单位为弧度制。**分区信息**包含`startAngle`,`endAngle`来描述各个分区的起止角度。
 
+## [堆叠图Stack](./堆叠图.md)
+
+<RecoDemo>
+  <Demo-Stack slot="demo" />
+  <template slot="code-template">
+    <<< @/docs/.vuepress/components/Demo/Stack.vue?template
+  </template>
+  <template slot="code-script">
+    <<< @/docs/.vuepress/components/Demo/Stack.vue?script
+  </template>
+  <template slot="code-style">
+    <<< @/docs/.vuepress/components/Demo/Stack.vue?style
+  </template>
+</RecoDemo>
+
+该模块依赖`数据项(keys)`其提供了`原始数据数据(data)`中所需要堆积的数据项的条目。最终返回`布局信息`。堆积数据包含`原始数据数据(data)`中每一项的所占的起始值和结束值。详情见[输入](/堆叠图#输入),及[输出](/堆叠图#输出)。
+
+
 ## [层级布局Hierarchy](./层级布局.md)
 
 > 层级布局模块一般不直接用于绘图，而是为一些基于层级布局结构的布局算法提供基础数据结构。
