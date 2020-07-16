@@ -82,6 +82,28 @@
 
 该模块依赖`数据项(keys)`其提供了`原始数据数据(data)`中所需要堆积的数据项的条目。最终返回`布局信息`。堆积数据包含`原始数据数据(data)`中每一项的所占的起始值和结束值。详情见[输入](/堆叠图#输入),及[输出](/堆叠图#输出)。
 
+## 力学图Force
+
+<RecoDemo>
+  <Demo-Force slot="demo" />
+  <template slot="code-template">
+    <<< @/docs/.vuepress/components/Demo/Force.vue?template
+  </template>
+  <template slot="code-script">
+    <<< @/docs/.vuepress/components/Demo/Force.vue?script
+  </template>
+  <template slot="code-data">
+    <<< @/docs/.vuepress/components/Demo/ForceData/data.json?json
+  </template>
+  <template slot="code-style">
+    <<< @/docs/.vuepress/components/Demo/Force.vue?style
+  </template>
+</RecoDemo>
+
+这个模块实现了用以模拟粒子物理运动的 [velocity Verlet](https://en.wikipedia.org/wiki/Verlet_integration) 数值积分器。仿真的演化: 它假设任意单位时间步长 Δ*t* = 1，所有的粒子的单位质量常量 *m* = 1。作用在每个粒子上的合力 *F* 相当于在单位时间 Δ*t* 内的恒定加速度 *a*。并且可以简单的通过为每个粒子添加速度并计算粒子的位置来模拟仿真。
+
+该模块依赖[节点和连接信息](/力学图#节点和连接信息)，以及一些[基本力](/力学图#基本力)。向[节点信息](/力学图#节点信息)中写入每个节点的坐标，将[连接信息](/力学图#连接信息)中的`source`，`target`部分修改为对应的节点引用。
+
 
 ## [层级布局Hierarchy](./层级布局.md)
 
