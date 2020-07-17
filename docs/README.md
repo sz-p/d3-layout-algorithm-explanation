@@ -82,7 +82,7 @@
 
 该模块依赖`数据项(keys)`其提供了`原始数据数据(data)`中所需要堆积的数据项的条目。最终返回`布局信息`。堆积数据包含`原始数据数据(data)`中每一项的所占的起始值和结束值。详情见[输入](/堆叠图#输入),及[输出](/堆叠图#输出)。
 
-## 力学图Force
+## [力学图Force](./力学图)
 
 <RecoDemo>
   <Demo-Force slot="demo" />
@@ -114,6 +114,26 @@
 许多数据集从从本质上是嵌套结构的。例如一个[族谱结构](/层级布局#族谱结构)。
 
 该模块依赖一个`族谱结构`，将族谱结构的的数据按照层级结构进行格式化，最终生成`布局信息`。详情见[输入](/层级布局#输入)，[输出](/层级布局#输出)。
+
+## [矩阵树Treemap](./矩阵树)
+
+<RecoDemo>
+  <Demo-TreeMap slot="demo" />
+  <template slot="code-template">
+    <<< @/docs/.vuepress/components/Demo/TreeMap.vue?template
+  </template>
+  <template slot="code-script">
+    <<< @/docs/.vuepress/components/Demo/TreeMap.vue?script
+  </template>
+  <template slot="code-style">
+    <<< @/docs/.vuepress/components/Demo/TreeMap.vue?style
+  </template>
+</RecoDemo>
+
+矩阵树,是[层级布局(Hierarchy)](/层级布局)的一种
+
+该模块依赖一个[层级布局(Hierarchy)](./层级布局#布局信息)结果,和一个[画布区大小(size)](/矩阵树#画布区大小size)。输出一个[矩阵树数据Treemap](/矩阵树#布局信息),本质上是给[层级布局(Hierarchy)](./层级布局#布局信息)写入了两个坐标，这两个坐标构成的区域即为该分区的可视化信息。详情见[输入](/矩阵树#输入),及[输出](/矩阵树#输出)。
+
 
 ## [分区Partition](./分区图.md)
 
