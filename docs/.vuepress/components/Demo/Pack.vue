@@ -15,7 +15,6 @@ export default {
       this.layouter = d3.pack().size([this.width, this.height]);
       // 输出
       this.layoutData = this.layouter(nodeData).descendants();
-      console.log(this.layouter(nodeData))
     },
     render() {
       const svg = d3

@@ -23,11 +23,17 @@ module.exports = {
 	// },
 	theme: require.resolve('../../.vuepress/theme'),
 	themeConfig: {
+		prevLinks: false,
+		nextLinks: false,
 		displayAllHeaders: false, // 展开全部侧边栏
 		sidebar: require('./config/sidebar'), // 侧边栏配置
 		smoothScroll: true,
-		lastUpdated: '上次更新'
-		// editLinks: false,
+		docsRepo: 'sz-p/d3-layout-algorithm-explanation',
+		lastUpdated: '上次更新',
+		editLinks: true,
+		docsDir: 'docs',
+		docsBranch: 'master',
+		editLinkText: '在 GitHub 上编辑此页'
 	},
 	chainWebpack(config) {
 		config.resolve.alias.set('vue', 'vue/dist/vue.common.js');
@@ -44,9 +50,19 @@ module.exports = {
 	// },
 	plugins: [
 		// ['@vuepress/back-to-top', true],
-		[ '@vuepress/last-updated' ], // 显示最后更新时间
+		// 显示最后更新时间
+		[ '@vuepress/last-updated' ],
+	    // show code demo plugin
 		[ path.resolve(__dirname, './vuepress-plugin-extract-code') ],
+		// 数学公式插件
 		'@maginapp/vuepress-plugin-katex',
+		// 页面滚动连接自动高亮插件
+		[ '@vuepress/active-header-links' ],
+		// 图片缩放插件
+		[ '@vuepress/medium-zoom' ],
+		// 顶部进度条插件
+		['vuepress-plugin-nprogress'],
+
 		{
 			delimiters: 'dollars'
 		}
